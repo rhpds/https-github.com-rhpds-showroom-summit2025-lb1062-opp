@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat Advanced Cluster Management for Kubernetes :: Red Hat Summit 2025</title>
+    <link rel="prev" href="module-02.html">
+    <link rel="next" href="module-04.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../_/css/site.css"><link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="https://demo.redhat.com/images/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar"  style="background-color: #131313 !important;">
+    <div class="navbar-brand">
+      <div style="display: flex; flex-direction:row; padding: 12px 32px; gap: 16px;">
+        <img src="https://www.redhat.com/rhdc/managed-files/Red-Hat-Summit-logo.svg" alt="Red Hat Summit logo" width="90px" class="hero-summit-logo dx-block dx-mb-1">
+        <img src="https://gpte-public.s3.amazonaws.com/rh-ansiblefest-2021-logo-pool-reverse-rgb_0.svg" alt="AnsibleFest logo" width="auto" class="hero-ansiblefest-logo dx-block dx-mb-2">
+      </div>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Red Hat Summit 2025</a>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+      </div>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title" style="display: none;"><a href="index.html" class=" query-params-link">Hands-on with Red Hat OpenShift Platform Plus</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-01.html">1. Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-01.html#access">Accessing the lab environment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#openshift-acm">OpenShift and ACM console access</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#acs">RHACS console access</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#quay">Quay console access</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#bastion-host">Bastion access</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#demo-applications">Demo applications setup</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html">2. Red Hat Quay</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html#build-app">Develop your app</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#quay-login">Login to Quay from the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#golden-image">Create a golden image</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#dev-app">Add your code and containerize</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html#quay">Red Hat Quay</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#access-quay">Accessing Red Hat Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#navigating-the-registry">Navigating the registry</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#vulnerability-scanning-with-quay">Vulnerability Scanning with Quay</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-03.html">3. Red Hat Advanced Cluster Management for Kubernetes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#cluster-lifecycle">Working with Kubernetes Clusters and Cluster Lifecycle</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#hosted-control-planes">Introducing Hosted Control Planes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create-manage-cluster">Create and Manage Clusters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create-manage-vms">Create and Manage Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#policy-driven-governance">Policy Driven Governance</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#create-grc-policies">Creating GRC Policies in RHACM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploying-applications">Deploying Applications to Managed Clusters in RHACM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#updating-an-application">Updating the Frontend Image in the Deployed Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#acm-conclusion">Conclusion</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-04.html">4. Red Hat Advanced Cluster Security for Kubernetes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#outline">RHACS basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#console-access">Accessing the RHACS console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#acs-nav">Navigating the RHACS console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#vuln-mgmt">The Vulnerability Management dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#vuln-scanner">RHACS Vulnerability Scanner</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#log4shell">log4shell CVE vulnerability analysis</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#runtime-enforce">Introduction to Runtime policy enforcement</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#deploy-enforce">Introduction to Deploy-Time policy enforcement</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-04.html#conclusion">Conclusion</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore" style="display: none;">
+  <div class="context">
+    <span class="title">Hands-on with Red Hat OpenShift Platform Plus</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Hands-on with Red Hat OpenShift Platform Plus</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="module-03.html">3. Red Hat Advanced Cluster Management for Kubernetes</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Red Hat Advanced Cluster Management for Kubernetes</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this session, participants will learn how to work with Red Hat Advanced Cluster Management for Kubernetes (RHACM).</p>
+</div>
+<div class="paragraph">
+<p>Participants will walk through these 4 major use cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Multi-Cluster Lifecycle</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Centrally manage, create, update, and delete Kubernetes clusters.</p>
+</li>
+<li>
+<p>Search, find and modify any kubernetes resource across the entire domain.</p>
+</li>
+<li>
+<p>Quickly troubleshoot and resolve issues across your federated domain.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Virtual Machine Lifecycle</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Centrally manage, create, update, and delete Virtual Machines.</p>
+</li>
+<li>
+<p>Search, find and modify any VMs across the entire domain Managed by RHACM.</p>
+</li>
+<li>
+<p>Quickly troubleshoot and resolve issues across your VMs with Observability.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Policy Driven Governance</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Centrally set and enforce policies for security, applications, and infrastructure.</p>
+</li>
+<li>
+<p>Quickly visualize detailed auditing on configuration of apps and clusters.</p>
+</li>
+<li>
+<p>Leverage Policy Generator to generate policies at scale.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Advanced Application Lifecycle</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easily deploy applications at scale leveraging GitOps.</p>
+</li>
+<li>
+<p>See applications work real time from multiple sources.</p>
+</li>
+<li>
+<p>Quickly visualize application relationships across clusters and those that span clusters.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Lets get started!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cluster-lifecycle"><a class="anchor" href="#cluster-lifecycle"></a>Working with Kubernetes Clusters and Cluster Lifecycle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>At a high level Cluster Lifecycle management is about creating, upgrading, and destroying and importing clusters in a multi cloud environment, whether they may be traditional OpenShift Clusters, managed environments like ROSA or ARO, or specialized cluster deployments like Hosted Control Planes or Single-Node OpenShift.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Please reference the introduction page to find the credentials required to login to your lab environment.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once you have logged in to OpenShift Console, you will find yourself on the RHACM interface.</p>
+</div>
+<div class="paragraph">
+<p>If not, then navigate to the <strong>Cluster</strong> drop down menu and then select <strong>All Clusters</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/101-local-cluster.png" target="blank"><img src="_images/101-local-cluster.png" alt="101 local cluster" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>In this interface you will see 2 clusters available, the first cluster is a Hosted Control Plane Cluster called <strong>development</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/102-cluster-view.png" target="blank"><img src="_images/102-cluster-view.png" alt="102 cluster view" width="100%"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="hosted-control-planes"><a class="anchor" href="#hosted-control-planes"></a>Working with Hosted Control Planes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hosted Control Planes is a form factor of Red Hat OpenShift Container platform, but it follows a distinct architectural model.
+In standalone OpenShift, the control plane and data plane are coupled in terms of locality. A dedicated group of nodes hosts the control plane with a minimum number to ensure a quorum and the network stack is shared. While functional, this approach may not always meet customers' diverse use cases, especially when it comes to multi-cluster scale deployments.
+To address this, Red Hat provides hosted control planes in addition to standalone OpenShift. Hosted Control Planes is based on the upstream Red Hat project HyperShift which can be thought of as a middleware for hosting OpenShift control planes at scale. This deployment model helps solve concerns in regard to cost and time to provision, as well as providing a strong separation between management and workloads.</p>
+</div>
+<div class="paragraph">
+<p>Hosted Control Planes for Red Hat OpenShift decouple the control plane from the data plane:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It provides network domain separation between control-plane and workloads.</p>
+</li>
+<li>
+<p>Offers a shared interface for fleet administrators and Site Reliability Engineers (SREs) to operate multiple clusters easily.</p>
+</li>
+<li>
+<p>Treats the control plane like any other workload, enabling administrators to use the same stack to monitor, secure, and operate their applications while managing the control plane.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The decoupling of the Control Plane and Data Plane introduces multiple potential benefits and paves the way for a Hybrid-cloud approach. Below are possibilities that Hosted Control Plane as a technology enables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Trust Segmentation &amp; Human Error Reduction: Management plane for control planes and cloud credentials separate from the end-user cluster. A separate network of management from the workload. Furthermore, with the control-plane managed, it is harder for users to basically shoot themselves in the foot and destroy their own clusters since they won’t be seeing the CP resources in the first place.</p>
+</li>
+<li>
+<p>Cheaper Control Planes: You can host \~7-21 control planes into the same three machines you were using for 1 control plane. And run \~1000 control planes on 150 nodes. Thus you run most densely on existing hardware. Which also makes HA clusters cheaper.</p>
+</li>
+<li>
+<p>Immediate Clusters: Since the control plane consists of pods being launched on OpenShift, you are not waiting for machines to provision.</p>
+</li>
+<li>
+<p>Kubernetes Managing Kubernetes: Having control-plane as Kubernetes workloads immediately unlocks for free all the features of Kubernetes such as HPA/VPA, cheap HA in the form of replicas, control-plane Hibernation now that control-plane is represented as deployments, pods, etc.</p>
+</li>
+<li>
+<p>Infra Component Isolation: Registries, HAProxy, Cluster Monitoring, Storage Nodes, and other infra type components are allowed to be pushed out to the tenant’s cloud provider account isolating their usage of those to just themselves.</p>
+</li>
+<li>
+<p>Increased Life Cycle Options: You can upgrade the consolidated control planes out of cycle from the segmented worker nodes, including embargoed CVEs.</p>
+</li>
+<li>
+<p>Future Mixed Management &amp; Workers IaaS: Although it is not in the solution today, you feel you could get to running the control plane on a different IaaS provider than the workers faster under this architecture</p>
+</li>
+<li>
+<p>Heterogeneous Arch Clusters: you can more easily run control planes on one CPU chip type (ie x86) and the workers on a different one (ie ARM or even Power/Z).</p>
+</li>
+<li>
+<p>Easier Multi-Cluster Management: More centralized multi-cluster management which results in fewer external factors influencing the cluster status and consistency</p>
+</li>
+<li>
+<p>Cross Cluster Delivery Benefits: As you look to have more and more layered offerings such as service mesh, server-less, pipelines, and other span multiple clusters, having a concept of externalized control planes may make delivering such solutions easier.</p>
+</li>
+<li>
+<p>Easy Operability: Think about SREs. Instead of chasing down cluster control-planes, they would now have a central-pane of glass where they could debug and navigate their way even to cluster dataplanes. Centralized operations, less Time To Resolution (TTR), and higher productivity become low-hanging fruits.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You will also find a second cluster called <strong>local-cluster</strong>. This cluster is the hub where the Advanced Cluster Management For Kubernetes, and Advanced Cluster Security for Kubernetes resides.</p>
+</div>
+<div class="paragraph">
+<p>Feel free to navigate the cluster’s interface and explore the different day 2 actions you can perform in the cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-manage-cluster"><a class="anchor" href="#create-manage-cluster"></a>Create and Manage Clusters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat Advanced Cluster Management for Kubernetes makes it quite easy to deploy and manage additional clusters. While simplicity is often a winning formula when it comes to deployments of Red Hat OpenShift with methods such as IPI and the Assisted Installer, RHACM takes this to a whole new level with just a few clicks through the cluster creation wizard.</p>
+</div>
+<div class="paragraph">
+<p>From the Clusters screen you can see how easy it is to deploy a new cluster.</p>
+</div>
+<div class="paragraph">
+<p>Click on the <strong>Create cluster</strong> button in the center of the screen:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/103-create-cluster.png" target="blank"><img src="_images/103-create-cluster.png" alt="103 create cluster" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>You will notice that there is an Option for AWS and it’s already highlighted that you have saved credentials. you will use this to deploy our new cluster, but feel free to explore this window and see other cluster types that are available.</p>
+</div>
+<div class="paragraph">
+<p>When you are ready, click on the AWS button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/104-aws-credentials.png" target="blank"><img src="_images/104-aws-credentials.png" alt="104 aws credentials" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see two options for the control plane type:</p>
+</div>
+<div class="paragraph">
+<div class="title">Standalone</div>
+<p>The <strong>development</strong> cluster that you have provisioned is an example of a Hosted Control Plane cluster, which you explained the benefits of in detail in the <a href="module-01.html#hosted-control-planes">Introducing Hosted Control Planes</a> section above.</p>
+</div>
+<div class="paragraph">
+<p>For our lab, you will be using the Standalone cluster option. Click on that option, and you will be presented with a menu that allows you to customize the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Name your cluster <strong>demo-cluster</strong>, and select <strong>default</strong> for the cluster set. Lastly select the most recent release image <strong>OpenShift 4.17.11</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Next</strong> to continue.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/105-create-cluster-details.png" target="blank"><img src="_images/105-create-cluster-details.png" alt="105 create cluster details" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>On the next screen You can customize the AWS region, the CPU architecture, and the number of nodes to deploy in the control plane and worker pools.</p>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Next</strong> to proceed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/106-create-cluster-nodepools.png" target="blank"><img src="_images/106-create-cluster-nodepools.png" alt="106 create cluster nodepools" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>The next screen allows you to configure networking type to use and it&#8217;s associated  variables.</p>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Next</strong> to proceed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/107-create-cluster-networking.png" target="blank"><img src="_images/107-create-cluster-networking.png" alt="107 create cluster networking" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>The next couple of screens allow for additional customization, configuring a proxy, creating private AWS configurations, and pre-configuring automation functions with Ansible Automation Platform.</p>
+</div>
+<div class="paragraph">
+<p>Click <strong>Next</strong> on each screen to proceed to the final <strong>Review and Create</strong> screen.</p>
+</div>
+<div class="paragraph">
+<p>You will see a description of the cluster you are creating, click the blue <strong>Create</strong> button to start the deployment process.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/108-create-cluster-summary-create.png" target="blank"><img src="_images/108-create-cluster-summary-create.png" alt="108 create cluster summary create" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>If you click on <strong>Clusters</strong> in the left menu bar you will be returned to the original cluster view screen but you can see that our new cluster is now in the creating stage.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/109-view-new-cluster.png" target="blank"><img src="_images/109-view-new-cluster.png" alt="109 view new cluster" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The deployment of a full cluster will take approximately 45 minutes to complete, the primary purpose of this part of the lab was to demonstrate how easy it is to deploy clusters. you will continue the lab working with the infrastructure already in place.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-manage-vms"><a class="anchor" href="#create-manage-vms"></a>Create and Manage Virtual Machines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Do you want to manage and provision your OpenShift Virtualization virtual machine workloads across multiple clusters while using a single source of truth in the GitOps way? In this exercise you will show how you can do that with Red Hat Advanced Cluster Management and OpenShift GitOps.</p>
+</div>
+<div class="paragraph">
+<p>For this process you leverage OpenShift Virtualization. OpenShift Virtualization leverages Kubevirt an open source project that makes it possible to run, deploy, and manage virtual machines (VMs) with Kubernetes as the underlying orchestration platform. The process of running virtual machines within containers is known as container-native virtualization. OpenShift Virtualization enables container-native virtualization by packaging those virtual machines inside containers and managing both workloads from a single RHACM Console.</p>
+</div>
+<div class="sect2">
+<h3 id="_how_does_openshift_virtualization_work"><a class="anchor" href="#_how_does_openshift_virtualization_work"></a>How does OpenShift Virtualization work?</h3>
+<div class="paragraph">
+<p>Open Shift Virtualization leverages <strong>KubeVirt</strong> and it works by extending the Kubernetes application programming interface (API) so it can interact with virtual machines in the same way as other Kubernetes resources and tools. This makes it possible for containers and virtual machines to share the same cluster, nodes, and networks.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_openshift_virtualization_added_functionality_is_composed_of_3_main_components"><a class="anchor" href="#_openshift_virtualization_added_functionality_is_composed_of_3_main_components"></a>OpenShift Virtualization added functionality is composed of 3 main components:</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Custom resource definitions (CRDs):</strong> A custom resource is an object that extends the Kubernetes API or allows you to introduce your own API into a project or a cluster. A custom resource definition file defines your object kind and lets the API Server handle the entire lifecycle. KubeVirt brings a CRD to the Kubernetes API that enables it to handle virtual machines like other Kubernetes objects (such as pods).</p>
+</li>
+<li>
+<p><strong>Controllers:</strong> A controller is a set of deployments running on the cluster that provide an API endpoint for managing the new KubeVirt CRDs.</p>
+</li>
+<li>
+<p><strong>Agents:</strong> Agents run on a cluster’s worker nodes to manage node tasks related to virtualization.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Another way to think of OpenShift Virtualization is as a pod running with a KVM-based virtual machine inside of it. In Kubernetes, a pod is a group of containers that run together and share the same resources, and KVM (Kernel-based Virtual Machine) is an open source technology that extends the Linux® kernel to function as a hypervisor. With KubeVirt, virtual machine instances run just like pods. This allows OpenShift Virtualization to manage VM states like "stopped," "paused," and "running," as well as perform operations like the provisioning, scheduling, and migration of virtual machines.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploying_a_virtual_machines_using_openshift_gitops"><a class="anchor" href="#_deploying_a_virtual_machines_using_openshift_gitops"></a>Deploying a Virtual Machines Using OpenShift GitOps</h3>
+<div class="paragraph">
+<p>Red Hat® OpenShift® GitOps is an operator that provides a workflow that integrates git repositories, continuous integration/continuous delivery (CI/CD) tools, and Kubernetes to realize faster, more secure, scalable software development, without compromising quality.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift GitOps enables customers to build and integrate declarative git driven CD workflows directly into their application development platform. There’s no single tool that converts a development pipeline to "DevOps". By implementing a GitOps framework, updates and changes are pushed through declarative code, automating infrastructure and deployment requirements, and CI/CD.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift® GitOps takes advantage of Argo CD and integrates it into Red Hat Advanced Cluster Management for Kubernetes (RHACM) to deliver a consistent, fully supported, declarative Kubernetes platform to configure and use with GitOps principles.</p>
+</div>
+<div class="paragraph">
+<p>By utilizing RHACM users can now enable the optional Argo CD pull model architecture which offers flexibility that may be better suited for certain scenarios. One of the main use cases for the optional pull model is to address network scenarios where the centralized cluster is unable to reach out to remote clusters, while the remote clusters can communicate with the centralized cluster. In such scenarios, the push model would not be easily feasible.</p>
+</div>
+<div class="paragraph">
+<p>Argo CD currently utilizes a push model architecture where the workload is pushed from a centralized cluster to remote clusters, requiring a connection from the centralized cluster to the remote destinations.</p>
+</div>
+<div class="paragraph">
+<p>In the pull model, the Argo CD Application CR is distributed from the centralized cluster to the remote clusters. Each remote cluster independently reconciles and deploys the application using the received CR. Subsequently, the application status is reported back from the remote clusters to the centralized cluster, resulting in a user experience (UX) that is similar to the push model.</p>
+</div>
+<div class="paragraph">
+<p>Another advantage of the pull model is decentralized control, where each cluster has its own copy of the configuration and is responsible for pulling updates independently. The hub-managed architecture using Argo CD and the pull model can reduce the need for a centralized system to manage the configurations of all target clusters, making the system more scalable and easier to manage. However, note that the hub cluster itself still represents a potential single point of failure, which you should address through redundancy or other means.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the pull model provides more flexibility, allowing clusters to pull updates on their own schedule and reducing the risk of conflicts or disruptions.</p>
+</div>
+<div class="paragraph">
+<p>For this exercise you will use the Push Model.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ArgoCD has been deployed in your enviroment however you will need to configure it in RHACM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_integrating_argocd_with_rhacm"><a class="anchor" href="#_integrating_argocd_with_rhacm"></a>Integrating ArgoCD with RHACM</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <strong>Applications</strong> from the left side menu.</p>
+</li>
+<li>
+<p>Click <strong>Create application, select ArgoCD AppicationSet-Push Model</strong>.</p>
+</li>
+<li>
+<p>Under the Argo server select <strong>Add Argo Server</strong></p>
+</li>
+<li>
+<p>Enter the following information:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name:</strong> openshift-gitops</p>
+</li>
+<li>
+<p><strong>Namespace:</strong> openshift-gitops</p>
+</li>
+<li>
+<p><strong>ClusterSet:</strong> default</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-argoconfig.png" target="blank"><img src="_images/03-argoconfig.png" alt="03 argoconfig" width="100%"></a>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploying_an_virtual_machine"><a class="anchor" href="#_deploying_an_virtual_machine"></a>Deploying an Virtual Machine</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <strong>Applications</strong> from the left side menu.</p>
+</li>
+<li>
+<p>Click <strong>Create application, select ArgoCD AppicationSet-Push Model</strong>.</p>
+</li>
+<li>
+<p>Enter the following information:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name:</strong> dev-vm</p>
+</li>
+<li>
+<p><strong>Namespace:</strong> openshift-gitops</p>
+</li>
+<li>
+<p>Click <strong>NEXT</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-vm-app-acm.png" target="blank"><img src="_images/03-vm-app-acm.png" alt="03 vm app acm" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under repository types, select the GIT repository</p>
+</li>
+<li>
+<p><strong>URL:</strong> <a href="https://github.com/jalvarez-rh/kubevirt-gitops" class="bare">https://github.com/jalvarez-rh/kubevirt-gitops</a></p>
+</li>
+<li>
+<p><strong>Revision:</strong> main</p>
+</li>
+<li>
+<p><strong>Path:</strong> vms</p>
+</li>
+<li>
+<p><strong>Destination:</strong> openshift-cnv</p>
+</li>
+<li>
+<p>Click <strong>NEXT TWICE</strong></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-vm-app-git.png" target="blank"><img src="_images/03-vm-app-git.png" alt="03 vm app git" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under <strong>Placement</strong> for application deployment, verify that <strong>New Placement</strong> is selected.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Cluster set:</strong> default</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Under <strong>Label expressions</strong> click <strong>add label</strong> and select the following</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Label:</strong> name</p>
+</li>
+<li>
+<p><strong>Operator:</strong> equals any of</p>
+</li>
+<li>
+<p><strong>Values:</strong> local-cluster</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-vm-placement-acm.png" target="blank"><img src="_images/03-vm-placement-acm.png" alt="03 vm placement acm" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <strong>NEXT - verify that all the information is correct.</strong></p>
+</li>
+<li>
+<p>Click <strong>Submit</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It will take a few minutes to deploy the application, click on the <strong>Topology Tab</strong> to view and verify that <strong>all of the circles are green</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-acm-vm-topology.png" target="blank"><img src="_images/03-acm-vm-topology.png" alt="03 acm vm topology" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Under the Infrastructure view, Select the <strong>Virtual Machines</strong> here you will see a list of the available virtual machines, if you completed all of the steps above you should see a VM labeled <strong>rhel9-gitops</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-vm-acm-view.png" target="blank"><img src="_images/03-vm-acm-view.png" alt="03 vm acm view" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>From this point you can interact with the virtual machine directly from ACM. Feel free to click the <strong>Launch</strong> button to see all of the information about the Virtual Machine.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-vm-actions.png" target="blank"><img src="_images/03-vm-actions.png" alt="03 vm actions" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Feel free to experiment with the virtual machine at your leisure, notice all of the different <strong>day 2 operations</strong> available.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to time and resource constrains you did not explore the ability to monitor VMs from RHACM leveraging Grafana. If you would like to learn more about the out of the box dashboard that allow you to monitor your VM please visit the following blog to learn more - <a href="https://developers.redhat.com/articles/2024/12/05/monitor-openshift-virtualization-scale-red-hat-advanced-cluster-management" class="bare">https://developers.redhat.com/articles/2024/12/05/monitor-openshift-virtualization-scale-red-hat-advanced-cluster-management</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have successfully deployed a Virtual Machine Leveraing Red Hat GitOps. This approach leveraged a Git repository which housed all of the manifests that defined your VMs. RHACM was able to take those manifests and use them as deployables, which were then deployed to the target cluster for easy management of your resources.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="policy-driven-governance"><a class="anchor" href="#policy-driven-governance"></a>Policy Driven Governance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have a cluster and a deployed virtual machines, you need to make sure that infrastructure does not drift from their original configurations. This kind of drift is a serious problem, because it can happen from benign and benevolent fixes and changes, as well as malicious activities that you might not notice but can cause significant problems. The solution that RHACM provides for this is the Governance functionality.</p>
+</div>
+<div class="sect2">
+<h3 id="_review_grc_functionality"><a class="anchor" href="#_review_grc_functionality"></a>Review GRC Functionality</h3>
+<div class="paragraph">
+<p>Enterprises must meet internal standards for software engineering, secure engineering, resiliency, security, and regulatory compliance for workloads hosted on private, multi and hybrid clouds. Red Hat Advanced Cluster Management for Kubernetes governance provides an extensible policy framework for enterprises to introduce their own security policies.</p>
+</div>
+<div class="paragraph">
+<p>The governance lifecycle is based on defined policies, processes, and procedures to manage security and compliance from a central interface page.</p>
+</div>
+<div class="paragraph">
+<p>View the following diagram of the governance architecture:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/113-grc-diagram.png" target="blank"><img src="_images/113-grc-diagram.png" alt="113 grc diagram" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the Red Hat Advanced Cluster Management for Kubernetes security policy framework to create and manage policies. Kubernetes custom resource definition instances are used to create policies.</p>
+</div>
+<div class="paragraph">
+<p>Each Red Hat Advanced Cluster Management policy can have at least one or more templates. For more details about the policy elements, view the Policy YAML table section.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-grc-policies"><a class="anchor" href="#create-grc-policies"></a>Creating Policies in RHACM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to assist in the creation and management of Red Hat Advanced Cluster Management for Kubernetes policies you use the policy generator tool. This tool, along with GitOps, greatly simplifies the distribution of Kubernetes resource objects to managed OpenShift or Kubernetes clusters through RHACM policies.</p>
+</div>
+<div class="sect2">
+<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
+<div class="paragraph">
+<p>To deploy policies with subscriptions, you will need to bind the <strong>open-cluster-management:subscription-admin</strong> ClusterRole to the user creating the subscription.</p>
+</div>
+<div class="paragraph">
+<p>To do this, complete the following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the <strong>Governance</strong> tab.</p>
+</li>
+<li>
+<p>On the top tabs, click on <strong>Policies</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Create Policy</strong>.</p>
+</li>
+<li>
+<p>On the top switch the toggle to <strong>Display the YAML</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/114-policy-toggle.png" target="blank"><img src="_images/114-policy-toggle.png" alt="114 policy toggle" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Copy the following YAML excerpt and paste it in the screen:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-configure-subscription-admin-hub
+  namespace: ""
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-configure-subscription-admin-hub
+        spec:
+          remediationAction: inform
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRole
+                metadata:
+                  name: open-cluster-management:subscription-admin
+                rules:
+                  - apiGroups:
+                      - app.k8s.io
+                    resources:
+                      - applications
+                    verbs:
+                      - "*"
+                  - apiGroups:
+                      - apps.open-cluster-management.io
+                    resources:
+                      - "*"
+                    verbs:
+                      - "*"
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - configmaps
+                      - secrets
+                      - namespaces
+                    verbs:
+                      - "*"
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRoleBinding
+                metadata:
+                  name: open-cluster-management:subscription-admin
+                roleRef:
+                  name: open-cluster-management:subscription-admin
+                  apiGroup: rbac.authorization.k8s.io
+                  kind: ClusterRole
+                subjects:
+                  - name: kube:admin
+                    apiGroup: rbac.authorization.k8s.io
+                    kind: User
+                  - name: system:admin
+                    apiGroup: rbac.authorization.k8s.io
+                    kind: User
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: policy-configure-subscription-admin-hub-placement
+  namespace: ""
+placementRef:
+  name: policy-configure-subscription-admin-hub-placement
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+  - name: policy-configure-subscription-admin-hub
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: policy-configure-subscription-admin-hub-placement
+  namespace: ""
+spec:
+  clusterConditions:
+    - status: "True"
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: name
+        operator: In
+        values:
+          - local-cluster</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Enter a namespace to place the policy, the <strong>default</strong> namespace is OK to use.</p>
+</li>
+<li>
+<p>Click <strong>Next</strong> till the end and then click on <strong>Submit</strong>.</p>
+</li>
+<li>
+<p>Allow a few moments for the policy to propagate to the <strong>local-cluster / RHACM Hub Cluster</strong>.</p>
+</li>
+<li>
+<p>Navigate back to policies and select the <strong>policy-configure-subscription-admin-hub</strong> policy.</p>
+</li>
+<li>
+<p>Under the actions dropdown, select <strong>Enforce</strong>. This will enforce the policy, wait until the green checkmark is displayed.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/115-enforce-governance-policy.png" target="blank"><img src="_images/115-enforce-governance-policy.png" alt="115 enforce governance policy" width="100%"></a>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_policy_generator"><a class="anchor" href="#_using_policy_generator"></a>Using Policy Generator</h3>
+<div class="paragraph">
+<p>This Policy Generator description will create 2 configuration policies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>openshift-gitops-installed</strong>: The goal of the first policy is to inform if the OpenShift GitOps operator is installed on managed clusters.</p>
+</li>
+<li>
+<p><strong>kubeadmin-removed</strong>: The goal of the second policy is to inform if the kubeadmin user is removed from managed clusters.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Both policies are informative only, and you will only execute them manually to demonstrate how to resolve issues.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With the ArgoCD resource, you can use Red Hat OpenShift GitOps to manage policy definitions by granting OpenShift GitOps access to create policies on the Red Hat Advanced Cluster Management hub cluster.</p>
+</div>
+<div class="sect3">
+<h4 id="_prerequisites_2"><a class="anchor" href="#_prerequisites_2"></a>Prerequisites</h4>
+<div class="paragraph">
+<p>We need to create a <strong>ClusterRole</strong> resource for OpenShift GitOps, with access to create, read, update, and delete policies and placements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a <strong>ClusterRole</strong> from the OCP Console by Clicking the + Icon on the Top right.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-ocp-console-add.png" target="blank"><img src="_images/04-ocp-console-add.png" alt="04 ocp console add" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Copy and Paste the following YAML, Click <strong>Create</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: openshift-gitops-policy-admin
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - policy.open-cluster-management.io
+    resources:
+      - policies
+      - configurationpolicies
+      - certificatepolicies
+      - operatorpolicies
+      - policysets
+      - placementbindings
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - apps.open-cluster-management.io
+    resources:
+      - placementrules
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - cluster.open-cluster-management.io
+    resources:
+      - placements
+      - placements/status
+      - placementdecisions
+      - placementdecisions/status</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate back to the + sign again, you need the <strong>ClusterRoleBinding</strong> object to grant the OpenShift GitOps service account access to the <strong>openshift-gitops-policy-admin</strong> ClusterRole object. Click <strong>Create</strong> once complete</p>
+</li>
+</ul>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: openshift-gitops-policy-admin
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: openshift-gitops-policy-admin</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the Terminal in the Showroom tab and execute the following command:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc -n openshift-gitops patch argocd openshift-gitops --type merge --patch "$(curl https://raw.githubusercontent.com/jalvarez-rh/grc-policy-generator-blog/refs/heads/main/openshift-gitops/argocd-patch.yaml)"</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>This command will merge and patch the ArgoCD configuration to point to the latest Init Container that will allow us to deploy the Policies</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploying_a_policy_with_argocd"><a class="anchor" href="#_deploying_a_policy_with_argocd"></a>Deploying a Policy with ArgoCD</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <strong>Applications</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Create application, select ArgoCD ApplicationSet - Push Model</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Name: policy-generator</p>
+</li>
+<li>
+<p>Argo server: openshift-gitops</p>
+</li>
+<li>
+<p>Click <strong>NEXT</strong></p>
+</li>
+<li>
+<p>Under repository types, select the GIT repository</p>
+</li>
+<li>
+<p>URL: <a href="https://github.com/jalvarez-rh/demo-policygenerator.git" class="bare">https://github.com/jalvarez-rh/demo-policygenerator.git</a></p>
+</li>
+<li>
+<p>Revision: main</p>
+</li>
+<li>
+<p>Path: dir</p>
+</li>
+<li>
+<p>Remote namespace: policy-generator</p>
+</li>
+<li>
+<p>Click <strong>NEXT</strong> Twice</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Verify that it installs only to the local cluster by setting the following values:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cluster sets: <strong>default</strong></p>
+</li>
+<li>
+<p>Label: <strong>local-cluster</strong></p>
+</li>
+<li>
+<p>Operator: <strong>equals any of</strong></p>
+</li>
+<li>
+<p>Value: <strong>true</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Verify all the information is correct, click <strong>Create</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It will take a few minutes to deploy the application, <strong>Click on the Topology Tab</strong> to view and verify that <strong>all of the circles are green</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/116-governance-topology.png" target="blank"><img src="_images/116-governance-topology.png" alt="116 governance topology" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the <strong>Governance</strong> tab.</p>
+</li>
+<li>
+<p>Click on the <strong>Policies</strong> tab.</p>
+</li>
+<li>
+<p>Verify that you see two policies and that their <strong>Cluster Violations</strong> count is one.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>openshift-gitops-installed</p>
+</li>
+<li>
+<p>kubeadmin-removed</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/117-policies-list.png" target="blank"><img src="_images/117-policies-list.png" alt="117 policies list" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that the policies have been created for us leveraging the Policy Generator Engine let’s go ahead and enforce them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On the <strong>openshift-gitops-installed</strong> policy, click on the ellipses and set policy to <strong>Enforce</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/118-policies-enforce-red.png" target="blank"><img src="_images/118-policies-enforce-red.png" alt="118 policies enforce red" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click the <strong>Enforce</strong> button to verify.</p>
+</li>
+<li>
+<p>Wait a few minutes and you will see that the <strong>Cluster Violations</strong> will go from <strong>red</strong> to <strong>green</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/119-policies-enforce-green.png" target="blank"><img src="_images/119-policies-enforce-green.png" alt="119 policies enforce green" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on the policy and slect <strong>Results</strong> to veify that the gitops operator has been installed.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+CAREFUL implementing the <strong>kubeadmin-removed</strong> policy, if you enforce this you won’t be able to continue this lab and access that cluster through the console as the only account created on these clusters is Kubeadmin.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now you have successfully created a Policy leveraging the Policy Generator to scan your clusters, if you would like to play with other policies please visit the Policy Repo for more Policies you can test out.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploying-applications"><a class="anchor" href="#deploying-applications"></a>Deploying Applications to Managed Clusters in RHACM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Building on the concepts that you just learned on how to deploy Applications with Red Hat GitOps lets now deploy the application that you loaded to your local Quay Repo earlier in the earlier module.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <strong>Applications</strong> from the left side menu.</p>
+</li>
+<li>
+<p>Click <strong>Create application</strong>, select <strong>ArgoCD AppicationSet-Push Model</strong>.</p>
+</li>
+<li>
+<p>Enter the following information:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Name: skupper-patient-demo</p>
+</li>
+<li>
+<p>Argo Server: openshift-gitops</p>
+</li>
+<li>
+<p>Click <strong>NEXT</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-app-gitops.png" target="blank"><img src="_images/03-app-gitops.png" alt="03 app gitops" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under repository types, select the GIT repository</p>
+</li>
+<li>
+<p>URL: <a href="https://github.com/mfosterrox/skupper-security-demo.git" class="bare">https://github.com/mfosterrox/skupper-security-demo.git</a></p>
+</li>
+<li>
+<p>Revision: main</p>
+</li>
+<li>
+<p>Path: skupper-demo</p>
+</li>
+<li>
+<p>Destination: patient-portal</p>
+</li>
+<li>
+<p>Click <strong>NEXT TWICE</strong></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-app-gitops-2.png" target="blank"><img src="_images/03-app-gitops-2.png" alt="03 app gitops 2" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under <strong>Sync Policy</strong> uncheck <strong>Automaticaly sync when cluster state changes</strong> and check <strong>Replace resources instead of applying changes from the source repository</strong></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-app-gitops-3.png" target="blank"><img src="_images/03-app-gitops-3.png" alt="03 app gitops 3" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These changes are only required as you will be modifying the application YAML on ACM and you don&#8217;t want it to sync to a Git Repo, you normaly wouldn&#8217;t uncheck these in a real production enviroment.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under <strong>Placement</strong> for application deployment, verify that <strong>New Placement</strong> is selected.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cluster set: default</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Under <strong>Label expressions</strong> click <strong>add label</strong> and select the following</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Label:</strong> name</p>
+</li>
+<li>
+<p><strong>Operator:</strong> equals any off</p>
+</li>
+<li>
+<p><strong>Values:</strong> local-cluster</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-app-placement.png" target="blank"><img src="_images/03-app-placement.png" alt="03 app placement" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verify all of the information is correct and click <strong>Submit</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It will take a few minutes to deploy the application, click on the <strong>Topology Tab</strong> to view and verify that <strong>all of the circles are green</strong>.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<a class="image" href="03-application-topology-git.png" target="blank"><img src="03-application-topology-git.png" alt="03 application topology git" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Under the topology view, Select the <strong>Route</strong> and click on the <strong>Launch Route URL</strong>, this will take you to the Front end for the Patient Portal application, which is now running in our Hosted Controlled Plane (HCP) CLuster.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you get a "Application is not available" page change the URL to use http:// and that should fix the issue.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-application-route-git.png" target="blank"><img src="_images/03-application-route-git.png" alt="03 application route git" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations! You have successfully deployed an application to using RHACM and OpenShift GitOps. This approach leveraged a Git repository which housed all of the manifests that defined your application. RHACM was able to take those manifests and use them as deployables, which were then deployed to the target cluster.</p>
+</div>
+<div class="sect2">
+<h3 id="updating-an-application"><a class="anchor" href="#updating-an-application"></a>Updating the Frontend Application</h3>
+<div class="paragraph">
+<p>Building on the concepts that you learned earlier on how to deploy Policies and Applications with Red Hat GitOps let&#8217;s use your local Quay repo that contains a <strong>frontend</strong> image you built earlier, this image contains a few key security issues that you will explore on the ACS module later on.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <strong>Applications</strong> from the left side menu.</p>
+</li>
+<li>
+<p>Click on <strong>Filter</strong> and under <strong>type</strong> select <strong>Application Set</strong></p>
+</li>
+<li>
+<p>Click on the <strong>patient-demo</strong> App and Click <strong>Topology</strong></p>
+</li>
+<li>
+<p>Click on <strong>deployment</strong> then find <strong>frontend</strong> Click on <strong>frontend</strong></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-deployment-patient.png" target="blank"><img src="_images/03-deployment-patient.png" alt="03 deployment patient" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <strong>Launch resource in Search</strong> a new window will pop up</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-frontend-search.png" target="blank"><img src="_images/03-frontend-search.png" alt="03 frontend search" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Under Deployment find <strong>frontend</strong> and click it</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-frontend-search2.png" target="blank"><img src="_images/03-frontend-search2.png" alt="03 frontend search2" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on the <strong>YAML</strong> tab and under spec:containers find the <strong>image</strong> field</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-frontend-search3.png" target="blank"><img src="_images/03-frontend-search3.png" alt="03 frontend search3" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate back the Terminal screen and execute the following command</p>
+</li>
+</ul>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">echo $QUAY_URL/$QUAY_USER/frontend:0.1</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The output from the terminal will provide an URL you need for the frontend image, copy it from the terminal. Below is an example of an expected output</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[demo-user@bastion ~]$ echo $QUAY_URL/$QUAY_USER/frontend:0.1
+quay-pjhhr.apps.cluster-pjhhr.pjhhr.sandbox4183.opentlc.com/quayadmin/frontend:0.1</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate back to Search and replace the <strong>image</strong> with the URL you just copy from the terminal. Click <strong>Save</strong></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-frontend-image.png" target="blank"><img src="_images/03-frontend-image.png" alt="03 frontend image" width="100%"></a>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate back to ACM / Application / Topology View</p>
+</li>
+<li>
+<p>Click on Deployment / Frontend. Verify that the image url has changed</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/03-frontend-image2.png" target="blank"><img src="_images/03-frontend-image2.png" alt="03 frontend image2" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <strong>Pod</strong> in the Topology View might go RED, this is expected as you are editing this on the ACM side but not the GitOps side so is reporting a difference, you wouldn&#8217;t do this on a real production environment, this is only for educational purposes only.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Congratulations, you have successfully deployed an application to a Kubernetes cluster using RHACM. This approach leveraged a Git repository which housed all of the manifests that defined your application. RHACM was able to take those manifests and use them as deployables, which were then deployed to the target cluster.</p>
+</div>
+<div class="paragraph">
+<p>In the Next Module you will dive deeper into the Security aspects of the Frontend image you just deployed, you will scan it and explore vulnabilities and much more.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="acm-conclusion"><a class="anchor" href="#acm-conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In summary, you made use of the features provided by Red Hat Advanced Cluster Management for Kubernetes, to deploy a brand new standalone cluster, as well as deploy a Virtual Machine using infrastructure as code with RedHat GitOps, you also deployed governance policies and a complex application with GitOps, making it much easier to build, manage and secure your Kubernetes Clusters. Hopefully this lab has helped demonstrate to you the immense value provided by RHACM and OpenShift Platform Plus. Please feel free to continue and explore the RHACM lab environment, or continue on to the next portion of the lab.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="module-02.html" class="query-params-link">2. Red Hat Quay</a></span>
+  <span class="next"><a href="module-04.html" class="query-params-link">4. Red Hat Advanced Cluster Security for Kubernetes</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a href="https://demo.redhat.com" target="_blank" class="poweredBy"><p>Powered by</p><div class="labInfo_poweredBy" style="display: block; width: 260px;"><svg class="labInfo_poweredByLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1508.5 178.739"><g fill="#111"><path d="M316.6 63.2v-56H342a21.279 21.279 0 0 1 7.8 1.3 18.111 18.111 0 0 1 5.9 3.5 15.577 15.577 0 0 1 5 11.8 15.051 15.051 0 0 1-3.1 9.5 16.836 16.836 0 0 1-8.4 5.8l12.5 24.1h-9.3l-11.6-23H325v23Zm24.7-48.6H325v18.7h16.3q5.25 0 8.1-2.7a8.7 8.7 0 0 0 2.8-6.6 8.7 8.7 0 0 0-2.8-6.6c-1.8-1.9-4.5-2.8-8.1-2.8ZM364.1 42.8a20.674 20.674 0 0 1 1.6-8.2 20.288 20.288 0 0 1 4.3-6.7 19.92 19.92 0 0 1 6.5-4.5 19.718 19.718 0 0 1 8-1.6 18.463 18.463 0 0 1 7.8 1.6 18.677 18.677 0 0 1 6.2 4.5 20.927 20.927 0 0 1 4.1 6.8 23.2 23.2 0 0 1 1.5 8.4v2.3H372a13.822 13.822 0 0 0 4.6 8.4 13.6 13.6 0 0 0 9.1 3.3 15.553 15.553 0 0 0 5.7-1 12.858 12.858 0 0 0 4.6-2.6l5.1 5a25.983 25.983 0 0 1-7.4 4.1 24.69 24.69 0 0 1-8.4 1.3 21.306 21.306 0 0 1-8.4-1.6 22.763 22.763 0 0 1-6.8-4.4 20.788 20.788 0 0 1-4.5-6.7 23.2 23.2 0 0 1-1.5-8.4Zm20.2-14.2a11.527 11.527 0 0 0-8 3 13.046 13.046 0 0 0-4.2 7.8h24.2a13.091 13.091 0 0 0-4.2-7.8 11.106 11.106 0 0 0-7.8-3ZM443.1 63.2v-3.8a19.448 19.448 0 0 1-5.8 3.3 18.924 18.924 0 0 1-6.7 1.2 19.824 19.824 0 0 1-14.6-6.1 22.268 22.268 0 0 1-4.4-6.7 21.812 21.812 0 0 1 0-16.4A20.534 20.534 0 0 1 416 28a19.335 19.335 0 0 1 6.6-4.5 20.334 20.334 0 0 1 8.2-1.6 20.7 20.7 0 0 1 6.6 1 19.415 19.415 0 0 1 5.7 3V7.2l8-1.8v57.8Zm-25.2-20.4a13.718 13.718 0 0 0 4 10.1 13.45 13.45 0 0 0 9.8 4.1 14.956 14.956 0 0 0 6.4-1.3 15.954 15.954 0 0 0 4.9-3.6V33.6a14.988 14.988 0 0 0-4.9-3.5 15.271 15.271 0 0 0-6.4-1.3 13.423 13.423 0 0 0-9.9 4 13.806 13.806 0 0 0-3.9 10ZM478.1 63.2v-56h8.4v24h29.8v-24h8.4v56h-8.4V38.8h-29.8v24.4ZM547.2 64a16.483 16.483 0 0 1-10.8-3.5 11.037 11.037 0 0 1-4.2-8.9 10.375 10.375 0 0 1 4.7-9.2 20.76 20.76 0 0 1 11.8-3.2 27.841 27.841 0 0 1 5.8.6 27.374 27.374 0 0 1 5.3 1.6v-4.3a8.143 8.143 0 0 0-2.6-6.5 11.452 11.452 0 0 0-7.4-2.2 20.788 20.788 0 0 0-6 .9 34.616 34.616 0 0 0-6.6 2.6l-3-6a54.169 54.169 0 0 1 8.4-3.1 33.18 33.18 0 0 1 8.3-1.1c5.2 0 9.3 1.3 12.2 3.8s4.4 6.1 4.4 10.8v27h-7.8v-3.5a19.441 19.441 0 0 1-5.8 3.2 23.54 23.54 0 0 1-6.7 1Zm-7.3-12.6a5.646 5.646 0 0 0 2.6 4.8 11.193 11.193 0 0 0 6.6 1.8 16.256 16.256 0 0 0 5.9-1 14.449 14.449 0 0 0 4.9-2.9V47a19.778 19.778 0 0 0-4.8-1.8 24.933 24.933 0 0 0-5.7-.6 11.859 11.859 0 0 0-6.8 1.8 5.728 5.728 0 0 0-2.7 5ZM580.6 53.2v-24H572v-6.7h8.6V12.1l7.9-1.9v12.3h12v6.7h-12v22.1a5.94 5.94 0 0 0 1.4 4.4c.9.9 2.5 1.3 4.6 1.3a23.637 23.637 0 0 0 3-.2 10.857 10.857 0 0 0 2.8-.8v6.7a19.28 19.28 0 0 1-3.8.9 27.484 27.484 0 0 1-3.8.3c-3.9 0-7-.9-9-2.8-2-1.7-3.1-4.4-3.1-7.9Z"></path></g><path d="M127 90.2c12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4L149.8 37c-1.7-7.1-3.2-10.3-15.7-16.6-9.7-5-30.8-13.1-37.1-13.1-5.8 0-7.5 7.5-14.4 7.5-6.7 0-11.6-5.6-17.9-5.6-6 0-9.9 4.1-12.9 12.5 0 0-8.4 23.7-9.5 27.2a4.216 4.216 0 0 0-.3 1.9c0 9.2 36.3 39.4 85 39.4Zm32.5-11.4c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3C21.8 58.8 0 61.8 0 81c0 31.5 74.6 70.3 133.7 70.3 45.3 0 56.7-20.5 56.7-36.6-.1-12.8-11-27.3-30.9-35.9Z" fill="#e00"></path><path d="M159.5 78.8c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3l3.7-9.1a4.877 4.877 0 0 0-.3 2c0 9.2 36.3 39.4 85 39.4 12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4Z"></path><path d="M253.5 158.7a2.22 2.22 0 0 1-2.2-2.2V2.2a2.2 2.2 0 0 1 4.4 0v154.2a2.242 2.242 0 0 1-2.2 2.3Z" fill="#111"></path><text data-name="Demo Platform" transform="translate(1186 149)" fill="#111" font-size="82" font-family="'RedHatDisplay', 'Overpass', overpass, helvetica, arial, sans-serif" font-weight="700"><tspan x="-877.892" y="0">Demo Platform</tspan></text></svg></div></a>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

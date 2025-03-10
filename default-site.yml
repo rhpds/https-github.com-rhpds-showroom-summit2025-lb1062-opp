@@ -1,12 +1,11 @@
 ---
 site:
-  title: Red Hat Summit 2024
-  # url: https://redhat-scholars.github.io/course-template
+  title: Red Hat Summit 2025
   start_page: modules::index.adoc
 
 content:
   sources:
-    - url: .
+    - url: ./
       start_path: content
 
 ui:
@@ -19,8 +18,3 @@ runtime:
 output:
   dir: ./www
 
-antora:
-  extensions:
-    - id: dev-mode
-      require: ./content/lib/dev-mode.js
-      enabled: true

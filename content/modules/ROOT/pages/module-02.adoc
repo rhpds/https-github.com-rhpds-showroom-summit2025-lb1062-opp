@@ -1,138 +1,551 @@
-= Managing an Application from GitHub
+= Store, Scan and Deploy Applications with Red Hat Quay
 
-In the first half of this workshop, we packaged an application into this portable container format manually using rpms.
-In the second half, we will consider that you may want to manage software from GitHub or some kind of software versioning application.
-Rather than installing rpms, we have individual software files and pull them out of that version control into a group of systems.
+In this module you will be acting as the devloper.(UPDATE STORY)
 
-== Install RHEL 8 UBI
+[[build-app]]
 
-In this lab, we will be using a different Red Hat Enterprise Linux version in my container. 
+[[quay-login]]
 
-. Verify the host system release 
+== Login to Quay from the CLI
 
-+
-[source,bash]
+*Procedure*
+
+[start=1]
+. Run the following command.
+
+====
+Let's export a few variables to make things easier. These variables will stay in the .bashrc file so they're saved in case you need to refresh the terminal.
+====
+
+[source,sh,subs="attributes",role=execute]
 ----
-cat /etc/redhat-release
-----
-+ 
-NOTE: The `bastion` system is Red Hat Enterprise Linux 9, and when you built the previous container, you used the UBI9 image. This means both the image and the container were built off the same Red Hat Enterprise Linux packages. 
-
-. As we did previously in this lab, Use `buildah from` to pull down the Red Hat Enterprise Linux 8 UBI.
-
-+
-[source,bash]
-----
-buildah from registry.access.redhat.com/ubi8/ubi
+echo export QUAY_USER={quay_admin_username} >> ~/.bashrc
+QUAY_USER={quay_admin_username}
 ----
 
-NOTE: Because you already pulled one image named `ubi-working-container` this one is called `ubi-working-container-1`. 
+[start=2]
 
-[#prerequisites]
-== Install Prerequisites
+. Run the following command to set the Quay URL variable 
 
-Now that you have a working container, you will use the same process as before installing all the prerequisites, changing config files, and manipulating the contents of this container to be in the desired state.
-
-The software you will install is a JavaScript-based game that runs on a web browser. As before in the lab, use dnf to install software inside the container. 
-
-. Use `buildah run` and install Apache (`httpd`) into the `ubi-working-container-1` container. 
-+
-[source,bash]
+[source,sh,subs="attributes",role=execute]
 ----
-buildah run ubi-working-container-1 -- dnf -y install httpd
+echo export QUAY_URL=$(oc -n quay get route quay-quay -o jsonpath='{.spec.host}') >> ~/.bashrc
+QUAY_URL=$(oc -n quay get route quay-quay -o jsonpath='{.spec.host}')
 ----
 
-== Enable Service
+IMPORTANT: Verify that the variables are correct
 
-The next thing to do is to use a systemctl to enable the service. The ubi-init provides full systemd service to the container.
-This will start up any of the services that are enabled. 
-
-. Enable the `httpd` service using `buildah run`
-
-+
-[source,bash]
+[source,sh,subs="attributes",role=execute]
 ----
-buildah run ubi-working-container-1 -- systemctl enable httpd
+echo $QUAY_USER
+echo $QUAY_URL
 ----
 
-NOTE: The UBI standard image doesn't have systemd installed on it by default. The `ubi-init` container image does include systemd. Plan accordingly to which image you use to build applications.  
-
-== Explore Source Materials
-
-A GitHub repository has already been synchronized to `/home/devops/clumsy-bird/` This repository contains the configurations for your application.
-
-. Verify the repository is cloned inside the `/home/devops/` directory
-+
-[source,bash]
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
 ----
-cd /home/devops/
+[lab-user@bastion ~]$ echo $QUAY_USER
+echo $QUAY_URL
+quayadmin
+quay-bq65l.apps.cluster-bq65l.bq65l.sandbox209.opentlc.com
 ----
 
-+
-[source,bash]
+[start=3]
+. Using the terminal on the bastion host, login to quay using the Podman CLI as shown below:
+
+[source,sh,subs="attributes",role=execute]
 ----
-git clone https://github.com/ellisonleao/clumsy-bird
-----
-+
-NOTE: The output states that the software has already been checked out. 
-+
-. Explore the JavaScript contents, index files, and everything else that we need for this web-based JavaScript software.
-+
-[source,bash,role=execute]
-----
-ls clumsy-bird
+podman login $QUAY_URL
 ----
 
-== Add Source Materials to Container
+NOTE: Use the quay admin credentials to sign in. 
 
-. Now that you have verified the source materials exist, you will put the software inside of my container image using the `buildah copy` command.
-+
-[source,bash]
+[cols="2,2"]
+|===
+| *Quay Username:* | *{quay_admin_username}* 
+| *Quay Password:* | *{quay_admin_password}* 
+|===
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
 ----
-buildah copy ubi-working-container-1 clumsy-bird /var/www/html
-----
-
-[#container]
-== Enable Container in Background
-
-In the previous section of this lab, you ran the game natively through interactive mode. Because you are now building a web application you will need to run the container in the background and access it through a web address. 
-
-. Execute `buildah config` to specify a port and initialize the container. 
-
-+
-[source,bash]
-----
-buildah config --port 80 --cmd "/usr/sbin/init" ubi-working-container-1
+Username: quayadmin
+Password:
+Login Succeeded!
 ----
 
-NOTE: The command makes a configuration change to this container. I'm configuring this container to accept connections to its port 80. When the container starts up, it should run the init command, which, in this case, is going to be the Apache daemon right from earlier when I enabled it.
+Beautiful! We're logged in. Now you can download build and push images directly to your quay repository.
 
-== Commit Container and Deploy
+[[golden-image]]
 
-. Now that we have a container in a working configured state, it is time to make that permanent by committing it to a container image called `clumsy-bird`
-+
-[source,bash]
+=== Create our developer golden image
+
+Imagine a base image as a blank canvas, providing a reliable foundation like a minimal operating system or runtime environment. Developers add the essential configurations, libraries, and tools needed to fit their application's unique demands. By tagging this customized creation as a golden image, developers ensure every deployment uses the same standardized, consistent setup, simplifying workflows and avoiding unexpected surprises.
+
+*Procedure*
+
+. Run the following commands in succession
+
+[source,sh,subs="attributes",role=execute]
 ----
-buildah commit ubi-working-container-1 clumsy-bird
+podman pull python:3.12-alpine
 ----
 
-. Verify that the image was created with `podman`
-+
-[source,bash]
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion ~]$ podman pull python:3.12-alpine
+Trying to pull docker.io/library/python:3.12-alpine...
+Getting image source signatures
+Copying blob e846654b130a skipped: already exists  
+Copying blob 00bb69fc5235 skipped: already exists  
+Copying blob 1f3e46996e29 skipped: already exists  
+Copying blob 7b104e645578 skipped: already exists  
+Copying config 451fdb03e1 done   | 
+Writing manifest to image destination
+451fdb03e17285d3263d88f0f3bed692c82556935490d233096974386cd0381b
+----
+
+====
+This command tags the python:3.12-alpine image with your Quay repository and username allowing you to accurately push the image in a later step.
+====
+
+[source,sh,subs="attributes",role=execute]
+----
+podman tag docker.io/library/python:3.12-alpine $QUAY_URL/$QUAY_USER/python-alpine-golden:0.1
+----
+
+====
+This command shows you the local images available
+====
+
+[source,sh,subs="attributes",role=execute]
 ----
 podman images
 ----
-+
-. Run the container Now it's time to run the container. 
-+
-[source,bash]
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
 ----
-podman run -d -p 8500:80 clumsy-bird
+[demo-user@bastion ~]$ podman images
+REPOSITORY                                                                                  TAG          IMAGE ID      CREATED      SIZE
+quay-w2t4c.apps.cluster-w2t4c.w2t4c.sandbox1647.opentlc.com/quayadmin/python-alpine-golden  0.1          451fdb03e172  5 weeks ago  50.6 MB
+docker.io/library/python                                                                    3.12-alpine  451fdb03e172  5 weeks ago  50.6 MB
 ----
 
-== Verify Application
+====
+This command pushes the golden image to your repository
+====
 
-Verify that the application is running by navigating to
+[source,sh,subs="attributes",role=execute]
+----
+podman push $QUAY_URL/$QUAY_USER/python-alpine-golden:0.1
+----
 
-http://bastion.{guid}.example.opentlc.com:8500
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion ~]$ podman push $QUAY_URL/$QUAY_USER/python-alpine-golden:0.1
+Getting image source signatures
+Copying blob c6121fb0c7de done   | 
+Copying blob a0904247e36a done   | 
+Copying blob 5b6d0b88dd08 done   | 
+Copying blob 375bee7d34e2 done   | 
+Copying config 451fdb03e1 done   | 
+Writing manifest to image destination
+----
 
+Perfect! 
+
+[[dev-app]]
+
+=== Create the frontend application, and upload it to Quay
+
+In this section, you will add the application code to the image, build, tag and push the new image to Quay. Later, we'll use that image to deploy an application to the OpenShift Cluster.
+
+TIP: With the variables saved in the ~/.bashrc file you will not have to declare them again in the future. 
+
+*Procedure*
+
+. List the contents of the `frontend` directory inside the `app-images` folder to see the files available for the project.
+
+[source,sh,subs="attributes",role=execute]
+----
+ls $TUTORIAL_HOME/app-images/frontend/
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion ~]$ ls $TUTORIAL_HOME/app-images/frontend/
+Dockerfile  main.py  static
+----
+
+[start=2]
+. Display the contents of the `Dockerfile` to understand how the image is built, including installed dependencies and the copied files.
+
+[source,sh,subs="attributes",role=execute]
+----
+cat $TUTORIAL_HOME/app-images/frontend/Dockerfile
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion ~]$ cat $TUTORIAL_HOME/app-images/frontend/Dockerfile
+FROM python:3.12-alpine AS build
+
+RUN pip install --no-cache-dir httpx psycopg psycopg_binary psycopg_pool starlette sse_starlette uvicorn
+
+#vulnerable packages
+RUN pip install --no-cache-dir setuptools==39.1.0
+RUN pip install --no-cache-dir Flask==0.5
+RUN pip install --no-cache-dir Django==1.11.29
+RUN pip install --no-cache-dir requests==2.19.0
+RUN pip install --no-cache-dir PyYAML==3.12
+
+FROM python:3.12-alpine AS run
+
+RUN adduser -S fritz -G root
+USER fritz
+
+COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --chown=fritz:root static /home/fritz/static
+COPY --chown=fritz:root main.py /home/fritz/main.py
+
+EXPOSE 8080
+WORKDIR /home/fritz
+ENTRYPOINT ["python", "main.py"]
+----
+
+
+[start=3]
+. Update the `FROM` statement in the Dockerfile to reference a custom base image hosted in a private registry, using `sed` to modify the line.
+
+[source,sh,subs="attributes",role=execute]
+----
+sed -i "s|^FROM python:3\.12-alpine AS \(\w\+\)|FROM $QUAY_URL/$QUAY_USER/python-alpine-golden:0.1 AS \1|" $TUTORIAL_HOME/app-images/frontend/Dockerfile
+----
+
+[start=4]
+. Check the Dockerfile again to verify that the `FROM` statement has been updated correctly.
+
+[source,sh,subs="attributes",role=execute]
+----
+cat $TUTORIAL_HOME/app-images/frontend/Dockerfile
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion ~]$ cat $TUTORIAL_HOME/app-images/frontend/Dockerfile
+FROM quay-w2t4c.apps.cluster-w2t4c.w2t4c.sandbox1647.opentlc.com/quayadmin/python-alpine-golden:0.1 AS build
+
+RUN pip install --no-cache-dir 
+
+....
+----
+
+[start=5]
+. Build the Docker image using `podman` from the `frontend` directory. The `-t` flag tags the image with a version (`0.1`) and a registry URL.
+
+[source,sh,subs="attributes",role=execute]
+----
+cd $TUTORIAL_HOME/app-images/frontend/
+podman build -t $QUAY_URL/$QUAY_USER/frontend:0.1 .
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion frontend]$ podman build -t $QUAY_URL/$QUAY_USER/frontend:0.1 .
+[1/2] STEP 1/2: FROM quay-w2t4c.apps.cluster-w2t4c.w2t4c.sandbox1647.opentlc.com/quayadmin/python-alpine-golden:0.1 AS build
+.
+.
+.
+Successfully tagged quay-w2t4c.apps.cluster-w2t4c.w2t4c.sandbox1647.opentlc.com/quayadmin/frontend:0.1
+46ea42cba3f17c366b0c534164ae088719266df9ab4122532b0bffd1bbefaec9
+----
+
+[start=6]
+. Upload the built image to a remote registry using `podman push`. The `--remove-signatures` flag ensures that image signatures are not included in the pushed image.
+
+[source,sh,subs="attributes",role=execute]
+----
+podman push $QUAY_URL/$QUAY_USER/frontend:0.1 --remove-signatures
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+[demo-user@bastion frontend]$ podman push $QUAY_URL/$QUAY_USER/frontend:0.1 --remove-signatures
+Copying blob e2adcecab318 done   | 
+Copying blob 9944062081bf done   | 
+Copying blob 83e98ac5789e skipped: already exists  
+Copying blob 32fd82e104c5 skipped: already exists  
+Copying blob 453d5d1264c7 done   | 
+Copying blob 3c37dc31320d done   | 
+Copying blob 210a2ae1a75e skipped: already exists  
+Copying blob 57a6ec527341 skipped: already exists  
+Copying config 46ea42cba3 done   | 
+Writing manifest to image destination
+----
+
+NOTE: Quay will automatically create a private registry to store the application image because of your admin access. To deploy the application, make sure the repository is set to public so that you can pull the image without needing authentication.
+
+The frontend application is finally built! The next step is to review it in Quay and deploy it to OpenShift using ACM and OpenShift GitOps.
+
+[[quay]]
+
+== Access Quay 
+
+Your Red Hat Quay console is available at: {quay_console_url}[window=blank]
+
+Administrator login is available with:
+
+[source,sh,subs="attributes",role=execute]
+
+[cols="1,1"]
+|===
+*Quay Console Username:* | {quay_admin_username} |
+*Quay Console Password:* | {quay_admin_password} |
+|===
+
+[[navigating-the-registry]]
+
+== Browse the registry
+
+In the setup module you downloaded built and pushed a insecure java application called *frontend*. Now it's time to deploy it to the OpenShift Cluster. To do this you will need to make the registry that you created public. 
+
+Let's take a look at our application in the registry.
+
+*Procedure*
+
+. First, click on the *frontend* repository. 
+
+image::02-quay-login.png[link=self, window=blank, width=100%]
+
+The information tab shows you information such as;
+
+- Podman and Docker commands
+- Repository activity
+- The repository description. 
+
+image::02-frontend-repo.png[link=self, window=blank, width=100%]
+
+====
+On the left hand side of the window you should see the following icons labelled in order from top to bottom,
+====
+
+image::02-quay-sidebar.png[link=self, window=blank, width=100%]
+
+- Information
+- Tags
+- Tag History
+- Usage Logs
+- Settings
+
+
+[start=2]
+. Click on the *Tags* icon. 
+
+image::02-quay-tags.png[link=self, window=blank, width=100%]
+
+This tab displays all of the images and tags that have been upladed, providing information such as fixable vulnerabilities, the image size and allows for bulk changes to images based on the security posture. 
+
+We will explore this tab a little later in this module.
+
+[start=3]
+. Click on the *Tags History* icon. 
+
+image::02-quay-history.png[link=self, window=blank, width=100%]
+
+This tab simply displays the container images history over time. 
+
+[start=4]
+. Click into the SHA256 hash number. 
+
+image::02-image-details.png[link=self, window=blank, width=100%]
+
+From this dashboard you will be able to see the image manifest of that container image.
+
+image::02-image-manifest.png[link=self, window=blank, width=100%]
+
+[start=5]
+. Click the *BACK* icon in the top left of the dashboard then click on the *Usage Logs* icon. 
+
+image::02-quay-back.png[link=self, window=blank, width=100%]
+image::02-quay-usage.png[link=self, window=blank, width=100%]
+
+
+This tab displays the usage over time along with details about who/how the images were pushed to the cluster. 
+
+====
+You should see that you (The "quayadmin") pushed an image tagged 0.1 to the repository today. 
+====
+
+[start=6]
+. Lastly click on the *Settings* icon. 
+
+image::02-quay-settings.png[link=self, window=blank, width=100%]
+
+In this tab you can add/remove users and update permissions, alter the privacy of the repository, and even schedule alerts based on found vulnerabilities.
+
+[start=6]
+. Make your repository public before deploying our application in the next step by clicking the *Make Public* button under *Repository Visibility*
+
+image::02-quay-public.png[link=self, window=blank, width=100%]
+
+IMPORTANT: Make sure to make the repository public. Otherwise you will not be able to deploy the application in the ACM section.
+
+[start=7]
+. Click OK
+
+image::02-quay-public-yes.png[link=self, window=blank, width=100%]
+
+Great! The frontend application can now be deployed with ACM without using pull secrets. 
+
+[[vulnerability-scanning-with-quay]]
+
+== Vulnerability Scanning with Quay
+
+Red Hat Quay can also help with securing our environments by performing a container vulnerability scan on any images added to our registry, and advise which ones are potentially fixable. This feature is also known as vulnerability scanning at rest.
+
+Use the following procedure to check the security scan results for our Java container image you have uploaded.
+
+*Procedure*
+
+. Click on the *Tags* icon on the left side of the screen like before.
+
+image::02-quay-tags.png[link=self, window=blank, width=100%]
+
+NOTE: You may need to click the checkbox near the image you would would like more information on, but the column for *Security Scan* should populate.
+
+[start=2]
+. By default, the security scan color codes the vulnerabilities, you can hover over the security scan for more information.
+
+image::02-quay-scan-hover.png[link=self, window=blank, width=100%]
+
+NOTE: The alpine container image you are using in this lab shows 34 vulnerabilities, with 2 cirtical vulnerabilities. This number will change with time and will be different between container scanners for a variety of reasons such as reporting mechanisms, vulnerability feeds and operating system support. 
+
+[start=3]
+. Click on the list of vulnerabilities to see a more detailed view.
+
+image::02-quay-security.png[link=self, window=blank, width=100%] 
+
+image::02-quay-vuln-overview.png[link=self, window=blank, width=100%]
+
+[start=4]
+. Click on a vulnerable package on the left menu to get more information about the vulnerability and see what you have to do to fix the issue.
+
+image::02-quay-vuln-detailed.png[link=self, window=blank, width=100%]
+
+NOTE: Toggling for fixable/unfixable vulnerabilities is an excellent way for developers to understand what is within their responsibility for fixing. For example, since you are using an older version of Java, many fixes are available for these common issues. 
+
+=== Ensure ACS can pull the image manifest from your Quay instance
+
+There is currently no integration with the Quay repository which means ACS cannot view the manifest layers. You can verify this by running a similar roxctl scan that you ran before.
+
+*Procedure*
+
+. Run the following command to test the RHACS/Quay integration
+
+[source,sh,subs="attributes",role=execute]
+----
+roxctl --insecure-skip-tls-verify -e "$ROX_CENTRAL_ADDRESS:443" image scan --image=$QUAY_URL/$QUAY_USER/frontend:0.1 --force -o table
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+ERROR:  Scanning image failed: retrieving image scan result: could not scan image: "quay-nhxdx.apps.cluster-nhxdx.nhxdx.sandbox4561.opentlc.com/quayadmin/frontend:0.1": rpc error: code = Internal desc = image enrichment error: error getting metadata for image: quay-nhxdx.apps.cluster-nhxdx.nhxdx.sandbox4561.opentlc.com/quayadmin/frontend:0.1 error: no matching image registries found: please add an image integration for quay-nhxdx.apps.cluster-nhxdx.nhxdx.sandbox4561.opentlc.com. Retrying after 3 seconds...
+----
+
+[start=2]
+. Next, run the following command in the terminal to add the Quay integration to RHACS via an API call.
+
+[source,sh,subs="attributes",role=execute]
+----
+# ACS API endpoint used to create the Quay repo integration
+POST_ENDPOINT="https://${ROX_CENTRAL_ADDRESS}/v1/imageintegrations"
+
+# Quay repository payload
+read -r -d '' PAYLOAD << EOM
+{
+  "name": "my-quay-repo",
+  "type": "quay",
+  "categories": [
+    "REGISTRY"
+  ],
+  "quay": {
+    "endpoint": "http://$QUAY_URL",
+    "insecure": true
+  },
+  "autogenerated": false,
+  "skipTestIntegration": false
+}
+EOM
+
+# Make API request to create Quay repository
+curl -k -X POST "${POST_ENDPOINT}" \
+     -H "Authorization: Bearer ${ROX_API_TOKEN}" \
+     -H "Content-Type: application/json" \
+     -d "${PAYLOAD}" \
+     | jq
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   605  100   339  100   266   3459   2714 --:--:-- --:--:-- --:--:--  6237
+{
+  "id": "ad83bd29-864b-4343-a23d-3b606a24210b",
+  "name": "my-quay-repo",
+  "type": "quay",
+  "categories": [
+    "REGISTRY"
+  ],
+  "quay": {
+    "endpoint": "http://quay-nhxdx.apps.cluster-nhxdx.nhxdx.sandbox4561.opentlc.com/quayadmin",
+    "oauthToken": "",
+    "insecure": true,
+    "registryRobotCredentials": null
+  },
+  "autogenerated": false,
+  "clusterId": "",
+  "skipTestIntegration": false,
+  "source": null
+}
+----
+
+[start=3]
+. Lastly, run the following command and to scan the frontend:0.1 container that you built.
+
+[source,sh,subs="attributes",role=execute]
+----
+roxctl --insecure-skip-tls-verify -e "$ROX_CENTRAL_ADDRESS:443" image scan --image=$QUAY_URL/$QUAY_USER/frontend:0.1 --force -o table
+----
+
+TIP: The following output can be configured using flags. You can configure different outputs (table, CSV, JSON, and sarif.) and filter for specific severities.
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+.
+.
+.
+|            |         | GHSA-r64q-w8jr-g9qp |    LOW    |             https://github.com/urllib3/urllib3/issues/1553              |    1.24.3     |
++------------+---------+---------------------+-----------+-------------------------------------------------------------------------+---------------+
+WARN:   A total of 33 unique vulnerabilities were found in 7 components
+----
+
+
+image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzMyaHRsNTdwZWRlejRycGtpNTkxOGlyMjJsODE4OHFiaWd3NjFpNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rVVFWyTINqG7C/giphy.gif[link=self, window=blank, width=100%, class="center"]
+
+=== Summary
+
+Nice job! Developers can now build and push their images to Quay, view their image vulnerabilities, and use roxctl to scan their images.
+
+Onto the operations team and Red Hat Advanced Cluster Management.

@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat Advanced Cluster Security for Kubernetes :: Red Hat Summit 2025</title>
+    <link rel="prev" href="module-03.html">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../_/css/site.css"><link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="https://demo.redhat.com/images/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar"  style="background-color: #131313 !important;">
+    <div class="navbar-brand">
+      <div style="display: flex; flex-direction:row; padding: 12px 32px; gap: 16px;">
+        <img src="https://www.redhat.com/rhdc/managed-files/Red-Hat-Summit-logo.svg" alt="Red Hat Summit logo" width="90px" class="hero-summit-logo dx-block dx-mb-1">
+        <img src="https://gpte-public.s3.amazonaws.com/rh-ansiblefest-2021-logo-pool-reverse-rgb_0.svg" alt="AnsibleFest logo" width="auto" class="hero-ansiblefest-logo dx-block dx-mb-2">
+      </div>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Red Hat Summit 2025</a>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+      </div>
+    </div>
+  </nav>
+</header>
+    <div class="body">
+<div class="nav-container" data-component="modules" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title" style="display: none;"><a href="index.html" class=" query-params-link">Hands-on with Red Hat OpenShift Platform Plus</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-01.html">1. Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-01.html#access">Accessing the lab environment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#openshift-acm">OpenShift and ACM console access</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#acs">RHACS console access</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#quay">Quay console access</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-01.html#bastion-host">Bastion access</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#demo-applications">Demo applications setup</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html">2. Red Hat Quay</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html#build-app">Develop your app</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#quay-login">Login to Quay from the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#golden-image">Create a golden image</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#dev-app">Add your code and containerize</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html#quay">Red Hat Quay</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#access-quay">Accessing Red Hat Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#navigating-the-registry">Navigating the registry</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="module-02.html#vulnerability-scanning-with-quay">Vulnerability Scanning with Quay</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-03.html">3. Red Hat Advanced Cluster Management for Kubernetes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#cluster-lifecycle">Working with Kubernetes Clusters and Cluster Lifecycle</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#hosted-control-planes">Introducing Hosted Control Planes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#create-manage-cluster">Create and Manage Clusters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#create-manage-vms">Create and Manage Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#policy-driven-governance">Policy Driven Governance</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#create-grc-policies">Creating GRC Policies in RHACM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#deploying-applications">Deploying Applications to Managed Clusters in RHACM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#updating-an-application">Updating the Frontend Image in the Deployed Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-03.html#acm-conclusion">Conclusion</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-04.html">4. Red Hat Advanced Cluster Security for Kubernetes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#outline">RHACS basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#console-access">Accessing the RHACS console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#acs-nav">Navigating the RHACS console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#vuln-mgmt">The Vulnerability Management dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#vuln-scanner">RHACS Vulnerability Scanner</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#log4shell">log4shell CVE vulnerability analysis</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#runtime-enforce">Introduction to Runtime policy enforcement</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploy-enforce">Introduction to Deploy-Time policy enforcement</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#conclusion">Conclusion</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore" style="display: none;">
+  <div class="context">
+    <span class="title">Hands-on with Red Hat OpenShift Platform Plus</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Hands-on with Red Hat OpenShift Platform Plus</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="module-04.html">4. Red Hat Advanced Cluster Security for Kubernetes</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Red Hat Advanced Cluster Security for Kubernetes</h1>
+<div class="sect1">
+<h2 id="outline"><a class="anchor" href="#outline"></a>Module outline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module is designed to highlight the features of Red Hat Advanced Cluster Security for Kubernetes (RHACS) while monitoring and securing the patient-frontend application you deployed earlier in the Quay module.</p>
+</div>
+<div class="paragraph">
+<p>We will begin with navigation basics, progress through vulnerability management, policy management, and enforcement, and conclude by using policy as code to enforce these policies in the build, deploy and runtime phases.</p>
+</div>
+<div class="sect2">
+<h3 id="_rhacs_basics"><a class="anchor" href="#_rhacs_basics"></a>RHACS Basics</h3>
+<div class="paragraph">
+<p>RHACS equips developers and administrators with tools to meet the security demands of a cloud-native development approach on Kubernetes. Its robust features address primary security concerns across environments, including multiple datacenters, private clouds, and public clouds running Kubernetes clusters.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rhacs_features"><a class="anchor" href="#_rhacs_features"></a>RHACS Features</h3>
+<div class="paragraph">
+<p>Using Red Hat Advanced Cluster Security for Kubernetes, you can achieve comprehensive security, addressing the following key use cases:</p>
+</div>
+<div class="sect3">
+<h4 id="_vulnerability_management"><a class="anchor" href="#_vulnerability_management"></a>Vulnerability Management</h4>
+<div class="paragraph">
+<p>Protect your nodes, platforms, and applications from vulnerabilities using powerful prioritization and impact-based filters.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_network_security"><a class="anchor" href="#_network_security"></a>Network Security</h4>
+<div class="paragraph">
+<p>Provide real-time visibility, generate and enforce network policies, detect anomalies, and manage app-centric network access controls.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_security_policy_guardrails"><a class="anchor" href="#_security_policy_guardrails"></a>Security Policy Guardrails</h4>
+<div class="paragraph">
+<p>Ensure consistent, compliant, and secure configurations with RHACS built-in policy guardrails.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compliance"><a class="anchor" href="#_compliance"></a>Compliance</h4>
+<div class="paragraph">
+<p>Ensure that your clusters meet contractual and regulatory requirements, such as DISA-STIG and PCI-DSS, with easy audit capabilities.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_risk_profiling"><a class="anchor" href="#_risk_profiling"></a>Risk Profiling</h4>
+<div class="paragraph">
+<p>Identify and prioritize potential security risks using key impact and severity metrics for OpenShift and Kubernetes clusters.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_threat_detection_and_response"><a class="anchor" href="#_threat_detection_and_response"></a>Threat Detection and Response</h4>
+<div class="paragraph">
+<p>Set secure process and network controls to detect malicious runtime incidents and respond using Kubernetes-native enforcement controls.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="console-access"><a class="anchor" href="#console-access"></a>Accessing the RHACS console</h3>
+<div class="paragraph">
+<p>In this section, you will confirm that you can connect to the RHACS portal.</p>
+</div>
+<div class="paragraph">
+<p>The following information will be available on the main lab screen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The RHACS Admin Credentials</p>
+</li>
+<li>
+<p>The URL for the RHACS portal</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_logging_into_the_rhacs_console"><a class="anchor" href="#_logging_into_the_rhacs_console"></a>Logging into the RHACS console</h3>
+<div class="paragraph">
+<p>Your RHACS Console is available at: {acs_route}[window=blank]</p>
+</div>
+<div class="paragraph">
+<p>Administrator login is available with:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RHACS Console Username:</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{acs_portal_username}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RHACS Console Password:</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{acs_portal_password}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="acs-nav"><a class="anchor" href="#acs-nav"></a>Introduction to the RHACS console</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first section of this lab will focus on navigation and vulnerability management. This work will take place in the UI and require you to use both the dashboard and the lab environment.</p>
+</div>
+<div class="sect2">
+<h3 id="_navigating_the_rhacs_console"><a class="anchor" href="#_navigating_the_rhacs_console"></a>Navigating the RHACS console</h3>
+<div class="paragraph">
+<p>In this section, you familiarize yourself with the RHACS portal, including its tabs, search capabilities and dashboard functionality.</p>
+</div>
+<div class="paragraph">
+<p>The RHACS dashboard has four main sections:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigation bar</p>
+</li>
+<li>
+<p>Navigation drawer</p>
+</li>
+<li>
+<p>Dashboard</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-numbered-dashboard.png" target="blank"><img src="_images/04-acs-numbered-dashboard.png" alt="04 acs numbered dashboard" width="100%"></a>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_navigation_bar"><a class="anchor" href="#_navigation_bar"></a>Navigation bar</h3>
+<div class="paragraph">
+<p>The top bar contains the following functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Global search</p>
+</li>
+<li>
+<p>Command-line tools</p>
+</li>
+<li>
+<p>Cluster health</p>
+</li>
+<li>
+<p>Documentation</p>
+</li>
+<li>
+<p>API reference guide</p>
+</li>
+<li>
+<p>Enable dark/light Mode</p>
+</li>
+<li>
+<p>Logged-in user account</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_1_global_search"><a class="anchor" href="#_1_global_search"></a>1. Global Search</h3>
+<div class="paragraph">
+<p>The ability to instantly find resources is essential to safeguard your cluster. Utilize the RHACS search feature to find relevant resources faster.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can use it to find deployments exposed to a newly published CVE or all deployments with external network exposure.</p>
+</div>
+<div class="paragraph">
+<p>A search query consists of two parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An attribute that identifies the resource type you want to search for.</p>
+</li>
+<li>
+<p>A search term that finds the matching resource.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, to find all violations in the <strong>frontend</strong> deployment, the search query is <strong>Deployment:frontend</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In this search query, Deployment is the attribute, and frontend is the search term.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The search field in RHACS requires each attribute to be entered fully as a search term. Enter your first attribute, and hit the &lt;tab&gt; key to move along to the following attribute you would like to enter. Results will appear once they match the entered query.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Procedure</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click on the search bar</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-search.png" target="blank"><img src="_images/04-acs-search.png" alt="04 acs search" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Enter "Deployment" + "patient-frontend" in the search bar</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-search-patient-frontend.png" target="blank"><img src="_images/04-acs-search-patient-frontend.png" alt="04 acs search patient frontend" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+RHACS maintains a library of searchable assets to help you search faster, they will appear in a drop-down list, and you can click on them to enter them as well. If a specific CVE or deployment cannot be found, please confirm the spelling of the asset name or that it is correctly deployed in the cluster.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_common_search_queries"><a class="anchor" href="#_common_search_queries"></a>Common search queries</h4>
+<div class="paragraph">
+<p>Here are some common search queries you can try in the RHACS search bar if you’d like to test its functionality.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Purpose</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CVE:&lt;CVE_number&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CVE:CVE-2018-11776</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finding deployments that are affected by a specific CVE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Privileged:&lt;true_or_false&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Privileged:true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finding privileged running deployments</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exposure Level:&lt;level&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exposure Level:External</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finding deployments that have external network exposure</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-search-cve.png" target="blank"><img src="_images/04-acs-search-cve.png" alt="04 acs search cve" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is just a sample of the types of queries you can use to analyze your environment in RHACS. For additional examples of search queries, please see the RHACS documentation.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_local_page_filtering"><a class="anchor" href="#_local_page_filtering"></a>Local page filtering</h4>
+<div class="paragraph">
+<p>You can use local page filtering from within all views in the RHACS portal. Local page filtering works similarly to the global search, but only relevant attributes are available. You can select the search bar to show all available attributes for a specific view.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_navigation_menu"><a class="anchor" href="#_2_navigation_menu"></a>2. Navigation menu</h3>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-nav-01.png" target="blank"><img src="_images/04-acs-nav-01.png" alt="04 acs nav 01" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>The left-hand navigation menu provides access to each of the security use cases, as well as product configuration to integrate RHACS with your existing tooling.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_dashboard"><a class="anchor" href="#_3_dashboard"></a>3. Dashboard</h3>
+<div class="paragraph">
+<p>The Red Hat Advanced Cluster Security for Kubernetes (RHACS) Dashboard provides quick access to the data you need. It contains additional navigation shortcuts and actionable widgets that are easy to filter and customize so that you can focus on the data that matters most to you. You can view information about levels of risk in your environment, compliance status, policy violations, and common vulnerabilities and exposures (CVEs) in images.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-dashboard.png" target="blank"><img src="_images/04-acs-dashboard.png" alt="04 acs dashboard" width="100%"></a>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_navigating_the_main_dashboard"><a class="anchor" href="#_navigating_the_main_dashboard"></a>Navigating the main dashboard</h4>
+<div class="paragraph">
+<p>The main dashboard is your place to look at the vulnerabilities, risk, compliance, and policy violations across your clusters and namespaces. This section addresses all of the functionality in the main dashboard to help you navigate it more effectively in the future.
+The dashboard can be broken down into three main sections:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The status bar</p>
+</li>
+<li>
+<p>The dashboard filter</p>
+</li>
+<li>
+<p>The actionable widgets</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-dashboard-01.png" target="blank"><img src="_images/04-acs-dashboard-01.png" alt="04 acs dashboard 01" width="100%"></a>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1_the_status_bar"><a class="anchor" href="#_1_the_status_bar"></a>1. The status bar</h4>
+<div class="paragraph">
+<p>The status bar provides at-a-glance numerical counters for critical resources. The counters reflect what is visible with your current access scope, defined by the roles associated with your user profile.</p>
+</div>
+<div class="paragraph">
+<p>These counters are clickable, providing fast access to the desired list view pages as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Counter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destination</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clusters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Platform Configuration &#8594; Clusters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nodes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration Management &#8594; Applications &amp; Infrastructure &#8594; Nodes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Violations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Violations Main Menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deployments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration Management &#8594; Applications &amp; Infrastructure &#8594; Deployments</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vulnerability Management &#8594; Dashboard &#8594; Images</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secrets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration Management &#8594; Applications &amp; Infrastructure &#8594; Secrets</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_2_the_dashboard_filter"><a class="anchor" href="#_2_the_dashboard_filter"></a>2. The Dashboard filter</h4>
+<div class="paragraph">
+<p>The dashboard includes a top-level filter that applies simultaneously to all widgets. You can select clusters and one or more namespaces within selected clusters. Any change to the filter is immediately reflected by all widgets, limiting the data they present to the selected scope.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The dashboard filter does not affect the status bar, and when no clusters or namespaces are selected, the view automatically switches to all.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-dashboard-02.png" target="blank"><img src="_images/04-acs-dashboard-02.png" alt="04 acs dashboard 02" width="100%"></a>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_actionable_widgets"><a class="anchor" href="#_3_actionable_widgets"></a>3. Actionable widgets</h4>
+<div class="paragraph">
+<p>If you have time, adjust the dashboard filtering options and widgets to hone the filtering capabilities.</p>
+</div>
+<div class="paragraph">
+<p>With these widgets, you can customize the information displayed on the dashboard by default in order to find the items that you consider most important to your deployments and your business' security.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vuln-mgmt"><a class="anchor" href="#vuln-mgmt"></a>RHACS Vulnerability Scanner</h3>
+<div class="paragraph">
+<p>Red Hat Advanced Cluster Security for Kubernetes (RHACS) introduced Scanner V4 in version 4.4 as a Technology Preview to enhance container image vulnerability scanning. Built on ClairCore (the engine behind Clair v4), it offers better accuracy and broader support for programming languages and operating systems.</p>
+</div>
+<div class="paragraph">
+<p>RHACS scans Go binaries, including dependencies from go.mod Supports Java (JAR/WAR/EAR), JavaScript (Node.js/npm), Python (egg and wheel), and Ruby (gem). RHACS adds support for Amazon Linux 2023, Alpine Linux 3.19, SUSE Linux Enterprise Server (SLES) 15, openSUSE Leap 15.1, Photon OS, and Oracle Linux.</p>
+</div>
+<div class="paragraph">
+<p>For more information, take a look at the <a href="https://docs.openshift.com/acs/4.6/operating/examine-images-for-vulnerabilities.html">RHACS Scanner V4 documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_vulnerability_management_dashboard"><a class="anchor" href="#_the_vulnerability_management_dashboard"></a>The Vulnerability Management dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let us continue by looking at our primary use case for RHACS that is the Vulnerability Management features and dashboard, a familiar topic for most security teams.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For the following section, please note that the order in which the images appear or the number of components affected may vary depending on versions and other applications running in the cluster.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_vulnerability_management_workload_cve"><a class="anchor" href="#_vulnerability_management_workload_cve"></a>Vulnerability Management - Workload CVE</h3>
+<div class="paragraph">
+<p>The Vulnerability Management tab in RHACS has seen significant improvements over the past year. It now focuses on categorizing vulnerabilities by workload, enabling scans for RHEL CoreOS, node-level issues, and correlating them with platform and application vulnerabilities. This helps security teams identify the software layer where the issue exists and the right team to address it.</p>
+</div>
+<div class="paragraph">
+<p>More critical than fixing individual vulnerabilities is establishing a process to keep container images updated and prevent serious, fixable vulnerabilities from advancing through the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-1.png" target="blank"><img src="_images/04-workload-1.png" alt="04 workload 1" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Workload CVE dashboard</strong> shows hundreds of vulnerabilities, over 200 images, and 300+ deployments because multiple images are used across different deployments.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The numbers may be different in your environments.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now it&#8217;s time to find the same <strong>patient-frontend</strong> application and do some dissecting.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Click the <strong>Vulnerability Management &#8594; Workload CVEs</strong> tab</p>
+</li>
+<li>
+<p>Click the dropdown and select deployment.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-2.png" target="blank"><img src="_images/04-workload-2.png" alt="04 workload 2" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Click the second dropdown and select name.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-3.png" target="blank"><img src="_images/04-workload-3.png" alt="04 workload 3" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Then, filter for the <strong>frontend</strong> deployment.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-4.png" target="blank"><img src="_images/04-workload-4.png" alt="04 workload 4" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>You will notice that an extra filter was added to the default filters, showing only the single deployment that the "Developer" built in the Quay module.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Click the <strong>CVE</strong> tab</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-5.png" target="blank"><img src="_images/04-workload-5.png" alt="04 workload 5" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>From here you can analyze the vulnerabilites that the devoplers have introduced into the environment.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>CVE-2017-18342 &amp; CVE-2020-14343 both are critical and are specific to the PyYAML package. This package is a high impact fix for the developers to focus on.</p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-6.png" target="blank"><img src="_images/04-workload-6.png" alt="04 workload 6" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Container OS age and the age of its components are a massive correlating factor to the number of vulnerabilites present. Speed is security when it comes to containers.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Click the <strong>CVE-2020-14343</strong> blue link.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-workload-7.png" target="blank"><img src="_images/04-workload-7.png" alt="04 workload 7" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re focused on a specific vulnerability, it&#8217;s very helpful to see all the components it affects. With this dashboard you can see that our response to this vulnerability needs to be targeted, you should reach out directly to the development team that needs that PyYAML package.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+As a security team our next step is to inform the development team about these vulnerabilities. Luckily, they should have already seen these issues in Quay.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vulnerability_reporting"><a class="anchor" href="#_vulnerability_reporting"></a>Vulnerability reporting</h3>
+<div class="paragraph">
+<p>Internal vulnerability reporting improves software security by helping teams fix issues early, lowering the risk of breaches and failures. It promotes a security-focused mindset and ensures critical vulnerabilities are prioritized and resolved quickly, resulting in a more reliable product and increased user trust.</p>
+</div>
+<div class="paragraph">
+<p>In the next part of the module, you will create a vulnerability report for the frontend application that would be sent to the developer team.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Let&#8217;s start by clicking on the <strong>Vulnerability Reporting</strong> tab.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-1.png" target="blank"><img src="_images/04-vr-1.png" alt="04 vr 1" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Click the <strong>Create report</strong> button.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-2.png" target="blank"><img src="_images/04-vr-2.png" alt="04 vr 2" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see that creating a report is a three step process. It requires you to configure the report parameters and the delivery destination, and then you have to review and create your report.</p>
+</div>
+<div class="paragraph">
+<p>The configurable parameters are the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Report name</p>
+</li>
+<li>
+<p>Report description</p>
+</li>
+<li>
+<p>CVE severity</p>
+</li>
+<li>
+<p>CVE status</p>
+</li>
+<li>
+<p>Image type</p>
+</li>
+<li>
+<p>CVEs discovered since (with a date)</p>
+</li>
+<li>
+<p>And a Report scope.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Fill out the information specific to the frontend deployment of the patient-portal.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Report name: frontend-vulnerability-report</p>
+</li>
+<li>
+<p>Report description (Optional)</p>
+</li>
+<li>
+<p>CVE severity: Critical + Important</p>
+</li>
+<li>
+<p>CVE status: Fixable + Unfixable</p>
+</li>
+<li>
+<p>Image type: Deployed + Watched</p>
+</li>
+<li>
+<p>CVEs discovered since: All time (It&#8217;s been a short lab :) )</p>
+</li>
+<li>
+<p>Include NVD CVSS</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-3.png" target="blank"><img src="_images/04-vr-3.png" alt="04 vr 3" width="100%"></a>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>You now have a vulnerability report but you haven&#8217;t targeted it to the frontend deployment. That&#8217;s what collections are for.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Click on the "Select a collection" dropdown then select <strong>Create collection</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-4.png" target="blank"><img src="_images/04-vr-4.png" alt="04 vr 4" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>When you are done, select the <strong>Select a collection</strong> dropdown</p>
+</li>
+<li>
+<p>Click <strong>Create Collection</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-4.png" target="blank"><img src="_images/04-vr-4.png" alt="04 vr 4" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>You can create collection rules by deployment, namespace and cluster. The collections are setup this way so that you can easily attach policies, vulnerability reports and notifications by the logical groupings of your organization.</p>
+</div>
+<div class="paragraph">
+<p>Since you want to target only a single deployment, let&#8217;s add the Deployment and Namespace specific to the frontend deployment.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>Give the collection a name. (ex: frontend)</p>
+</li>
+<li>
+<p>Click the dropdown and select <strong>Deployments with names matching</strong> then enter <strong>frontend</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-5.png" target="blank"><img src="_images/04-vr-5.png" alt="04 vr 5" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="8">
+<li>
+<p>Do the same with the namespace rule. Select <strong>Namespace with names matching</strong> then enter <strong>patient-portal</strong></p>
+</li>
+</ol>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>If you do this correctly the frontend deployment you are targeting should never disappear from the "collection results" information on the right of the screen.</p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-6.png" target="blank"><img src="_images/04-vr-6.png" alt="04 vr 6" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="9">
+<li>
+<p>Review the collection</p>
+</li>
+<li>
+<p>Scroll down and hit <strong>Save</strong></p>
+</li>
+<li>
+<p>Click <strong>Next</strong> once you are back in the <strong>Configure report parameters</strong> tab</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Next, create an example email notifier that will send an email every Monday to remind the frontend team about the vulnerabilities in the deployment.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>This notifier will not work but will show you what is possible with RHACS.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="12">
+<li>
+<p>Click <strong>Add delivery destination &#8594; Create email notifier</strong> and enter the following</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Integration name: frontend-example
+Email server: smtp.example.com:465
+Click <strong>Enable unauthenticated SMTP</strong>
+From: security team
+Sender: <a href="mailto:rhacs@demo.com">rhacs@demo.com</a>
+Default recipient: <a href="mailto:frontend@fix-this.com">frontend@fix-this.com</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-8.png" target="blank"><img src="_images/04-vr-8.png" alt="04 vr 8" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Don&#8217;t worry if you don&#8217;t want to enable the notification. The exercise is about going through the workflow.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="12">
+<li>
+<p>Select a frequency. For example, weekly on Monday.</p>
+</li>
+<li>
+<p>Hit <strong>Next</strong></p>
+</li>
+<li>
+<p>Review your masterpiece and click <strong>Create</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWJ0ZWRjZ3g0OTUyOGE5MDVhdDgyZzVhczcwNGdpbWxibzBhejZzMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VdiQKDAguhDSi37gn1/giphy.gif" alt="itsalive">
+</div>
+</div>
+<div class="paragraph">
+<p>However, you don&#8217;t have to wait until Monday to view the report.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="15">
+<li>
+<p>Click the vertical ellipses on the right side of the UI and click <strong>Generate Download</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-vr-9.png" target="blank"><img src="_images/04-vr-9.png" alt="04 vr 9" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="16">
+<li>
+<p>Download the report and take a look if you have the time.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Awesome!</p>
+</div>
+<div class="paragraph">
+<p>Now that the development team is getting weekly reports about their vulnerabilities it&#8217;s time to create some guardrails for the applications behavior.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_policy_management"><a class="anchor" href="#_policy_management"></a>Policy Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RHACS includes built-in policies to detect attacker activities like gaining access, maintaining presence, lateral movement, and data exfiltration. Its continuous runtime monitoring observes container activity and enforces appropriate responses. RHACS goes further by leveraging containers' ephemeral and immutable nature to improve security proactively.</p>
+</div>
+<div class="paragraph">
+<p>We use runtime incidents and vulnerabilities as opportunities to enhance security by defining policies and enforcing them early in the CI/CD process.</p>
+</div>
+<div class="paragraph">
+<p>In the next section, you&#8217;ll focus on identifying and enforcing a runtime policy. For this example, you&#8217;ll stop the alpine package manager from running in our frontend application. Specifically, you&#8217;ll ensure the frontend container never triggers updates while in our clusters.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="runtime-enforce"><a class="anchor" href="#runtime-enforce"></a>Runtime policy enforcement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RHACS monitors container processes and collects data to help you create policies that block unwanted behaviors. This data can also be used to build baseline policy configurations for further refinement.</p>
+</div>
+<div class="paragraph">
+<p>Package managers like apt (Ubuntu), apk (Alpine), or yum/dnf (Red Hat) are tools for managing software on Linux systems. While essential for managing virtual machines, using them in running containers violates the immutable nature of container operations.</p>
+</div>
+<div class="paragraph">
+<p>This policy shows how RHACS detects and prevents runtime violations by using Linux kernel instrumentation to identify running processes and OpenShift® to terminate pods as enforcement. OpenShift enforcement is preferable to rules applied directly to containers or container engines, as it ensures consistency with OpenShift&#8217;s maintained state.</p>
+</div>
+<div class="paragraph">
+<p>By terminating the container upon detecting runtime policy violations, you not only enforce the immutable principle but also stop an attack before it progresses further.</p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the left-hand side of the application, click the <strong>Platform Configuration</strong> tab and select <strong>Policy Management</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-00.png" target="blank"><img src="_images/04-acs-policy-00.png" alt="04 acs policy 00" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Filter through the policies to find <strong>Alpine Linux Package Manager Execution</strong> or use the search bar to select <strong>Policy</strong> then <strong>Alpine Linux Package Manager Execution</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-01.png" target="blank"><img src="_images/04-acs-policy-01.png" alt="04 acs policy 01" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Once you have found the policy <strong>Alpine Linux Package Manager Execution</strong> click on the three dots then click <strong>Clone policy</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-02.png" target="blank"><img src="_images/04-acs-policy-02.png" alt="04 acs policy 02" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is a system policy. If you change a system policy they get reset upon the next release. It is always best practice to clone such policies.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Give the policy a new name: <strong>Alpine Linux Package Manager Execution - Enforce</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-03.png" target="blank"><img src="_images/04-acs-policy-03.png" alt="04 acs policy 03" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>Click <strong>Next</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-04.png" target="blank"><img src="_images/04-acs-policy-04.png" alt="04 acs policy 04" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>The lifecycle stages don&#8217;t need to be changed so click <strong>Next</strong></p>
+</li>
+<li>
+<p>The <strong>rules</strong> don&#8217;t need to be changed either since you are already targeting the <strong>apk</strong> process. Click <strong>Next</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-05.png" target="blank"><img src="_images/04-acs-policy-05.png" alt="04 acs policy 05" width="100%"></a>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The Policy behavior section allows you to exclude specific deployments from this policy. Some RHACS users have golden applications that they always want excluded from enforcement policies. This would be where you add those exceptions.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="8">
+<li>
+<p>Click <strong>Next</strong></p>
+</li>
+<li>
+<p>In the <strong>Policy behavior &#8594; Actions</strong> tab select <strong>inform and enforce</strong></p>
+</li>
+<li>
+<p>Enable runtime enforcement by clicking the <strong>inform and enforce</strong> button.</p>
+</li>
+<li>
+<p>Configure enforcement behavior by selecting <strong>Enforce at Runtime</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Next</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-policy-06.png" target="blank"><img src="_images/04-acs-policy-06.png" alt="04 acs policy 06" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="13">
+<li>
+<p>Review the policy changes</p>
+</li>
+<li>
+<p>Click <strong>Save</strong></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure to save the policy changes! If you do not save the policy, the process will not be blocked!
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_testing_the_runtime_policy"><a class="anchor" href="#_testing_the_runtime_policy"></a>Testing the runtime policy</h3>
+<div class="paragraph">
+<p>Next, you will use tmux to watch OpenShift events while running the test so you can see how RHACS enforces the policy at runtime.</p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="1">
+<li>
+<p>start tmux with two panes:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">tmux new-session \; split-window -v \; attach</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Next, run a watch on OpenShift events in the first shell pane:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc get events -n patient-portal -w</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Press <strong>Ctrlb, o</strong> to switch to the next pane. (Ctrlb THEN o)</p>
+</li>
+<li>
+<p>Exec into our <strong>patient-frontend</strong> application by getting the pod details and adding them to the following command.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">POD=$(oc get pod -n patient-portal -l app=frontend -o jsonpath="{.items[0].metadata.name}")
+oc exec -n patient-portal $POD -i --tty -- /bin/sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Sample output</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[demo-user@bastion ~]$ POD=$(oc get pod -n patient-portal -l app=frontend -o jsonpath="{.items[0].metadata.name}")
+oc exec -n patient-portal $POD -i --tty -- /bin/sh
+/home/fritz $</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you see <strong>/home/fritz $</strong> you&#8217;ve confirmed you have a shell and access to the frontend application.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>Run the alpine package manager in this shell:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">apk update</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Examine the output and expect to see that the package manager attempts to perform an update operation:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-texinfo hljs" data-lang="texinfo">/home/fritz $ apk update
+ERROR: Unable to lock database: Permission denied
+ERROR: Failed to open apk database: Permission denied
+/home/fritz $ command terminated with exit code 137
+[demo-user@bastion ~]$</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>Examine the oc get events tmux pane (The pane on the bottom), and note that it shows that RHACS detected the package manager invocation and deleted the pod:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-texinfo hljs" data-lang="texinfo">^C^C[demo-user@bastion ~]$ oc get events -n patient-portal -w
+LAST SEEN   TYPE      REASON                 OBJECT                           MESSAGE
+50s         Normal    Killing                pod/frontend-8667d5c56b-f9fcj    Stopping container frontend
+50s         Normal    Scheduled              pod/frontend-8667d5c56b-s6dph    Successfully assigned patient-portal/frontend-8667d5c56b-s6dph to ip-10-0-61-109.us-east-2.compute.internal
+49s         Normal    AddedInterface         pod/frontend-8667d5c56b-s6dph    Add eth0 [10.131.0.167/23] from ovn-kubernetes
+49s         Normal    Pulling                pod/frontend-8667d5c56b-s6dph    Pulling image "quay-czscm.apps.cluster-czscm.czscm.sandbox478.opentlc.com/quayadmin/frontend:0.1"
+49s         Normal    Pulled                 pod/frontend-8667d5c56b-s6dph    Successfully pulled image "quay-czscm.apps.cluster-czscm.czscm.sandbox478.opentlc.com/quayadmin/frontend:0.1" in 46ms (46ms including waiting). Image size: 117738460 bytes.
+49s         Normal    Created                pod/frontend-8667d5c56b-s6dph    Created container frontend
+49s         Normal    Started                pod/frontend-8667d5c56b-s6dph    Started container frontend
+50s         Normal    SuccessfulCreate       replicaset/frontend-8667d5c56b   Created pod: frontend-8667d5c56b-s6dph
+50s         Warning   StackRox enforcement   deployment/frontend              A pod (frontend-8667d5c56b-f9fcj) violated StackRox policy "Alpine Linux Package Manager Execution - Enforce" and was killed</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+After a few seconds, you can see the pod is deleted and recreated. In your tmux shell pane, note that your shell session has terminated and that you are returned to the Bastion VM command line.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="7">
+<li>
+<p>Type exit in the terminal, use ctrl+c to stop the 'watch' command, and type exit one more time to get back to the default terminal.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Congrats! You have successfully stopped yourself from downloading malicious packages! However, the security investigative process continues, as you have now raised a flag that must be triaged! you will triage our violations after you look at deploy time policies.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy-enforce"><a class="anchor" href="#deploy-enforce"></a>Introduction to <strong>Deploy-Time &amp; Build-time</strong> policy enforcement</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_deploy_time_policy_enforcement"><a class="anchor" href="#_deploy_time_policy_enforcement"></a>Deploy-Time policy enforcement</h3>
+<div class="paragraph">
+<p>Deploy-time policies enforce configuration controls within the cluster and during the CI/CD process to prevent misconfigurations before deployment. In this example, we&#8217;ll ensure the Ubuntu Package Manager never makes it into the default namespace.</p>
+</div>
+<div class="paragraph">
+<p>RHACS provides two ways to enforce deploy-time policies:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>With Admission Controller Enabled (Listen and Enforce Mode). RHACS rejects deployments that violate policy before they are created.
+Without Admission Controller Enabled:</p>
+</li>
+<li>
+<p>RHACS scales the pod replicas to zero, effectively preventing the deployment from running.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In the next example, we’ll configure a Deploy-Time policy to block the frontend application from deploying into the patient-portal namespace if the image contains the alpine package manager.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_time_policy_enforcement"><a class="anchor" href="#_build_time_policy_enforcement"></a>Build-Time policy enforcement</h3>
+<div class="paragraph">
+<p>Build-time policies in RHACS help prevent misconfigurations or vulnerabilities from being introduced during the build process, before deployment even occurs. These policies are focused on ensuring that the code and images being built meet security and configuration standards.</p>
+</div>
+<div class="paragraph">
+<p>RHACS provides two ways to enforce build-time policies:</p>
+</div>
+<div class="paragraph">
+<p>With Build Scanning Enabled (Enforce Mode): RHACS scans the container image for vulnerabilities or policy violations during the build process. If any issues are detected, the build is rejected, preventing the image from being pushed to the registry.</p>
+</div>
+<div class="paragraph">
+<p>Without Build Scanning Enabled: RHACS allows the image to be built, but after scanning, it marks the image as non-compliant and provides a warning. The image can still be pushed to the registry, but it’s flagged for review before deployment.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prevent_the_alpine_package_manager_in_the_frontend_image_from_being_deployed"><a class="anchor" href="#_prevent_the_alpine_package_manager_in_the_frontend_image_from_being_deployed"></a>Prevent the Alpine Package Manager in the frontend image from being deployed</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Procedure</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Platform Configuration → Policy Management</strong>.</p>
+</li>
+<li>
+<p>On the <strong>Policy Management</strong> page, type <strong>Policy</strong> then <strong>alpine</strong> into the filter bar at the top.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This time you are going to edit a different policy. Specifically related to the <strong>Build &amp; Deploy</strong> phases.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-deploy.png" target="blank"><img src="_images/04-acs-deploy.png" alt="04 acs deploy" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Click on the <strong>Alpine Linux Package Manager (apk) in Image</strong> options (The three dots on the right side of the screen) and select <strong>Clone policy</strong></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure to <strong>CLONE</strong> the policy
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-deploy-1.png" target="blank"><img src="_images/04-acs-deploy-1.png" alt="04 acs deploy 1" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Give the policy a new name. For example: <strong>Alpine Linux Package Manager (apk) in Image - Build and Deploy - Enforce</strong></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Since this is a "Build and Deploy" lifecycle policy, when you begin enforcing the policy it will be enforce in BOTH lifecycle phases. You will enable enforcement in both to save time since the next section will review the build phase of
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now, you want to target the frontend deployment by it&#8217;s namespace</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click on the <strong>Policy behavior &#8594; Scope</strong> tab.</p>
+</li>
+<li>
+<p>Click on <strong>Add inclusion scope</strong>.</p>
+</li>
+<li>
+<p>Select <strong>Cluster=Production</strong> &amp; <strong>Namespace=patient-portal</strong> &amp; <strong>app=frontend</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-deploy-2.png" target="blank"><img src="_images/04-acs-deploy-2.png" alt="04 acs deploy 2" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="8">
+<li>
+<p>Next, head to <strong>Policy behavior &#8594; Actions</strong>.</p>
+</li>
+<li>
+<p>Update the policy to <strong>inform and enforce</strong></p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-deploy-3.png" target="blank"><img src="_images/04-acs-deploy-3.png" alt="04 acs deploy 3" width="100%"></a>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="10">
+<li>
+<p>Lastly, go to the <strong>Review Policy</strong> tab</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Your policy should look like this,</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-deploy-4.png" target="blank"><img src="_images/04-acs-deploy-4.png" alt="04 acs deploy 4" width="100%"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is a preview tab on the right side of the page that will show you all of the affected applications with the introduction of this policy. Because you targeted the frontend app specifically you will only see that container.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="11">
+<li>
+<p>Click Save</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-deploy-5.png" target="blank"><img src="_images/04-acs-deploy-5.png" alt="04 acs deploy 5" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Congrats! You&#8217;re now enforcing at runtime and deploy time. In the last step in this module. you will review</p>
+</div>
+<div class="sect2">
+<h3 id="_enforcement"><a class="anchor" href="#_enforcement"></a>Enforcement</h3>
+<div class="paragraph">
+<p>Let&#8217;s go through what the developer will now see when building and redeploying the frontend application.</p>
+</div>
+<div class="paragraph">
+<p>Procedure</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Tag and push the updated image to the Quay registry.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">podman tag $QUAY_URL/$QUAY_USER/frontend:0.1 $QUAY_URL/$QUAY_USER/frontend:0.2
+podman push $QUAY_URL/$QUAY_USER/frontend:0.2</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Perform an image security scan using roxctl to check for policy violations.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">roxctl -e $ROX_CENTRAL_ADDRESS:443 image check --image $QUAY_URL/$QUAY_USER/frontend:0.2</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Review the output of the scan to identify any security policy violations.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  Alpine Linux Package Manager  |   LOW    |      -       | Alert on deployments with the  |   - Image includes component   |      Run apk --purge del      |
+|         (apk) in Image         |          |              |  Alpine Linux package manager  |      'apk-tools' (version      | apk-tools in the image build  |
+|                                |          |              |         (apk) present          |           2.14.6-r2)           |   for production containers.   |
+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+WARN:   A total of 3 policies have been violated
+ERROR:  failed policies found: 2 policies violated that are failing the check
+ERROR:  Policy "Fixable Severity at least Important" - Possible remediation: "Use your package manager to update to a fixed version in future builds or speak with your security team to mitigate the vulnerabilities."
+ERROR:  Policy "Alpine Linux Package Manager (apk) in Image - Enforce Build and Deploy" - Possible remediation: "Run apk --purge del apk-tools in the image build for production containers."
+ERROR:  checking image failed: failed policies found: 2 policies violated that are failing the check</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Update the frontend deployment manifest with the new image and apply the changes.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sed -i "s|image: .*|image: ${QUAY_URL}/${QUAY_USER}/frontend:0.2|" $TUTORIAL_HOME/skupper-demo/frontend.yml
+oc apply -f $TUTORIAL_HOME/skupper-demo/frontend.yml</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>Observe the deployment error due to policy enforcement.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Resource: "apps/v1, Resource=deployments", GroupVersionKind: "apps/v1, Kind=Deployment"
+Name: "frontend", Namespace: "patient-portal"
+for: "/home/demo-user/demo-apps/skupper-demo/frontend.yml": error when patching "/home/demo-user/demo-apps/skupper-demo/frontend.yml": admission webhook "policyeval.stackrox.io" denied the request:
+The attempted operation violated 1 enforced policy, described below:
+
+Policy: Alpine Linux Package Manager (apk) in Image - Enforce Build and Deploy
+
+Description:
+➛ Alert on deployments with the Alpine Linux package manager (apk) present
+
+Rationale:
+➛ Package managers make it easier for attackers to use compromised containers,
+since they can easily add software.
+
+Remediation:
+➛ Run apk --purge del apk-tools in the image build for production containers.
+
+Violations:
+
+Container 'frontend' includes component 'apk-tools' (version 2.14.6-r2)
+
+In case of emergency, add the annotation {"admission.stackrox.io/break-glass": "ticket-1234"} to your deployment with an updated ticket number</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_report_and_resolve_violations"><a class="anchor" href="#_report_and_resolve_violations"></a>Report and Resolve Violations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, you will resolve a few of the issues that you have created.</p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to the Violations page.</p>
+</li>
+<li>
+<p>Filter by the policy violation Policy - Name - r/apk OR by the most recent policy violations. You will see a policy violation that has been enforced.</p>
+</li>
+<li>
+<p>Click the most recent violation and explore the list of the violation events.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-violations.png" target="blank"><img src="_images/04-acs-violations.png" alt="04 acs violations" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>If configured, each violation record is pushed to a Security Information and Event Management (SIEM) integration and is available to be retrieved via the API. The forensic data shown in the UI is recorded, including the timestamp, process user IDs, process arguments, process ancestors, and enforcement action.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You must resolve the issue before it can be marked as resolved.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Remove the deployment that violates the policy.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc delete -f $TUTORIAL_HOME/skupper-demo/frontend.yml</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>After addressing the issue, mark the violation as resolved.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/04-acs-resolve.png" target="blank"><img src="_images/04-acs-resolve.png" alt="04 acs resolve" width="100%"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_implement_policy_as_code_in_acm_with_openshift_gitops"><a class="anchor" href="#_implement_policy_as_code_in_acm_with_openshift_gitops"></a>Implement Policy-as-Code in ACM with OpenShift GitOps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your last task is to externally manage ACS policies through OpenShift GitOps. To make this easier, the policies from before have already been exported to a GitHub repository.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/mfosterrox/skupper-security-demo/tree/main/PaC-custom-policies">PaC Custom Policies on GitHub</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to OpenShift GitOps: Go to the OpenShift Console and search for "OpenShift GitOps"</p>
+</li>
+<li>
+<p>Create a new GitOps Application: In the GitOps dashboard, click on "New Application" to create a new application.</p>
+</li>
+<li>
+<p>Configure the Application:
+Name: Give the application a name, e.g., pac-custom-policies.</p>
+</li>
+<li>
+<p>Select the Argo server, "openshift-gitops"</p>
+</li>
+<li>
+<p>Hit "Next"</p>
+</li>
+<li>
+<p>Enter the URL of the GitHub repository containing the custom policies (<a href="https://github.com/mfosterrox/skupper-security-demo.git" class="bare">https://github.com/mfosterrox/skupper-security-demo.git</a>).</p>
+</li>
+<li>
+<p>Select "Main"</p>
+</li>
+<li>
+<p>Select "PaC-custom-policies"</p>
+</li>
+<li>
+<p>Enter the remote namespace of "stackrox"</p>
+</li>
+<li>
+<p>Make sure the "Replace resources instead of applying changes from the source repository" is selected.</p>
+</li>
+<li>
+<p><strong>Deploy application resources on clusters with all specified labels</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cluster sets: <strong>default</strong></p>
+</li>
+<li>
+<p>Label: <strong>local-cluster</strong></p>
+</li>
+<li>
+<p>Operator: <strong>equals any of</strong></p>
+</li>
+<li>
+<p>Value: <strong>true</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, you used Red Hat Advanced Cluster Security for Kubernetes (RHACS) to identify potential security violations in your cluster through a central dashboard. You created both deploy-time and runtime policies to help prevent malicious activities from occurring.</p>
+</div>
+<div class="paragraph">
+<p>This lab aimed to demonstrate the significant value RHACS and OpenShift Platform Plus provide in enhancing cluster security. Feel free to continue exploring the RHACS lab environment to deepen your understanding.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="module-03.html" class="query-params-link">3. Red Hat Advanced Cluster Management for Kubernetes</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a href="https://demo.redhat.com" target="_blank" class="poweredBy"><p>Powered by</p><div class="labInfo_poweredBy" style="display: block; width: 260px;"><svg class="labInfo_poweredByLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1508.5 178.739"><g fill="#111"><path d="M316.6 63.2v-56H342a21.279 21.279 0 0 1 7.8 1.3 18.111 18.111 0 0 1 5.9 3.5 15.577 15.577 0 0 1 5 11.8 15.051 15.051 0 0 1-3.1 9.5 16.836 16.836 0 0 1-8.4 5.8l12.5 24.1h-9.3l-11.6-23H325v23Zm24.7-48.6H325v18.7h16.3q5.25 0 8.1-2.7a8.7 8.7 0 0 0 2.8-6.6 8.7 8.7 0 0 0-2.8-6.6c-1.8-1.9-4.5-2.8-8.1-2.8ZM364.1 42.8a20.674 20.674 0 0 1 1.6-8.2 20.288 20.288 0 0 1 4.3-6.7 19.92 19.92 0 0 1 6.5-4.5 19.718 19.718 0 0 1 8-1.6 18.463 18.463 0 0 1 7.8 1.6 18.677 18.677 0 0 1 6.2 4.5 20.927 20.927 0 0 1 4.1 6.8 23.2 23.2 0 0 1 1.5 8.4v2.3H372a13.822 13.822 0 0 0 4.6 8.4 13.6 13.6 0 0 0 9.1 3.3 15.553 15.553 0 0 0 5.7-1 12.858 12.858 0 0 0 4.6-2.6l5.1 5a25.983 25.983 0 0 1-7.4 4.1 24.69 24.69 0 0 1-8.4 1.3 21.306 21.306 0 0 1-8.4-1.6 22.763 22.763 0 0 1-6.8-4.4 20.788 20.788 0 0 1-4.5-6.7 23.2 23.2 0 0 1-1.5-8.4Zm20.2-14.2a11.527 11.527 0 0 0-8 3 13.046 13.046 0 0 0-4.2 7.8h24.2a13.091 13.091 0 0 0-4.2-7.8 11.106 11.106 0 0 0-7.8-3ZM443.1 63.2v-3.8a19.448 19.448 0 0 1-5.8 3.3 18.924 18.924 0 0 1-6.7 1.2 19.824 19.824 0 0 1-14.6-6.1 22.268 22.268 0 0 1-4.4-6.7 21.812 21.812 0 0 1 0-16.4A20.534 20.534 0 0 1 416 28a19.335 19.335 0 0 1 6.6-4.5 20.334 20.334 0 0 1 8.2-1.6 20.7 20.7 0 0 1 6.6 1 19.415 19.415 0 0 1 5.7 3V7.2l8-1.8v57.8Zm-25.2-20.4a13.718 13.718 0 0 0 4 10.1 13.45 13.45 0 0 0 9.8 4.1 14.956 14.956 0 0 0 6.4-1.3 15.954 15.954 0 0 0 4.9-3.6V33.6a14.988 14.988 0 0 0-4.9-3.5 15.271 15.271 0 0 0-6.4-1.3 13.423 13.423 0 0 0-9.9 4 13.806 13.806 0 0 0-3.9 10ZM478.1 63.2v-56h8.4v24h29.8v-24h8.4v56h-8.4V38.8h-29.8v24.4ZM547.2 64a16.483 16.483 0 0 1-10.8-3.5 11.037 11.037 0 0 1-4.2-8.9 10.375 10.375 0 0 1 4.7-9.2 20.76 20.76 0 0 1 11.8-3.2 27.841 27.841 0 0 1 5.8.6 27.374 27.374 0 0 1 5.3 1.6v-4.3a8.143 8.143 0 0 0-2.6-6.5 11.452 11.452 0 0 0-7.4-2.2 20.788 20.788 0 0 0-6 .9 34.616 34.616 0 0 0-6.6 2.6l-3-6a54.169 54.169 0 0 1 8.4-3.1 33.18 33.18 0 0 1 8.3-1.1c5.2 0 9.3 1.3 12.2 3.8s4.4 6.1 4.4 10.8v27h-7.8v-3.5a19.441 19.441 0 0 1-5.8 3.2 23.54 23.54 0 0 1-6.7 1Zm-7.3-12.6a5.646 5.646 0 0 0 2.6 4.8 11.193 11.193 0 0 0 6.6 1.8 16.256 16.256 0 0 0 5.9-1 14.449 14.449 0 0 0 4.9-2.9V47a19.778 19.778 0 0 0-4.8-1.8 24.933 24.933 0 0 0-5.7-.6 11.859 11.859 0 0 0-6.8 1.8 5.728 5.728 0 0 0-2.7 5ZM580.6 53.2v-24H572v-6.7h8.6V12.1l7.9-1.9v12.3h12v6.7h-12v22.1a5.94 5.94 0 0 0 1.4 4.4c.9.9 2.5 1.3 4.6 1.3a23.637 23.637 0 0 0 3-.2 10.857 10.857 0 0 0 2.8-.8v6.7a19.28 19.28 0 0 1-3.8.9 27.484 27.484 0 0 1-3.8.3c-3.9 0-7-.9-9-2.8-2-1.7-3.1-4.4-3.1-7.9Z"></path></g><path d="M127 90.2c12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4L149.8 37c-1.7-7.1-3.2-10.3-15.7-16.6-9.7-5-30.8-13.1-37.1-13.1-5.8 0-7.5 7.5-14.4 7.5-6.7 0-11.6-5.6-17.9-5.6-6 0-9.9 4.1-12.9 12.5 0 0-8.4 23.7-9.5 27.2a4.216 4.216 0 0 0-.3 1.9c0 9.2 36.3 39.4 85 39.4Zm32.5-11.4c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3C21.8 58.8 0 61.8 0 81c0 31.5 74.6 70.3 133.7 70.3 45.3 0 56.7-20.5 56.7-36.6-.1-12.8-11-27.3-30.9-35.9Z" fill="#e00"></path><path d="M159.5 78.8c1.7 8.2 1.7 9.1 1.7 10.1 0 14-15.7 21.8-36.4 21.8-46.8 0-87.7-27.4-87.7-45.5a17.535 17.535 0 0 1 1.5-7.3l3.7-9.1a4.877 4.877 0 0 0-.3 2c0 9.2 36.3 39.4 85 39.4 12.5 0 30.6-2.6 30.6-17.5a12.678 12.678 0 0 0-.3-3.4Z"></path><path d="M253.5 158.7a2.22 2.22 0 0 1-2.2-2.2V2.2a2.2 2.2 0 0 1 4.4 0v154.2a2.242 2.242 0 0 1-2.2 2.3Z" fill="#111"></path><text data-name="Demo Platform" transform="translate(1186 149)" fill="#111" font-size="82" font-family="'RedHatDisplay', 'Overpass', overpass, helvetica, arial, sans-serif" font-weight="700"><tspan x="-877.892" y="0">Demo Platform</tspan></text></svg></div></a>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
