@@ -1,43 +1,67 @@
 = {lab_name}
 
-The `lab_name` var, known as an asciidoc attribute, above was set in `./content/antora.yml` and can be used to set the lab_name or title of your content.
-You are both free to change its value and if you prefer to use a different var name, you can change the value of `lab_name`, for example to `title` in `./content/antora.yml` and then reference it in your content as `\{title}`. +
+== Introduction
 
-image::rhel-logo-black.jpg[rhel-logo-black,55%,55%]
+In this lab, we aim to demonstrate the value-added service available to customers who purchase OpenShift Platform Plus subscriptions, which can benefit enterprises that need to manage multiple cluster deployments in an organized and security-focused manner. OpenShift Platform Plus contains all of the features that you may be familiar with in a standard OpenShift Container Platform subscription, but with the bonus of including four additional components for advanced management and functionality:  
 
-== Variables
+* Red Hat Advanced Cluster Management for Kubernetes (RHACM)
+* Red Hat Advanced Cluster Security for Kubernetes (RHACS)
+* Red Hat Quay (Quay)
+* Red Hat OpenShift Data Foundation (RHODF)
 
-Other vars can also be set there, such as `ssh_user` and `ssh_password`, and referenced inline in the lab content by using the `\{foo}` syntax.
+In this lab, participants can expect to gain a comprehensive understanding of the advanced capabilities provided by making use of these products to perform such as setting up a private registry for hosting images, deploying clusters and setting up global policies to make cluster management more straightforward, and analyzing the security profile of their clusters and applications by creating application enforcement policies and viewing image and network graph information to understand possible vulnerabilities in their deployments. 
 
-This is another var, or asciidoc attribute, from `./content/antora.yml` {my_var}
+Overall, this workshop promises to be a valuable learning experience for anyone looking to expand their knowledge of the value provided by purchasing a subscription for OpenShift Platform Plus.
 
-== Writing your lab
+== OpenShift Platform Plus applications
 
-Whatever type of content you are writing we'll refer to your *content* as "your lab" in this document.
+=== Red Hat Advanced Cluster Management for Kubernetes (RHACM)
 
-=== Lab structure
+Red Hat Advanced Cluster Management for Kubernetes is a multi-cluster management solution that helps organizations manage their Kubernetes clusters and applications across hybrid and multicloud environments. It provides a unified management console, policy-based governance, observability, and automation capabilities, helping to simplify and streamline Kubernetes management operations.
 
-Wether you are writing a lab
+In this workshop we will demonstrate the value of RHACM with the following activities:
 
-* First, we will build a monolithic application already compiled as RPM packages and put it into a container. This will allow us to deploy the application, copy it between machines, and update it separately from the operating system. This process affords us a portable and easily maintained component instead of tightly coupling the application with your operating system maintenance.
+. Demonstrate the ease of deploying new clusters in the cloud.
+. Create and Manage Virtual Machines. 
+. Create a governance policy to help secure our clusters.
+. Create an application deployment policy across managed clusters.
 
-* In closing we will build a second container on a different operating system version that makes an application not packaged into RPMs. This will be similar to a web application deployment, positioning the correct files at the right locations. To do this, we will pull a project from GitHub and position the component files within our container image. The purpose of this is to achieve a portable application container that can deploy on several different versions of Red Hat Enterprise Linux. This also provides the benefit of decoupling your application maintenance, which would all happen by building new containers versus operating system maintenance. The container is no longer reliant on the operating system installed on the machine where the application is deployed.
+=== Red Hat Advanced Cluster Security for Kubernetes (RHACS)
 
-. Now let's examine this cluster a bit more by describing the cluster (the `$GUID` environment variable is already set for you so you can immediately describe your individual cluster):
-+
-[source,sh,role=execute]
-----
-podman ps
-----
-+
-.Sample Output
-[source,texinfo,subs="attributes"]
-----
-CONTAINER ID  IMAGE                        COMMAND           CREATED      STATUS      PORTS                 NAMES
-2dcfee9e50c4  docker.io/library/httpd:2.4  httpd-foreground  3 hours ago  Up 3 hours  0.0.0.0:8080->80/tcp  showroom-httpd
-----
+Red Hat Advanced Cluster Security for Kubernetes is a Kubernetes-native security platform that equips you to build, deploy, and run cloud-native applications with more security. The solution helps protect containerized Kubernetes workloads in all major clouds and hybrid platforms, including Red Hat OpenShift, Amazon Elastic Kubernetes Service (EKS), Microsoft Azure Kubernetes Service (AKS), and Google Kubernetes Engine (GKE).
 
-=== Lab Access
+In this workshop we will demonstrate the value of RHACS with the following activities:
 
-The terminal window to your right is *already* logged into the lab environment as the `{ssh_user}` user via `ssh`. 
-All steps of this lab are to be completed as the `{ssh_user}` user.
+. Examine the RHACS console in order to explore vulnerable workloads.
+. Explore network graphs and metrics created by observing applications running in the cluster.
+. Demonstrate deployment and runtime enforcement options to prevent security issues.
+
+=== Red Hat Quay (Quay)
+
+Red Hat Quay is a security-focused and scalable private registry platform for managing content across globally distributed datacenter and cloud environments. It provides a single and resilient content repository for delivering containerized software to development and production across Red Hat OpenShift and Kubernetes clusters. Red Hat Quay is a distributed and highly available container image registry for your enterprise.
+
+In this workshop we will demonstrate the value of Quay with the following activities:
+
+. Easily Install and Configure Quay from the OpenShift OperatorHub.
+. Configure a private registry for use with our clusters.
+. Upload and explore an image with our newly created registry.
+
+=== Red Hat OpenShift Data Foundation (RHODF)
+
+Red Hat OpenShift Data Foundation—previously Red Hat OpenShift Container Storage—is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications quickly and efficiently across clouds.
+
+NOTE: In this workshop we will not use ODF explicitly, but it will be used as the primary backing storage for our Quay registry, and any other applications we deploy in the cluster that need persistent storage.
+
+== Environment Overview and Access
+
+You will be interacting with an OpenShift 4 cluster that is running on Amazon Web Services. This cluster will act as a central hub for the actions you are performing in your environment.
+The basics of the OpenShift 4 installation have been completed in advance. The OpenShift cluster is essentially set to all defaults and looks like the following:
+
+. Three control-plane nodes
+. Three worker nodes
+. One bastion host
+
+In addition you will have an additional working cluster provisioned with Hosted Control Planes in AWS, and be able to deploy your own cluster as a part of the lab tasks. 
+
+
+
