@@ -205,7 +205,7 @@ image::03-argoconfig.png[link=self, window=blank, width=100%, ArgoCD Config]
 image::03-vm-app-acm.png[link=self, window=blank, width=100%, VM Config]
 
 * Under repository types, select the GIT repository
-* *URL:* https://github.com/jalvarez-rh/kubevirt-gitops
+* *URL:* https://github.com/jalvarez-rh/kubevirt-gitops.git
 * *Revision:* main
 * *Path:* vms
 * *Destination:* openshift-cnv

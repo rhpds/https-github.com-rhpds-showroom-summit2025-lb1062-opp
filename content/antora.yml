@@ -15,3 +15,10 @@ asciidoc:
     ssh_password: devops
     ssh_command: ssh devops@bastion.{guid}.example.opentlc.com
 
+  extensions:
+    - id: dev-mode
+      require: ./content/lib/dev-mode.js
+      enabled: false
+    - ./content/lib/tab-block.js
+    - ./content/lib/remote-include-processor.js
+

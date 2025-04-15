@@ -1,6 +1,6 @@
 ---
 site:
-  title: Red Hat Summit 2025
+  title: OpenShift Platform Plus
   start_page: modules::index.adoc
 
 content:
