@@ -1,6 +1,6 @@
 ---
 site:
-  title: OpenShift Platform Plus
+  title: Lab 1062 - Hands-on lab with Red Hat OpenShift Platform Plus
   start_page: modules::index.adoc
 
 content:
@@ -18,3 +18,8 @@ runtime:
 output:
   dir: ./www
 
+antora:
+  extensions:
+    - id: dev-mode
+      require: ./content/lib/dev-mode.js
+      enabled: false
