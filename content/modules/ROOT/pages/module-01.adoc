@@ -16,8 +16,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-*Username:* | kubeadmin |
-*Password:* | {openshift_kubeadmin_password} |
+| *Username:* | kubeadmin |
+| *Password:* | {openshift_kubeadmin_password} |
 |===
 
 [[acs]]
@@ -29,8 +29,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-*RHACS Console Username:* | {acs_portal_username} |
-*RHACS Console Password:* | {acs_portal_password} |
+| *RHACS Console Username:* | {acs_portal_username} |
+| *RHACS Console Password:* | {acs_portal_password} |
 |===
 
 [[quay]]
@@ -42,8 +42,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-*Quay Console Username:* | {quay_admin_username} |
-*Quay Console Password:* | {quay_admin_password} |
+| *Quay Console Username:* | {quay_admin_username} |
+| *Quay Console Password:* | {quay_admin_password} |
 |===
 
 
@@ -101,15 +101,15 @@ Access:
 	rw WorkflowAdministration
 ----
 
-NOTE: This output is showing that you have unrestricted access to the RHACS product. These permissions can be seen in the **RHACS Access Control** tab that you will review later.
+NOTE: This output indicates you have full access to the RHACS product. You can check these permissions in the RHACS Access Control tab, which you'll review later.
 
-If you have full access you are ready to go!
+If you have full access, you're all set!
 
 == Deploy the workshop applications
 
-You now have access to the core OPP applications. Next, you'll deploy several insecure apps into the OpenShift cluster. Our insecure demo applications come from a variety of public GitHub repositories and sources. These apps will serve as the main use cases you examine during the workshop, ranging from well-known Capture the Flag (CTF) applications to vulnerabilities like Log4Shell and Apache Struts.
+You now have access to the core OPP applications. Next, you'll deploy several insecure apps into the OpenShift cluster. These demo apps come from public GitHub repositories and cover various vulnerabilities, including well-known Capture the Flag (CTF) apps, Log4Shell, and Apache Struts.
 
-After deploying the applications, you'll scan some of these containers using the roxctl CLI to get a feel for what you'll be dealing with when you get to the security section with Red Hat Advanced Cluster Security
+After deployment, you'll use the roxctl CLI to scan some containers, giving you a preview of what to expect during the security section with Red Hat Advanced Cluster Security.
 
 === Time to deploy
 
@@ -157,7 +157,7 @@ route.route.openshift.io/webgoat created
 configmap/webgoat-config created
 ----
 
-NOTE: You should see warnings such as: *Warning: would violate PodSecurity "baseline:latest": privileged (container "proxy" must not set securityContext.privileged=true)*. This is because you are deploying flawed container configurations and vulnerable container applications into the OpenShift cluster.
+NOTE: You may see warnings like: Warning: would violate PodSecurity "baseline:latest": privileged (container "proxy" must not set securityContext.privileged=true). These warnings appear because you are deploying containers with flawed configurations and known vulnerabilities into the OpenShift cluster.
 
 ====
 The following command will watch all of the applications as they are successfully deployed into the Openshift cluster. You can press ctrl+c to terminate the command.
@@ -165,7 +165,7 @@ The following command will watch all of the applications as they are successfull
 
 [source,bash,role="execute"]
 ----
-oc get deployments -l demo=roadshow -A -w
+oc get deployments -l demo=roadshow -A
 ----
 
 [.console-output]
@@ -188,9 +188,6 @@ payments     visa-processor        1/1     1            1           52s
 ----
 
 IMPORTANT: Please ensure the deploy application are deployed and available before moving onto the next module. 
-
-[start=2]
-. Run the following roxctl commands to check on the vulnerability status of the applications you deployed.
 
 ====
 The following command triggers a vulnerability scan by RHACS, roxctl filters the results into a table. The severity flag means only the critical vulnerabilities will be shown. This image is known as the "Damn Vulnerable Wed Application" and it contains A LOT of vulnerabilities.
@@ -221,6 +218,6 @@ image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY0NDA0ZnJqNXh6cGNqeHNx
 
 == Summary
 
-In this module, you got access to all of the lab UI's and interfaces including the Showroom lab enviroment (Where you are reading this). You downloaded and deployed some very insecure applications and set up the lab full of examples to dive into. 
+In this module, you gained access to all the lab UIs and interfaces, including the Showroom lab environment (where you are reading this). You downloaded and deployed insecure applications, setting up the lab with various examples to explore.
 
 *Time to test out your developer skills!*

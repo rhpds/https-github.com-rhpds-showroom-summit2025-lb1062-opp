@@ -4,7 +4,315 @@
 
 == Module outline
 
+Policy-Driven Governance
 
+* Set and enforce security, application, and infrastructure policies centrally
+* Visualize detailed auditing on app and cluster configurations
+* Use the Policy Generator to create policies at scale
+
+NOTE: Due to time and resource constrains you did not explore the ability to monitor VMs from RHACM leveraging Grafana. If you would like to learn more about the out of the box dashboard that allow you to monitor your VM please visit the following blog to learn more - https://developers.redhat.com/articles/2024/12/05/monitor-openshift-virtualization-scale-red-hat-advanced-cluster-management
+
+
+== Policy Driven Governance
+
+Now that you have a cluster and a deployed virtual machines, you need to make sure that infrastructure does not drift from their original configurations. This kind of drift is a serious problem, because it can happen from benign and benevolent fixes and changes, as well as malicious activities that you might not notice but can cause significant problems. The solution that RHACM provides for this is the Governance functionality.
+
+=== Review GRC Functionality
+
+Enterprises must meet internal standards for software engineering, secure engineering, resiliency, security, and regulatory compliance for workloads hosted on private, multi and hybrid clouds. Red Hat Advanced Cluster Management for Kubernetes governance provides an extensible policy framework for enterprises to introduce their own security policies.
+
+The governance lifecycle is based on defined policies, processes, and procedures to manage security and compliance from a central interface page. 
+
+View the following diagram of the governance architecture:
+
+image::113-grc-diagram.png[link=self, window=blank, width=100%, Governance, Risk, Compliance Diagram]
+
+Use the Red Hat Advanced Cluster Management for Kubernetes security policy framework to create and manage policies. Kubernetes custom resource definition instances are used to create policies.
+
+Each Red Hat Advanced Cluster Management policy can have at least one or more templates. For more details about the policy elements, view the Policy YAML table section.
+
+[[create-grc-policies]]
+
+== Creating Policies in RHACM
+
+In order to assist in the creation and management of Red Hat Advanced Cluster Management for Kubernetes policies you use the policy generator tool. This tool, along with GitOps, greatly simplifies the distribution of Kubernetes resource objects to managed OpenShift or Kubernetes clusters through RHACM policies.
+
+=== Prerequisites
+
+To deploy policies with subscriptions, you will need to bind the *open-cluster-management:subscription-admin* ClusterRole to the user creating the subscription.
+
+To do this, complete the following steps:
+
+- Navigate to the *Governance* tab.
+- On the top tabs, click on *Policies*.
+- Click *Create Policy*.
+- On the top switch the toggle to *Display the YAML*.
+
+image::114-policy-toggle.png[link=self, window=blank, width=100%, Display the YAML]
+
+- Copy the following YAML excerpt and paste it in the screen:
+
+[source,yaml,role=execute]
+----
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-configure-subscription-admin-hub
+  namespace: ""
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: inform
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-configure-subscription-admin-hub
+        spec:
+          remediationAction: inform
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRole
+                metadata:
+                  name: open-cluster-management:subscription-admin
+                rules:
+                  - apiGroups:
+                      - app.k8s.io
+                    resources:
+                      - applications
+                    verbs:
+                      - "*"
+                  - apiGroups:
+                      - apps.open-cluster-management.io
+                    resources:
+                      - "*"
+                    verbs:
+                      - "*"
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - configmaps
+                      - secrets
+                      - namespaces
+                    verbs:
+                      - "*"
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: rbac.authorization.k8s.io/v1
+                kind: ClusterRoleBinding
+                metadata:
+                  name: open-cluster-management:subscription-admin
+                roleRef:
+                  name: open-cluster-management:subscription-admin
+                  apiGroup: rbac.authorization.k8s.io
+                  kind: ClusterRole
+                subjects:
+                  - name: kube:admin
+                    apiGroup: rbac.authorization.k8s.io
+                    kind: User
+                  - name: system:admin
+                    apiGroup: rbac.authorization.k8s.io
+                    kind: User
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: policy-configure-subscription-admin-hub-placement
+  namespace: ""
+placementRef:
+  name: policy-configure-subscription-admin-hub-placement
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+  - name: policy-configure-subscription-admin-hub
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: policy-configure-subscription-admin-hub-placement
+  namespace: ""
+spec:
+  clusterConditions:
+    - status: "True"
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - key: name
+        operator: In
+        values:
+          - local-cluster
+----
+
+- Enter a namespace to place the policy, the *default* namespace is OK to use.
+- Click *Next* till the end and then click on *Submit*.
+- Allow a few moments for the policy to propagate to the *local-cluster / RHACM Hub Cluster*.
+- Navigate back to policies and select the *policy-configure-subscription-admin-hub* policy.
+- Under the actions dropdown, select *Enforce*. This will enforce the policy, wait until the green checkmark is displayed.
+
+image::115-enforce-governance-policy.png[link=self, window=blank, width=100%, Enforce the Governance Policy]
+
+=== Using Policy Generator
+
+This Policy Generator description will create 2 configuration policies:
+
+- *openshift-gitops-installed*: The goal of the first policy is to inform if the OpenShift GitOps operator is installed on managed clusters.
+- *kubeadmin-removed*: The goal of the second policy is to inform if the kubeadmin user is removed from managed clusters.
+
+NOTE: Both policies are informative only, and you will only execute them manually to demonstrate how to resolve issues.
+
+With the ArgoCD resource, you can use Red Hat OpenShift GitOps to manage policy definitions by granting OpenShift GitOps access to create policies on the Red Hat Advanced Cluster Management hub cluster.
+
+==== Prerequisites
+
+We need to create a *ClusterRole* resource for OpenShift GitOps, with access to create, read, update, and delete policies and placements: 
+
+- Create a *ClusterRole* from the OCP Console by Clicking the + Icon on the Top right.
+
+image::04-ocp-console-add.png[link=self, window=blank, width=100%, OCP Console Add]
+
+- Copy and Paste the following YAML, Click *Create*
+
+[source,sh,subs="attributes",role=execute]
+----
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: openshift-gitops-policy-admin
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - policy.open-cluster-management.io
+    resources:
+      - policies
+      - configurationpolicies
+      - certificatepolicies
+      - operatorpolicies
+      - policysets
+      - placementbindings
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - apps.open-cluster-management.io
+    resources:
+      - placementrules
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+    apiGroups:
+      - cluster.open-cluster-management.io
+    resources:
+      - placements
+      - placements/status
+      - placementdecisions
+      - placementdecisions/status
+----
+
+- Navigate back to the + sign again, you need the *ClusterRoleBinding* object to grant the OpenShift GitOps service account access to the *openshift-gitops-policy-admin* ClusterRole object. Click *Create* once complete
+
+[source,sh,subs="attributes",role=execute]
+----
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: openshift-gitops-policy-admin
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: openshift-gitops-policy-admin
+----
+
+- Navigate to the Terminal in the Showroom tab and execute the following command: 
+
+[source,sh,subs="attributes",role=execute]
+----
+oc -n openshift-gitops patch argocd openshift-gitops --type merge --patch "$(curl https://raw.githubusercontent.com/jalvarez-rh/grc-policy-generator-blog/refs/heads/main/openshift-gitops/argocd-patch.yaml)"
+----
+
+- This command will merge and patch the ArgoCD configuration to point to the latest Init Container that will allow us to deploy the Policies 
+
+=== Deploying a Policy with ArgoCD
+
+- Navigate to *Applications*.
+- Click *Create application, select ArgoCD ApplicationSet - Push Model*.
+* Name: policy-generator
+* Argo server: openshift-gitops
+* Click *NEXT*
+* Under repository types, select the GIT repository
+* URL: https://github.com/jalvarez-rh/demo-policygenerator.git
+* Revision: main
+* Path: dir
+* Remote namespace: policy-generator
+* Click *NEXT* Twice
+
+- Verify that it installs only to the local cluster by setting the following values:
+
+* Cluster sets: *default*
+* Label: *local-cluster*
+* Operator: *equals any of*
+* Value: *true*
+- Verify all the information is correct, click *Create*.
+
+It will take a few minutes to deploy the application, *Click on the Topology Tab* to view and verify that *all of the circles are green*.
+
+image::116-governance-topology.png[link=self, window=blank, width=100%, Governance Topology]
+
+- Navigate to the *Governance* tab.
+- Click on the *Policies* tab.
+- Verify that you see two policies and that their *Cluster Violations* count is one.
+* openshift-gitops-installed
+* kubeadmin-removed
+
+image::117-policies-list.png[link=self, window=blank, width=100%, Governance Policies List]
+
+Now that the policies have been created for us leveraging the Policy Generator Engine let’s go ahead and enforce them:
+
+- On the *openshift-gitops-installed* policy, click on the ellipses and set policy to *Enforce*.
+
+image::118-policies-enforce-red.png[link=self, window=blank, width=100%, Enforce the Policy]
+
+- Click the *Enforce* button to verify.
+- Wait a few minutes and you will see that the *Cluster Violations* will go from *red* to *green*.
+
+image::119-policies-enforce-green.png[link=self, window=blank, width=100%, Policy Enforced]
+
+- Click on the policy and slect *Results* to veify that the gitops operator has been installed.
+
+CAUTION: CAREFUL implementing the *kubeadmin-removed* policy, if you enforce this you won’t be able to continue this lab and access that cluster through the console as the only account created on these clusters is Kubeadmin.
+
+Now you have successfully created a Policy leveraging the Policy Generator to scan your clusters, if you would like to play with other policies please visit the Policy Repo for more Policies you can test out.
+
+[[deploying-applications]]
 
 == A task to complete on your own.
 
@@ -40,14 +348,14 @@ Showing that the latest version of Ubuntu from Docker.io has 0 critical vulnerab
 
 *Your turn*
 
-
+[source,sh,subs="attributes",role=execute]
+----
 MYIMAGE=<Add the registry URL here>
 roxctl --insecure-skip-tls-verify -e "$ROX_CENTRAL_ADDRESS:443" image scan --image $MYIMAGE --force -o table --severity=CRITICAL
 ----
 
 [source,sh,subs="attributes",role=execute]
 ----
-
 #!/bin/bash
 
 # API endpoint to create Quay repo
@@ -84,5 +392,4 @@ curl -k -X POST "${POST_ENDPOINT}" \
      -H "Content-Type: application/json" \
      -d "${PAYLOAD}" \
      | jq
-
 ----

@@ -1,6 +1,6 @@
 = Store, Scan and Deploy Applications with Red Hat Quay
 
-In this module you will be acting as the devloper.(UPDATE STORY)
+In this module, you'll act as the developer, selecting a base image to build your application on. You’ll start by downloading and storing a Python "Golden image," then add your application code to create a deployable app. In the next module, we'll hand off this app to the Operations team to deploy it to the OpenShift cluster.
 
 [[build-app]]
 
@@ -14,26 +14,20 @@ In this module you will be acting as the devloper.(UPDATE STORY)
 . Run the following command.
 
 ====
-Let's export a few variables to make things easier. These variables will stay in the .bashrc file so they're saved in case you need to refresh the terminal.
+Let’s export a few variables to simplify the process. These variables will be saved in the .bashrc file, so they persist even if you need to refresh the terminal.
 ====
 
 [source,sh,subs="attributes",role=execute]
 ----
 echo export QUAY_USER={quay_admin_username} >> ~/.bashrc
 QUAY_USER={quay_admin_username}
-----
-
-[start=2]
-
-. Run the following command to set the Quay URL variable 
-
-[source,sh,subs="attributes",role=execute]
-----
 echo export QUAY_URL=$(oc -n quay get route quay-quay -o jsonpath='{.spec.host}') >> ~/.bashrc
 QUAY_URL=$(oc -n quay get route quay-quay -o jsonpath='{.spec.host}')
 ----
 
-IMPORTANT: Verify that the variables are correct
+[start=2]
+
+Verify that the variables are correct, by running the command below.
 
 [source,sh,subs="attributes",role=execute]
 ----
@@ -80,7 +74,7 @@ Beautiful! We're logged in. Now you can download build and push images directly 
 
 === Create our developer golden image
 
-Imagine a base image as a blank canvas, providing a reliable foundation like a minimal operating system or runtime environment. Developers add the essential configurations, libraries, and tools needed to fit their application's unique demands. By tagging this customized creation as a golden image, developers ensure every deployment uses the same standardized, consistent setup, simplifying workflows and avoiding unexpected surprises.
+A base image is like a blank canvas, offering a solid foundation such as a minimal operating system or runtime environment. Developers then add the necessary configurations, libraries, and tools for their application. By tagging this customized setup as a golden image, developers ensure consistency across deployments, streamlining workflows and avoiding unexpected issues.
 
 *Procedure*
 
@@ -161,9 +155,9 @@ Perfect!
 
 === Create the frontend application, and upload it to Quay
 
-In this section, you will add the application code to the image, build, tag and push the new image to Quay. Later, we'll use that image to deploy an application to the OpenShift Cluster.
+In this section, you'll add the application code to the image, then build, tag, and push the new image to Quay. Later, we'll use this image to deploy the application to the OpenShift cluster.
 
-TIP: With the variables saved in the ~/.bashrc file you will not have to declare them again in the future. 
+IMPORTANT: With the variables saved in the ~/.bashrc file you will not have to declare them again in the future. 
 
 *Procedure*
 
@@ -268,17 +262,17 @@ Successfully tagged quay-w2t4c.apps.cluster-w2t4c.w2t4c.sandbox1647.opentlc.com/
 ----
 
 [start=6]
-. Upload the built image to a remote registry using `podman push`. The `--remove-signatures` flag ensures that image signatures are not included in the pushed image.
+. Upload the built image to a remote registry using `podman push`.
 
 [source,sh,subs="attributes",role=execute]
 ----
-podman push $QUAY_URL/$QUAY_USER/frontend:0.1 --remove-signatures
+podman push $QUAY_URL/$QUAY_USER/frontend:0.1 
 ----
 
 [.console-output]
 [source,bash,subs="+macros,+attributes"]
 ----
-[demo-user@bastion frontend]$ podman push $QUAY_URL/$QUAY_USER/frontend:0.1 --remove-signatures
+[demo-user@bastion frontend]$ podman push $QUAY_URL/$QUAY_USER/frontend:0.1 
 Copying blob e2adcecab318 done   | 
 Copying blob 9944062081bf done   | 
 Copying blob 83e98ac5789e skipped: already exists  
@@ -291,13 +285,13 @@ Copying config 46ea42cba3 done   |
 Writing manifest to image destination
 ----
 
-NOTE: Quay will automatically create a private registry to store the application image because of your admin access. To deploy the application, make sure the repository is set to public so that you can pull the image without needing authentication.
+NOTE: Quay will automatically create a private registry to store the application image due to your admin access. To deploy the application, ensure the repository is set to public so you can pull the image without authentication.
 
-The frontend application is finally built! The next step is to review it in Quay and deploy it to OpenShift using ACM and OpenShift GitOps.
+The frontend application is ready! Next, we'll review it in Quay and deploy it to OpenShift using ACM and OpenShift GitOps. First, let's make the repository public so we can deploy the application without requiring credentials.
 
 [[quay]]
 
-== Access Quay 
+== Accessing Quay 
 
 Your Red Hat Quay console is available at: {quay_console_url}[window=blank]
 
@@ -307,17 +301,17 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-*Quay Console Username:* | {quay_admin_username} |
-*Quay Console Password:* | {quay_admin_password} |
+| *Quay Console Username:* | {quay_admin_username} |
+| *Quay Console Password:* | {quay_admin_password} |
 |===
 
 [[navigating-the-registry]]
 
 == Browse the registry
 
-In the setup module you downloaded built and pushed a insecure java application called *frontend*. Now it's time to deploy it to the OpenShift Cluster. To do this you will need to make the registry that you created public. 
+In the setup module, you downloaded, built, and pushed an insecure Java application called frontend. Now, it's time to deploy it to the OpenShift Cluster. To proceed, you'll need to make the registry you created public.
 
-Let's take a look at our application in the registry.
+Let's take a look at the application in the registry.
 
 *Procedure*
 
@@ -351,9 +345,9 @@ image::02-quay-sidebar.png[link=self, window=blank, width=100%]
 
 image::02-quay-tags.png[link=self, window=blank, width=100%]
 
-This tab displays all of the images and tags that have been upladed, providing information such as fixable vulnerabilities, the image size and allows for bulk changes to images based on the security posture. 
+This tab shows all the images and tags that have been uploaded, including details like fixable vulnerabilities, image size, and the option to make bulk changes based on the security posture.
 
-We will explore this tab a little later in this module.
+We’ll explore this tab in more detail later in the module.
 
 [start=3]
 . Click on the *Tags History* icon. 
@@ -391,14 +385,14 @@ image::02-quay-settings.png[link=self, window=blank, width=100%]
 
 In this tab you can add/remove users and update permissions, alter the privacy of the repository, and even schedule alerts based on found vulnerabilities.
 
-[start=6]
+[start=7]
 . Make your repository public before deploying our application in the next step by clicking the *Make Public* button under *Repository Visibility*
 
 image::02-quay-public.png[link=self, window=blank, width=100%]
 
 IMPORTANT: Make sure to make the repository public. Otherwise you will not be able to deploy the application in the ACM section.
 
-[start=7]
+[start=8]
 . Click OK
 
 image::02-quay-public-yes.png[link=self, window=blank, width=100%]
@@ -409,17 +403,15 @@ Great! The frontend application can now be deployed with ACM without using pull 
 
 == Vulnerability Scanning with Quay
 
-Red Hat Quay can also help with securing our environments by performing a container vulnerability scan on any images added to our registry, and advise which ones are potentially fixable. This feature is also known as vulnerability scanning at rest.
+Red Hat Quay helps secure environments by performing container vulnerability scans on images added to the registry, identifying which vulnerabilities are potentially fixable. This is known as vulnerability scanning at rest.
 
-Use the following procedure to check the security scan results for our Java container image you have uploaded.
+Follow the procedure below to check the security scan results for the Java container image you've uploaded.
 
 *Procedure*
 
 . Click on the *Tags* icon on the left side of the screen like before.
 
 image::02-quay-tags.png[link=self, window=blank, width=100%]
-
-NOTE: You may need to click the checkbox near the image you would would like more information on, but the column for *Security Scan* should populate.
 
 [start=2]
 . By default, the security scan color codes the vulnerabilities, you can hover over the security scan for more information.
@@ -538,7 +530,7 @@ TIP: The following output can be configured using flags. You can configure diffe
 .
 |            |         | GHSA-r64q-w8jr-g9qp |    LOW    |             https://github.com/urllib3/urllib3/issues/1553              |    1.24.3     |
 +------------+---------+---------------------+-----------+-------------------------------------------------------------------------+---------------+
-WARN:   A total of 33 unique vulnerabilities were found in 7 components
+WARN:   A total of 34 unique vulnerabilities were found in 7 components
 ----
 
 
@@ -548,4 +540,4 @@ image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzMyaHRsNTdwZWRlejRycGtp
 
 Nice job! Developers can now build and push their images to Quay, view their image vulnerabilities, and use roxctl to scan their images.
 
-Onto the operations team and Red Hat Advanced Cluster Management.
+*Time to hand it off to the Operations team and Red Hat Advanced Cluster Management!*

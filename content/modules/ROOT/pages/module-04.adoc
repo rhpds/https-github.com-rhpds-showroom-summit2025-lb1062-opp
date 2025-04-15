@@ -4,41 +4,37 @@
 
 == Module outline
 
-This module is designed to highlight the features of Red Hat Advanced Cluster Security for Kubernetes (RHACS) while monitoring and securing the patient-frontend application you deployed earlier in the Quay module.
+This module highlights the features of Red Hat Advanced Cluster Security for Kubernetes (RHACS) while monitoring and securing the patient-frontend application you deployed in the Quay module.
 
-We will begin with navigation basics, progress through vulnerability management, policy management, and enforcement, and conclude by using policy as code to enforce these policies in the build, deploy and runtime phases.
+We will cover:
+
+* Navigation basics
+* Vulnerability management
+* Policy management and enforcement
 
 === RHACS Basics
-
-RHACS equips developers and administrators with tools to meet the security demands of a cloud-native development approach on Kubernetes. Its robust features address primary security concerns across environments, including multiple datacenters, private clouds, and public clouds running Kubernetes clusters.
+RHACS provides developers and administrators with tools to meet the security needs of cloud-native development on Kubernetes. Its features address primary security concerns across various environments, including datacenters, private clouds, and public clouds running Kubernetes clusters.
 
 === RHACS Features
-
-Using Red Hat Advanced Cluster Security for Kubernetes, you can achieve comprehensive security, addressing the following key use cases:
+With RHACS, you can achieve comprehensive security, covering key areas such as:
 
 ==== Vulnerability Management
-
-Protect your nodes, platforms, and applications from vulnerabilities using powerful prioritization and impact-based filters.
+Protect nodes, platforms, and applications from vulnerabilities using prioritization and impact-based filters.
 
 ==== Network Security
-
-Provide real-time visibility, generate and enforce network policies, detect anomalies, and manage app-centric network access controls.
+Gain real-time visibility, enforce network policies, detect anomalies, and manage app-centric network access controls.
 
 ==== Security Policy Guardrails
-
-Ensure consistent, compliant, and secure configurations with RHACS built-in policy guardrails.
+Ensure consistent, compliant, and secure configurations with RHACS' built-in policy guardrails.
 
 ==== Compliance
-
-Ensure that your clusters meet contractual and regulatory requirements, such as DISA-STIG and PCI-DSS, with easy audit capabilities.
+Make sure clusters meet regulatory and contractual requirements, such as DISA-STIG and PCI-DSS, with simple audit capabilities.
 
 ==== Risk Profiling
-
-Identify and prioritize potential security risks using key impact and severity metrics for OpenShift and Kubernetes clusters.
+Identify and prioritize security risks using key impact and severity metrics for OpenShift and Kubernetes clusters.
 
 ==== Threat Detection and Response
-
-Set secure process and network controls to detect malicious runtime incidents and respond using Kubernetes-native enforcement controls.
+Implement process and network controls to detect malicious runtime incidents and respond using Kubernetes-native enforcement.
 
 [[console-access]]
 
@@ -59,8 +55,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-*RHACS Console Username:* | {acs_portal_username} |
-*RHACS Console Password:* | {acs_portal_password} |
+| *RHACS Console Username:* | {acs_portal_username} |
+| *RHACS Console Password:* | {acs_portal_password} |
 |===
 
 [[acs-nav]]
