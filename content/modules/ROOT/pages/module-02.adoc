@@ -57,7 +57,7 @@ NOTE: Use the quay admin credentials to sign in.
 [cols="2,2"]
 |===
 | *Quay Username:* | *{quay_admin_username}* 
-| *Quay Password:* | *{quay_admin_password}* 
+*Quay Password:* | *{quay_admin_password}* 
 |===
 
 [.console-output]
