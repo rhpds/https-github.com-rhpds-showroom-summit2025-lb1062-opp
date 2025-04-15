@@ -2,19 +2,19 @@
 
 In this session, participants will learn how to use Red Hat Advanced Cluster Management for Kubernetes (RHACM). The session will cover three major use cases:
 
-Multi-Cluster Lifecycle
+*Multi-Cluster Lifecycle*
 
 * Centrally manage, create, update, and delete Kubernetes clusters
 * Search, find, and modify Kubernetes resources across the entire domain
 * Troubleshoot and resolve issues across your federated domain quickly
 
-Virtual Machine Lifecycle
+*Virtual Machine Lifecycle*
 
 * Centrally manage, create, update, and delete Virtual Machines
 * Search, find, and modify VMs across the entire domain managed by RHACM
 * Troubleshoot and resolve issues with observability across your VMs
 
-Advanced Application Lifecycle
+*Advanced Application Lifecycle*
 
 * Deploy applications at scale using GitOps
 * Monitor applications in real time from multiple sources
@@ -24,33 +24,13 @@ Lets get started!
 
 [[cluster-lifecycle]]
 
-== Working with Kubernetes Clusters and Cluster Lifecycle
+=== Working with Kubernetes Clusters and Cluster Lifecycle
 
 At a high level, Cluster Lifecycle Management involves creating, upgrading, destroying, and importing clusters in a multi-cloud environment. This includes traditional OpenShift clusters, managed environments like ROSA or ARO, and specialized deployments such as Hosted Control Planes or Single-Node OpenShift.
 
-===  OpenShift console access & RHACM console access
-
-The RHACM console is available in the OpenShift cluster console at: {openshift_console_url}
-
-Administrator login is available with:
-
-[cols="1,1"]
-|===
-| *Username:* | kubeadmin |
-| *Password:* | {openshift_kubeadmin_password} |
-|===
-
-Navigate to the *Cluster* drop down menu and then select *All Clusters*. 
-
-image::101-local-cluster.png[link=self, window=blank, width=100%, Cluster Selection Menu]
-
-In this interface you will see 2 clusters available, the first cluster is a Hosted Control Plane Cluster called *development*. The second cluster is our working cluster labeled "local-cluster".
-
-image::102-cluster-view.png[link=self, window=blank, width=100%, View of Clusters Listed]
-
 [[hosted-control-planes]]
 
-== Working with Hosted Control Planes
+=== Working with Hosted Control Planes
 
 Hosted Control Planes is a variant of Red Hat OpenShift that follows a distinct architectural model. In standalone OpenShift, the control and data planes are co-located, with a dedicated set of nodes hosting the control plane to ensure quorum, and the network stack is shared. While functional, this setup may not be ideal for large-scale, multi-cluster deployments.
 
@@ -78,10 +58,30 @@ Key Benefits of Decoupling the Control and Data Planes:
 * Cross-Cluster Delivery: Externalized control planes simplify delivering cross-cluster solutions like service mesh, serverless, and pipelines.
 * Improved Operability: SREs benefit from a centralized interface to manage and troubleshoot control planes, leading to faster issue resolution and increased productivity.
 
+==  RHACM console access
+
+The RHACM console is available in the OpenShift cluster console at: {openshift_console_url}
+
+Administrator login is available with:
+
+[cols="1,1"]
+|===
+| *Username:* | kubeadmin 
+| *Password:* | {openshift_kubeadmin_password}
+|===
+
+Navigate to the *Cluster* drop down menu and then select *All Clusters*. 
+
+image::101-local-cluster.png[link=self, window=blank, width=100%, Cluster Selection Menu]
+
+In this interface you will see 2 clusters available, the first cluster is a Hosted Control Plane Cluster called *"development"*. The second cluster is our working cluster labeled *"local-cluster"*.
+
+image::102-cluster-view.png[link=self, window=blank, width=100%, View of Clusters Listed]
+
 
 [[create-manage-cluster]]
 
-== Create and Manage Clusters
+== Create and Manage Kubernetes Clusters
 
 Red Hat Advanced Cluster Management for Kubernetes (RHACM) simplifies the deployment and management of additional clusters. While Red Hat OpenShift offers easy deployment methods like IPI and the Assisted Installer, RHACM takes it a step further, allowing you to deploy new clusters with just a few clicks using the cluster creation wizard.
 
@@ -111,7 +111,7 @@ The *development* cluster that you have provisioned is an example of a Hosted Co
 For our lab, you will be using the *Standalone* cluster option. 
 
 [start=3]
-. Click on the standalone option.
+. Click on the *standalone* option.
 . Name your cluster *demo-cluster*, and select *default* for the cluster set. 
 . Next, select the most recent release image *OpenShift 4.18.8*. (Or whatever is the most recent option, it does not matter)
 . Click on *Next* to continue.
@@ -120,32 +120,32 @@ image::105-create-cluster-details.png[link=self, window=blank, width=100%, Creat
 
 On the next screen You can customize the AWS region, the CPU architecture, and the number of nodes to deploy in the control plane and worker pools. 
 
-[start=8]
+[start=7]
 . Click on *Next* to proceed.
 
 image::106-create-cluster-nodepools.png[link=self, window=blank, width=100%, Create Cluster NodePools]
 
 The next screen allows you to configure networking type to use and it's associated variables. 
 
-[start=9]
+[start=8]
 . Click on *Next* to proceed.
 
 image::107-create-cluster-networking.png[link=self, window=blank, width=100%, Create Cluster Networking]
 
 The next couple of screens allow for additional customization, configuring a proxy, creating private AWS configurations, and pre-configuring automation functions with Ansible Automation Platform. 
 
-[start=10]
+[start=9]
 . Click *Next* on each screen to proceed to the final *Review and Create* screen.
 
 You will see a description of the cluster you are creating.
 
-[start=11]
+[start=10]
 . Click the blue *Create* button to start the deployment process.
 
 image::108-create-cluster-summary-create.png[link=self, window=blank, width=100%, Create Cluster Summary Page]
 
-[start=12]
-. Let the UI do it's thing. You should see the Cluster creation process starting in the User Interface.
+[start=11]
+. Let the UI do it's thing. You should see the Cluster creation process starting in the UI.
 
 image::03-cluster-creation.png[link=self, window=blank, width=100%, View New Cluster]
 
@@ -163,7 +163,7 @@ This process uses OpenShift Virtualization, which leverages KubeVirt, an open-so
 
 OpenShift Virtualization uses KubeVirt to extend the Kubernetes API, enabling it to interact with virtual machines just like other Kubernetes resources. This allows containers and virtual machines to share the same cluster, nodes, and networks.
 
-=== OpenShift Virtualization added functionality is composed of 3 main components:
+*OpenShift Virtualization added functionality is composed of 3 main components:*
 
 * *Custom Resource Definitions (CRDs)*: A custom resource extends the Kubernetes API, allowing you to introduce your own API to a project or cluster. KubeVirt adds a CRD to the Kubernetes API, enabling it to manage virtual machines like other Kubernetes objects (e.g., pods).
 
@@ -173,7 +173,7 @@ OpenShift Virtualization uses KubeVirt to extend the Kubernetes API, enabling it
 
 Think of OpenShift Virtualization as a pod running a KVM-based virtual machine. In Kubernetes, a pod is a group of containers sharing resources. KVM (Kernel-based Virtual Machine) is an open-source technology that turns the Linux kernel into a hypervisor. With KubeVirt, VM instances run like pods, allowing OpenShift Virtualization to manage VM states (e.g., "stopped," "paused," "running") and perform operations like provisioning, scheduling, and migrating virtual machines.
 
-=== Deploying a Virtual Machines Using OpenShift GitOps
+=== Deploy a Virtual Machines Using OpenShift GitOps
 
 Red Hat® OpenShift® GitOps is an operator that streamlines workflows by integrating git repositories, CI/CD tools, and Kubernetes. This enables faster, more secure, and scalable software development while maintaining quality.
 
@@ -193,7 +193,7 @@ For this exercise, you will use the Push Model.
 
 NOTE: ArgoCD has been deployed in your enviroment however you will need to configure it in RHACM.
 
-=== Integrating ArgoCD with RHACM
+=== Integrate ArgoCD with RHACM
 
 *Procedure*
 
@@ -209,7 +209,7 @@ image::03-argoconfig.png[link=self, window=blank, width=100%, ArgoCD Config]
 
 Perfect! Next you will use ArgoCD to deploy a Virtual Machine
 
-=== Deploying an Virtual Machine 
+=== Deploy an Virtual Machine 
 
 
 *Procedure*
@@ -262,7 +262,7 @@ image::03-vm-acm-view.png[link=self, window=blank, width=100%, VM View]
 
 From this point you can interact with the virtual machine directly from ACM.
 
-[start=10]
+[start=11]
 . Click the *Launch* button to see all of the information about the Virtual Machine.
 
 image::03-vm-actions.png[link=self, window=blank, width=100%, VM View]
@@ -271,21 +271,22 @@ Congratulations! You have successfully deployed a Virtual Machine using Red Hat 
 
 [[policy-driven-governance]]
 
-== Deploying Applications to Managed Clusters in RHACM
+== Deploy Applications Using OpenShift GitOps
 
 You've deployed your clusters and VMs, and now it's time to create some containerized applications, starting with the Python application from the Quay module.
 
 *Procedure*
+
 . Navigate to *Applications* from the left side menu.
 . Click *Create application*, select *ArgoCD AppicationSet-Push Model*.
 . Enter the following information:
-* Name: skupper-patient-demo
-* Argo Server: openshift-gitops
-* Click *NEXT*
+* *Name:* skupper-patient-demo
+* *Argo Server:* openshift-gitops
+. Click *NEXT*
 
 image::03-app-gitops.png[link=self, window=blank, width=100%, App GitOps]
 
-[start=4]
+[start=5]
 . Under repository types, select the GIT repository
 . enter the URL: https://github.com/mfosterrox/skupper-security-demo.git
 . Set Revision: main
@@ -295,14 +296,14 @@ image::03-app-gitops.png[link=self, window=blank, width=100%, App GitOps]
 
 image::03-app-gitops-2.png[link=self, window=blank, width=100%, App ACM GitOps]
 
-[start=10]
+[start=11]
 . Under *Sync Policy* uncheck *Automaticaly sync when cluster state changes* and check *Replace resources instead of applying changes from the source repository* 
 
 image::03-app-gitops-3.png[link=self, window=blank, width=100%, App ACM GitOps]
 
 NOTE: These changes are only required as you will be modifying the application YAML on RHACM and you don't want it to sync to a Git Repo, you normaly wouldn't uncheck these in a real production enviroment.
 
-[start=11]
+[start=12]
 . Under *Placement* for application deployment, verify that *New Placement* is selected.
 * Cluster set: default
 . Under *Label expressions* click *add label* and select the following
@@ -312,17 +313,17 @@ NOTE: These changes are only required as you will be modifying the application Y
 
 image::03-app-placement.png[link=self, window=blank, width=100%, ACM App Placement]
 
-[start=13]
+[start=14]
 . Verify all of the information is correct and click *Submit*.
 
 NOTE: It will take a few minutes to deploy the application
 
-[start=14]
+[start=15]
 . Click on the *Topology Tab* to view and verify that *all of the circles are green*.
 
 image::03-application-topology-git.png[link=self, window=blank, width=100%, Application Topology]
 
-[start=15]
+[start=16]
 . Under the topology view, Select the *Route* and click on the *Launch Route URL*
 
 NOTE: This will take you to the Front end for the Patient Portal application, which is now running in our Hosted Controlled Plane (HCP) CLuster.
@@ -331,7 +332,9 @@ IMPORTANT: If you get a "Application is not available" page change the URL to us
 
 image::03-application-route-git.png[link=self, window=blank, width=100%, Application Route]
 
-Congratulations! You have successfully deployed an application using RHACM and OpenShift GitOps. This approach utilized a Git repository containing the manifests that defined your application. RHACM took those manifests and used them as deployables, which were then deployed to the target cluster.
+Congratulations! 
+
+You have successfully deployed an application using RHACM and OpenShift GitOps. This approach utilized a Git repository containing the manifests that defined your application. RHACM took those manifests and used them as deployables, which were then deployed to the target cluster.
 
 [[updating-an-application]]
 
@@ -340,6 +343,7 @@ Congratulations! You have successfully deployed an application using RHACM and O
 Let's now use your local Quay repo that contains the frontend image you built earlier. This image includes a few key security issues that you will explore in more detail during the ACS module later on.
 
 *Procedure*
+
 . Navigate to *Applications* from the left side menu.
 . Click on *Filter* and under *type* select *Application Set* 
 . Click on the *patient-demo* App and Click *Topology*
@@ -392,13 +396,9 @@ image::03-frontend-image2.png[link=self, window=blank, width=100%, Application F
 IMPORTANT: The Pod in the Topology View should turn RED. This is expected because you're making changes on the ACM side but not on the GitOps side, causing a reporting difference. In a real production environment, you wouldn't make such changes manually, but this is done for educational purposes only.
 
 [[acm-conclusion]]
+
 == Conclusion
 
 Congratulations! You have successfully deployed an application to a Kubernetes cluster using RHACM. This approach utilized a Git repository containing the manifests that defined your application. RHACM took those manifests and used them as deployables, which were then deployed to the target cluster.
 
 In the next module, you'll dive deeper into the security aspects of the frontend image you just deployed. You will scan it, explore vulnerabilities, and much more.
-
-
-
-
-

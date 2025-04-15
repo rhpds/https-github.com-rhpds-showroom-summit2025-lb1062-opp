@@ -16,8 +16,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-| *Username:* | kubeadmin |
-| *Password:* | {openshift_kubeadmin_password} |
+| *Username:* | kubeadmin
+| *Password:* | {openshift_kubeadmin_password}
 |===
 
 [[acs]]
@@ -29,8 +29,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-| *RHACS Console Username:* | {acs_portal_username} |
-| *RHACS Console Password:* | {acs_portal_password} |
+| *RHACS Console Username:* | {acs_portal_username} 
+| *RHACS Console Password:* | {acs_portal_password} 
 |===
 
 [[quay]]
@@ -42,10 +42,9 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-| *Quay Console Username:* | {quay_admin_username} |
-| *Quay Console Password:* | {quay_admin_password} |
+| *Quay Console Username:* | {quay_admin_username} 
+| *Quay Console Password:* | {quay_admin_password} 
 |===
-
 
 === roxctl CLI verification 
 

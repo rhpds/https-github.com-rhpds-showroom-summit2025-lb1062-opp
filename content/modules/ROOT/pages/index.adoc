@@ -8,13 +8,13 @@ In this lab, we will demonstrate how OpenShift Platform Plus helps manage and se
 * Red Hat Advanced Cluster Management (RHACM)
 * Red Hat Advanced Cluster Security (RHACS)
 * Red Hat Quay (Quay)
-* Red Hat OpenShift Data Foundation (RHODF)*
+* Red Hat OpenShift Data Foundation (RHODF)
 
 Participants will learn how to:
 
-* Developers: Build, deploy and scan applications with Quay
-* Operations: Deploy Clusters, Virtual Machines, and applications with RHACM
-* Security: Secure applications with RHACS
+* *Developers:* Build, deploy and scan applications with Quay
+* *Operations:* Deploy Clusters, Virtual Machines, and applications with RHACM
+* *Security:* Secure applications with RHACS
 
 == OpenShift Platform Plus Applications
 
@@ -51,7 +51,7 @@ RHODF provides software-defined storage for containers. It supports rapid applic
 
 NOTE: While we won’t use RHODF directly in this workshop, it will be used as the primary storage for our Quay registry and other applications needing persistent storage.
 
-== Environment set up and useful information
+== Environment architecture and useful information
 The OpenShift 4 cluster for this lab is hosted on AWS and will be your central hub for tasks. The cluster setup includes:
 
 1. One OpenShift cluster (Named: "local-cluster") containing:
