@@ -2,66 +2,62 @@
 
 == Introduction
 
-In this lab, we aim to demonstrate the value-added service available to customers who purchase OpenShift Platform Plus subscriptions, which can benefit enterprises that need to manage multiple cluster deployments in an organized and security-focused manner. OpenShift Platform Plus contains all of the features that you may be familiar with in a standard OpenShift Container Platform subscription, but with the bonus of including four additional components for advanced management and functionality:  
+Lab Overview
+In this lab, we will demonstrate how OpenShift Platform Plus helps manage and secure multi-cluster deployments. OpenShift Platform Plus includes the core features of OpenShift Container Platform and adds four key components for better management and security:
 
-* Red Hat Advanced Cluster Management for Kubernetes (RHACM)
-* Red Hat Advanced Cluster Security for Kubernetes (RHACS)
+* Red Hat Advanced Cluster Management (RHACM)
+* Red Hat Advanced Cluster Security (RHACS)
 * Red Hat Quay (Quay)
-* Red Hat OpenShift Data Foundation (RHODF)
+* Red Hat OpenShift Data Foundation (RHODF)*
 
-In this lab, participants can expect to gain a comprehensive understanding of the advanced capabilities provided by making use of these products to perform such as setting up a private registry for hosting images, deploying clusters and setting up global policies to make cluster management more straightforward, and analyzing the security profile of their clusters and applications by creating application enforcement policies and viewing image and network graph information to understand possible vulnerabilities in their deployments. 
+Participants will learn how to:
 
-Overall, this workshop promises to be a valuable learning experience for anyone looking to expand their knowledge of the value provided by purchasing a subscription for OpenShift Platform Plus.
+* Developers: Build, deploy and scan applications with Quay
+* Operations: Deploy Clusters, Virtual Machines, and applications with RHACM
+* Security: Secure applications with RHACS
 
-== OpenShift Platform Plus applications
+== OpenShift Platform Plus Applications
 
 === Red Hat Advanced Cluster Management for Kubernetes (RHACM)
 
-Red Hat Advanced Cluster Management for Kubernetes is a multi-cluster management solution that helps organizations manage their Kubernetes clusters and applications across hybrid and multicloud environments. It provides a unified management console, policy-based governance, observability, and automation capabilities, helping to simplify and streamline Kubernetes management operations.
+RHACM helps manage Kubernetes clusters across hybrid and multicloud environments. It provides a unified console for policy-based governance, observability, and automation.
 
-In this workshop we will demonstrate the value of RHACM with the following activities:
+In this workshop, we’ll show how to:
 
-. Demonstrate the ease of deploying new clusters in the cloud.
-. Create and Manage Virtual Machines. 
-. Create a governance policy to help secure our clusters.
-. Create an application deployment policy across managed clusters.
+* Deploy clusters in the cloud
+* Manage Virtual Machines
+* Set governance policies for cluster security
+* Apply application deployment policies across clusters*
 
 === Red Hat Advanced Cluster Security for Kubernetes (RHACS)
+RHACS enhances security for Kubernetes workloads in any cloud, including OpenShift, AWS EKS, Azure AKS, and Google GKE.
 
-Red Hat Advanced Cluster Security for Kubernetes is a Kubernetes-native security platform that equips you to build, deploy, and run cloud-native applications with more security. The solution helps protect containerized Kubernetes workloads in all major clouds and hybrid platforms, including Red Hat OpenShift, Amazon Elastic Kubernetes Service (EKS), Microsoft Azure Kubernetes Service (AKS), and Google Kubernetes Engine (GKE).
+In this workshop, we’ll cover:
 
-In this workshop we will demonstrate the value of RHACS with the following activities:
+* Exploring the RHACS console to identify vulnerable workloads
+* Viewing network graphs and metrics
+* Applying deployment and runtime security policies
 
-. Examine the RHACS console in order to explore vulnerable workloads.
-. Explore network graphs and metrics created by observing applications running in the cluster.
-. Demonstrate deployment and runtime enforcement options to prevent security issues.
+=== Red Hat Quay
+Red Hat Quay is a private, secure, and scalable container image registry. It stores containerized software across distributed datacenters and cloud environments.
 
-=== Red Hat Quay (Quay)
+In this workshop, we’ll demonstrate:
 
-Red Hat Quay is a security-focused and scalable private registry platform for managing content across globally distributed datacenter and cloud environments. It provides a single and resilient content repository for delivering containerized software to development and production across Red Hat OpenShift and Kubernetes clusters. Red Hat Quay is a distributed and highly available container image registry for your enterprise.
-
-In this workshop we will demonstrate the value of Quay with the following activities:
-
-. Easily Install and Configure Quay from the OpenShift OperatorHub.
-. Configure a private registry for use with our clusters.
-. Upload and explore an image with our newly created registry.
+* Download, build and store a Python application in Quay
+* Uploading and exploring container images in the registry
 
 === Red Hat OpenShift Data Foundation (RHODF)
+RHODF provides software-defined storage for containers. It supports rapid application development and deployment across cloud environments.
 
-Red Hat OpenShift Data Foundation—previously Red Hat OpenShift Container Storage—is software-defined storage for containers. Red Hat OpenShift Data Foundation helps teams develop and deploy applications quickly and efficiently across clouds.
+NOTE: While we won’t use RHODF directly in this workshop, it will be used as the primary storage for our Quay registry and other applications needing persistent storage.
 
-NOTE: In this workshop we will not use ODF explicitly, but it will be used as the primary backing storage for our Quay registry, and any other applications we deploy in the cluster that need persistent storage.
+== Environment set up and useful information
+The OpenShift 4 cluster for this lab is hosted on AWS and will be your central hub for tasks. The cluster setup includes:
 
-== Environment Overview and Access
+1. One OpenShift cluster (Named: "local-cluster") containing:
+* Three control-plane nodes
+* Three worker nodes
 
-You will be interacting with an OpenShift 4 cluster that is running on Amazon Web Services. This cluster will act as a central hub for the actions you are performing in your environment.
-The basics of the OpenShift 4 installation have been completed in advance. The OpenShift cluster is essentially set to all defaults and looks like the following:
+2. The secondary cluster in AWS (Named: "development"), using Hosted Control Planes (HCP)
 
-. Three control-plane nodes
-. Three worker nodes
-. One bastion host
-
-In addition you will have an additional working cluster provisioned with Hosted Control Planes in AWS, and be able to deploy your own cluster as a part of the lab tasks. 
-
-
-
+3. You will "provision" a new cluster in the ACM module that will fail during deployment. 
