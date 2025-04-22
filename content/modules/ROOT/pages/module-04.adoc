@@ -15,8 +15,7 @@ We will cover:
 === RHACS Basics
 RHACS provides developers and administrators with tools to meet the security needs of cloud-native development on Kubernetes. Its features address primary security concerns across various environments, including datacenters, private clouds, and public clouds running Kubernetes clusters.
 
-=== RHACS Features
-With RHACS, you can achieve comprehensive security, covering key areas such as:
+*Features*
 
 ==== Vulnerability Management
 Protect nodes, platforms, and applications from vulnerabilities using prioritization and impact-based filters.
@@ -35,6 +34,10 @@ Identify and prioritize security risks using key impact and severity metrics for
 
 ==== Threat Detection and Response
 Implement process and network controls to detect malicious runtime incidents and respond using Kubernetes-native enforcement.
+
+== Introduction to the RHACS console
+
+The first section of this lab will focus on navigation and vulnerability management. This work will take place in the UI and require you to use both the dashboard and the lab environment.
 
 [[console-access]]
 
@@ -55,15 +58,11 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-| *RHACS Console Username:* | {acs_portal_username} |
-| *RHACS Console Password:* | {acs_portal_password} |
+| *RHACS Console Username:* | {acs_portal_username} 
+| *RHACS Console Password:* | {acs_portal_password} 
 |===
 
 [[acs-nav]]
-
-== Introduction to the RHACS console
-
-The first section of this lab will focus on navigation and vulnerability management. This work will take place in the UI and require you to use both the dashboard and the lab environment.
 
 === Navigating the RHACS console
 
@@ -105,39 +104,6 @@ For example, to find all violations in the *frontend* deployment, the search que
 In this search query, Deployment is the attribute, and frontend is the search term.
 
 NOTE: The search field in RHACS requires each attribute to be entered fully as a search term. Enter your first attribute, and hit the <tab> key to move along to the following attribute you would like to enter. Results will appear once they match the entered query.
-
-*Procedure*
-
-. Click on the search bar 
-
-image::04-acs-search.png[link=self, window=blank, width=100%]
-
-[start=2]
-
-. Enter "Deployment" + "patient-frontend" in the search bar
-
-image::04-acs-search-patient-frontend.png[link=self, window=blank, width=100%]
-
-NOTE: RHACS maintains a library of searchable assets to help you search faster, they will appear in a drop-down list, and you can click on them to enter them as well. If a specific CVE or deployment cannot be found, please confirm the spelling of the asset name or that it is correctly deployed in the cluster. 
-
-==== Common search queries
-
-Here are some common search queries you can try in the RHACS search bar if you’d like to test its functionality.
-
-|============
-|Query|Example|Purpose
-|CVE:<CVE_number>|CVE:CVE-2018-11776|Finding deployments that are affected by a specific CVE
-|Privileged:<true_or_false>|Privileged:true|Finding privileged running deployments
-|Exposure Level:<level>|Exposure Level:External|Finding deployments that have external network exposure
-|============
-
-image::04-acs-search-cve.png[link=self, window=blank, width=100%, Search Syntax]
-
-NOTE: This is just a sample of the types of queries you can use to analyze your environment in RHACS. For additional examples of search queries, please see the RHACS documentation.
-
-==== Local page filtering
-
-You can use local page filtering from within all views in the RHACS portal. Local page filtering works similarly to the global search, but only relevant attributes are available. You can select the search bar to show all available attributes for a specific view.
 
 === 2. Navigation menu
 
@@ -201,7 +167,6 @@ Red Hat Advanced Cluster Security for Kubernetes (RHACS) introduced Scanner V4 i
 RHACS scans Go binaries, including dependencies from go.mod Supports Java (JAR/WAR/EAR), JavaScript (Node.js/npm), Python (egg and wheel), and Ruby (gem). RHACS adds support for Amazon Linux 2023, Alpine Linux 3.19, SUSE Linux Enterprise Server (SLES) 15, openSUSE Leap 15.1, Photon OS, and Oracle Linux.
 
 For more information, take a look at the https://docs.openshift.com/acs/4.6/operating/examine-images-for-vulnerabilities.html[RHACS Scanner V4 documentation].
-
 
 == The Vulnerability Management dashboard
 

@@ -159,7 +159,7 @@ configmap/webgoat-config created
 NOTE: You may see warnings like: Warning: would violate PodSecurity "baseline:latest": privileged (container "proxy" must not set securityContext.privileged=true). These warnings appear because you are deploying containers with flawed configurations and known vulnerabilities into the OpenShift cluster.
 
 ====
-The following command will watch all of the applications as they are successfully deployed into the Openshift cluster. You can press ctrl+c to terminate the command.
+The following command will display what applciations have been deployed to the cluster
 ====
 
 [source,bash,role="execute"]
@@ -210,7 +210,7 @@ Scan results for image: quay.io/mfoster/dvwa
 +---------------------------+                         +---------------------+-----------+-----------------------------------------------------------------+---------------+
 |        zlib1g-dev         |                         |   CVE-2023-45853    | CRITICAL  |         https://nvd.nist.gov/vuln/detail/CVE-2023-45853         |       -       |
 +---------------------------+-------------------------+---------------------+-----------+-----------------------------------------------------------------+---------------+
-WARN:   A total of 881 unique vulnerabilities were found in 97 components
+WARN:   A total of 1174 unique vulnerabilities were found in 106 components
 ----
 
 image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY0NDA0ZnJqNXh6cGNqeHNxZGd5Zm5qMnlpOHhrbm1hY2pwcG5ydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/p18ohAgD3H60LSoI1C/giphy.gif[link=self, window=blank, width=100%, class="center"]
