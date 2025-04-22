@@ -57,7 +57,7 @@ NOTE: Use the quay admin credentials to sign in.
 [cols="2,2"]
 |===
 | *Quay Username:* | *{quay_admin_username}* 
-*Quay Password:* | *{quay_admin_password}* 
+| *Quay Password:* | *{quay_admin_password}* 
 |===
 
 [.console-output]
@@ -301,8 +301,8 @@ Administrator login is available with:
 
 [cols="1,1"]
 |===
-| *Quay Console Username:* | {quay_admin_username} |
-| *Quay Console Password:* | {quay_admin_password} |
+| *Quay Console Username:* | {quay_admin_username} 
+| *Quay Console Password:* | {quay_admin_password}
 |===
 
 [[navigating-the-registry]]
@@ -338,7 +338,6 @@ image::02-quay-sidebar.png[link=self, window=blank, width=100%]
 - Tag History
 - Usage Logs
 - Settings
-
 
 [start=2]
 . Click on the *Tags* icon. 

@@ -375,12 +375,7 @@ echo $QUAY_URL/$QUAY_USER/frontend:0.1
 ----
 
 [start=9]
-. Copy the Quay repo URL below
-
-[source,sh,subs="attributes",role=execute]
-----
-$QUAY_URL/$QUAY_USER/frontend:0.1
-----
+. Copy the Quay repo URL
 
 [start=10]
 . Navigate back to Search and replace the *image* with the URL you just copy from the terminal. Click *Save*
