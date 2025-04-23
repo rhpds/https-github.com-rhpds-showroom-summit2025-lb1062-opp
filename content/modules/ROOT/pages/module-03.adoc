@@ -236,7 +236,7 @@ image::03-vm-app-git.png[link=self, window=blank, width=100%, VM ACM Config]
 
 [start=6]
 . Under *Placement* for application deployment, verify that *New Placement* is selected.
-- *Cluster set:* default
+*Cluster set:* default
 . Under *Label expressions* click *add label* and select the following
 * *Label:* name
 * *Operator:* equals any of
@@ -282,30 +282,34 @@ You've deployed your clusters and VMs, and now it's time to create some containe
 . Enter the following information:
 * *Name:* skupper-patient-demo
 * *Argo Server:* openshift-gitops
-. Click *NEXT*
 
 image::03-app-gitops.png[link=self, window=blank, width=100%, App GitOps]
 
-[start=5]
+[start=4]
+. Click *NEXT ONCE* 
 . Under repository types, select the GIT repository
-. enter the URL: https://github.com/mfosterrox/skupper-security-demo.git
+. enter the URL: https://github.com/mfosterrox/skupper-security-demo.git and select the dropdown.
 . Set Revision: main
 . Set Path: skupper-demo
 . Set Destination: *patient-portal*
-. Then click *NEXT ONCE*
 
 image::03-app-gitops-2.png[link=self, window=blank, width=100%, App ACM GitOps]
 
-[start=11]
-. Under *Sync Policy* uncheck *Automaticaly sync when cluster state changes* and check *Replace resources instead of applying changes from the source repository* 
+[start=10]
+. Click *NEXT ONCE*
+. Under *Sync Policy* do the following:
+* Select *Replace resources instead of applying changes from the source repository* 
+* Unselect *Automaticaly sync when cluster state changes* 
 
 image::03-app-gitops-3.png[link=self, window=blank, width=100%, App ACM GitOps]
 
+[start=12]
+. Click *NEXT ONCE*
+
 NOTE: These changes are only required as you will be modifying the application YAML on RHACM and you don't want it to sync to a Git Repo, you normaly wouldn't uncheck these in a real production enviroment.
 
-[start=12]
-. Under *Placement* for application deployment, verify that *New Placement* is selected.
-* Cluster set: default
+[start=13]
+. Under *Placement* for application deployment, verify that *New Placement* is selected. The set the *Cluster set to default*
 . Under *Label expressions* click *add label* and select the following
 * *Label:* name
 * *Operator:* equals any off
@@ -314,16 +318,17 @@ NOTE: These changes are only required as you will be modifying the application Y
 image::03-app-placement.png[link=self, window=blank, width=100%, ACM App Placement]
 
 [start=14]
+. Click *NEXT ONCE*
 . Verify all of the information is correct and click *Submit*.
 
 NOTE: It will take a few minutes to deploy the application
 
-[start=15]
+[start=16]
 . Click on the *Topology Tab* to view and verify that *all of the circles are green*.
 
 image::03-application-topology-git.png[link=self, window=blank, width=100%, Application Topology]
 
-[start=16]
+[start=17]
 . Under the topology view, Select the *Route* and click on the *Launch Route URL*
 
 NOTE: This will take you to the Front end for the Patient Portal application, which is now running in our Hosted Controlled Plane (HCP) Cluster.
@@ -340,14 +345,14 @@ You have successfully deployed an application using RHACM and OpenShift GitOps. 
 
 === Updating the Frontend Application
 
-Let's now use your local Quay repo that contains the frontend image you built earlier. This image includes a few key security issues that you will explore in more detail during the ACS module later on.
+Let's now use your local Quay repository containing the frontend image you built earlier. This image has several key security issues, which we will explore in more detail during the RHACS module.
 
 *Procedure*
 
 . Navigate to *Applications* from the left side menu.
 . Click on *Filter* and under *type* select *Application Set* 
 . Click on the *patient-demo* App and Click *Topology*
-. Click on *deployment* then find *frontend* Click on *frontend*
+. Click on *deployment* then find *frontend* click on *frontend*
 
 image::03-deployment-patient.png[link=self, window=blank, width=100%, Application Deployment]
 

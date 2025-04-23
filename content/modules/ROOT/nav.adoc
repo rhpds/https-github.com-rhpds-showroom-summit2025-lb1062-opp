@@ -39,6 +39,8 @@
 ** xref:module-04.adoc#conclusion[Conclusion]
 
 
-// * xref:module-04.adoc[Red Hat OpenShift Data Foundation]
+* xref:module-05.adoc[5. Policy-Driven Governance with RHACM]
+** xref:module-04.adoc#outline[Creating Policies in RHACM]
+
 
 // * xref:module-05.adoc[4. Red Hat OpenShift Data Foundation]
