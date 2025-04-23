@@ -604,7 +604,7 @@ NOTE: This section will take place in the RHACM dashboard
 image::04-pac-01.png[link=self, window=blank, width=100%]
 
 [start=2]
-. Create a new application -> In the dashboard, click on "Create Application" to create a new application & select *"pull model".*
+. Create a new application -> In the dashboard, click on "Create Application" to create a new application & select *"Push model".*
 . Configure the Application:
 * Name: Give the application a name, e.g., pac-custom-policies.
 * Select the Argo server, "openshift-gitops"
