@@ -256,14 +256,14 @@ image::03-acm-vm-topology.png[link=self, window=blank, width=100%, Application T
 [start=10]
 . Go to *Infrastructure* then select *Virtual Machines* 
 
-In this tab you will see a list of the available virtual machines, if you completed all of the steps above you should see a VM labeled *rhel9-gitops*.,
+In this tab you will see a list of the available virtual machines, if you completed all of the steps above you should see a VM labeled *rhel9-gitops*.
 
 image::03-vm-acm-view.png[link=self, window=blank, width=100%, VM View]
 
 From this point you can interact with the virtual machine directly from ACM.
 
 [start=11]
-. Click the *Launch* button to see all of the information about the Virtual Machine.
+. Click the *Launch Links* button and select *Virtual Machine details* this will open a new tab that will allow to see all of the information about the Virtual Machine.
 
 image::03-vm-actions.png[link=self, window=blank, width=100%, VM View]
 
@@ -291,8 +291,8 @@ image::03-app-gitops.png[link=self, window=blank, width=100%, App GitOps]
 . enter the URL: https://github.com/mfosterrox/skupper-security-demo.git
 . Set Revision: main
 . Set Path: skupper-demo
-. Set Destination: patient-portal
-. Then click *NEXT TWICE*
+. Set Destination: *patient-portal*
+. Then click *NEXT ONCE*
 
 image::03-app-gitops-2.png[link=self, window=blank, width=100%, App ACM GitOps]
 
@@ -326,7 +326,7 @@ image::03-application-topology-git.png[link=self, window=blank, width=100%, Appl
 [start=16]
 . Under the topology view, Select the *Route* and click on the *Launch Route URL*
 
-NOTE: This will take you to the Front end for the Patient Portal application, which is now running in our Hosted Controlled Plane (HCP) CLuster.
+NOTE: This will take you to the Front end for the Patient Portal application, which is now running in our Hosted Controlled Plane (HCP) Cluster.
 
 IMPORTANT: If you get a "Application is not available" page change the URL to use http:// and that should fix the issue. 
 
