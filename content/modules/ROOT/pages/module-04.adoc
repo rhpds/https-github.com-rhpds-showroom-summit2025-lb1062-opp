@@ -62,102 +62,6 @@ Administrator login is available with:
 | *RHACS Console Password:* | {acs_portal_password} 
 |===
 
-[[acs-nav]]
-
-=== Navigating the RHACS console
-
-In this section, you familiarize yourself with the RHACS portal, including its tabs, search capabilities and dashboard functionality.
-
-The RHACS dashboard has four main sections:
-
-. Navigation bar
-. Navigation drawer
-. Dashboard
-
-image::04-acs-numbered-dashboard.png[link=self, window=blank, width=100%, Numbered Dashboard]
-
-=== Navigation bar
-
-The top bar contains the following functionality: 
-
-- Global search 
-- Command-line tools 
-- Cluster health 
-- Documentation 
-- API reference guide
-- Enable dark/light Mode 
-- Logged-in user account
-
-=== 1. Global Search
-
-The ability to instantly find resources is essential to safeguard your cluster. Utilize the RHACS search feature to find relevant resources faster.
-
-For example, you can use it to find deployments exposed to a newly published CVE or all deployments with external network exposure.
-
-A search query consists of two parts:
-
-- An attribute that identifies the resource type you want to search for.
-- A search term that finds the matching resource.
-
-For example, to find all violations in the *frontend* deployment, the search query is *Deployment:frontend*.
-
-In this search query, Deployment is the attribute, and frontend is the search term.
-
-NOTE: The search field in RHACS requires each attribute to be entered fully as a search term. Enter your first attribute, and hit the <tab> key to move along to the following attribute you would like to enter. Results will appear once they match the entered query.
-
-=== 2. Navigation menu
-
-image::04-acs-nav-01.png[link=self, window=blank, width=100%, Navigation Menu]
-
-The left-hand navigation menu provides access to each of the security use cases, as well as product configuration to integrate RHACS with your existing tooling.
-
-=== 3. Dashboard 
-
-The Red Hat Advanced Cluster Security for Kubernetes (RHACS) Dashboard provides quick access to the data you need. It contains additional navigation shortcuts and actionable widgets that are easy to filter and customize so that you can focus on the data that matters most to you. You can view information about levels of risk in your environment, compliance status, policy violations, and common vulnerabilities and exposures (CVEs) in images.
-
-image::04-acs-dashboard.png[link=self, window=blank, width=100%, Center Dashboard]
-
-==== Navigating the main dashboard
-
-The main dashboard is your place to look at the vulnerabilities, risk, compliance, and policy violations across your clusters and namespaces. This section addresses all of the functionality in the main dashboard to help you navigate it more effectively in the future.
-The dashboard can be broken down into three main sections:
-
-. The status bar
-. The dashboard filter
-. The actionable widgets
-
-image::04-acs-dashboard-01.png[link=self, window=blank, width=100%, Three Dashboard Sections]
-
-==== 1. The status bar
-
-The status bar provides at-a-glance numerical counters for critical resources. The counters reflect what is visible with your current access scope, defined by the roles associated with your user profile. 
-
-These counters are clickable, providing fast access to the desired list view pages as follows:
-
-|============
-|Counter|Destination
-|Clusters|Platform Configuration -> Clusters
-|Nodes|Configuration Management -> Applications & Infrastructure -> Nodes
-|Violations|Violations Main Menu
-|Deployments|Configuration Management -> Applications & Infrastructure -> Deployments
-|Images|Vulnerability Management -> Dashboard -> Images
-|Secrets|Configuration Management -> Applications & Infrastructure -> Secrets
-|============
-
-==== 2. The Dashboard filter 
-
-The dashboard includes a top-level filter that applies simultaneously to all widgets. You can select clusters and one or more namespaces within selected clusters. Any change to the filter is immediately reflected by all widgets, limiting the data they present to the selected scope.
-
-NOTE: The dashboard filter does not affect the status bar, and when no clusters or namespaces are selected, the view automatically switches to all.
-
-image::04-acs-dashboard-02.png[link=self, window=blank, width=100%]
-
-==== 3. Actionable widgets
-
-If you have time, adjust the dashboard filtering options and widgets to hone the filtering capabilities.
-
-With these widgets, you can customize the information displayed on the dashboard by default in order to find the items that you consider most important to your deployments and your business' security.
-
 [[vuln-mgmt]]
 
 === RHACS Vulnerability Scanner
@@ -166,7 +70,7 @@ Red Hat Advanced Cluster Security for Kubernetes (RHACS) introduced Scanner V4 i
 
 RHACS scans Go binaries, including dependencies from go.mod Supports Java (JAR/WAR/EAR), JavaScript (Node.js/npm), Python (egg and wheel), and Ruby (gem). RHACS adds support for Amazon Linux 2023, Alpine Linux 3.19, SUSE Linux Enterprise Server (SLES) 15, openSUSE Leap 15.1, Photon OS, and Oracle Linux.
 
-For more information, take a look at the https://docs.openshift.com/acs/4.6/operating/examine-images-for-vulnerabilities.html[RHACS Scanner V4 documentation].
+For more information, take a look at the https://docs.openshift.com/acs/4.7/operating/examine-images-for-vulnerabilities.html[RHACS Scanner V4 documentation].
 
 == The Vulnerability Management dashboard
 
@@ -174,7 +78,7 @@ Let us continue by looking at our primary use case for RHACS that is the Vulnera
 
 NOTE: For the following section, please note that the order in which the images appear or the number of components affected may vary depending on versions and other applications running in the cluster.
 
-=== Vulnerability Management - Workload CVE
+=== Vulnerability Management - Results
 
 The Vulnerability Management tab in RHACS has seen significant improvements over the past year. It now focuses on categorizing vulnerabilities by workload, enabling scans for RHEL CoreOS, node-level issues, and correlating them with platform and application vulnerabilities. This helps security teams identify the software layer where the issue exists and the right team to address it.
 
@@ -182,7 +86,7 @@ More critical than fixing individual vulnerabilities is establishing a process t
 
 image::04-workload-1.png[link=self, window=blank, width=100%]
 
-The *Workload CVE dashboard* shows hundreds of vulnerabilities, over 200 images, and 300+ deployments because multiple images are used across different deployments.
+The *Results Tab* shows hundreds of vulnerabilities, over 70 images, and 70+ deployments because multiple images are used across different deployments.
 
 NOTE: The numbers may be different in your environments. 
 
@@ -190,29 +94,26 @@ Now it's time to find the same *patient-frontend* application and do some dissec
 
 .Procedure
 
-. Click the *Vulnerability Management -> Workload CVEs* tab
-. Click the dropdown and select deployment.
+. Click the *Vulnerability Management -> Results* tab
+. Click the *first dropdown* and select *Namespace*.
+. Click the *second dropdown* and select *name*.
+. Then, type *patient-portal* to filter for your container image.
 
 image::04-workload-2.png[link=self, window=blank, width=100%]
 
-[start=2]
-. Click the second dropdown and select name.
+NOTE: You will notice that an extra filter (Namespace name "patient-portal") was added to the default filters, showing only the application that the "Developer" built in the Quay module.
 
-image::04-workload-3.png[link=self, window=blank, width=100%]
-
-[start=2]
-. Then, filter for the *frontend* deployment.
-
-image::04-workload-4.png[link=self, window=blank, width=100%]
-
-You will notice that an extra filter was added to the default filters, showing only the single deployment that the "Developer" built in the Quay module.
-
-[start=3]
-. Click the *CVE* tab
+[start=4]
+. Click the *3 images* button
 
 image::04-workload-5.png[link=self, window=blank, width=100%]
 
-From here you can analyze the vulnerabilites that the devoplers have introduced into the environment. 
+[start=5]
+. Click on your image. The *quayadmin/frontend:0.1* image.
+
+image::04-workload-5.5.png[link=self, window=blank, width=100%]
+
+From here you will see all of the vulnerabilites that the devoplers have introduced into the environment from the Quay module. 
 
 ====
 CVE-2017-18342 & CVE-2020-14343 both are critical and are specific to the PyYAML package. This package is a high impact fix for the developers to focus on. 
@@ -228,7 +129,6 @@ IMPORTANT: Container OS age and the age of its components are a massive correlat
 image::04-workload-7.png[link=self, window=blank, width=100%]
 
 If you're focused on a specific vulnerability, it's very helpful to see all the components it affects. With this dashboard you can see that our response to this vulnerability needs to be targeted, you should reach out directly to the development team that needs that PyYAML package.
-
 
 IMPORTANT: As a security team our next step is to inform the development team about these vulnerabilities. Luckily, they should have already seen these issues in Quay. 
 
@@ -266,11 +166,11 @@ The configurable parameters are the following:
 
 - Report name: frontend-vulnerability-report
 - Report description (Optional)
-- CVE severity: Critical + Important
-- CVE status: Fixable + Unfixable
-- Image type: Deployed + Watched
+- CVE severity: Critical + Important (prefilled)
+- CVE status: Fixable + Unfixable (select Unfixable)
+- Image type: Deployed + Watched (prefilled)
 - CVEs discovered since: All time (It's been a short lab :) )
-- Include NVD CVSS
+- Select *Include NVD & CVSS*
 
 image::04-vr-3.png[link=self, window=blank, width=100%]
 
@@ -313,29 +213,10 @@ image::04-vr-6.png[link=self, window=blank, width=100%]
 . Scroll down and hit *Save*
 . Click *Next* once you are back in the *Configure report parameters* tab
 
+NOTE: Normally, we would set up an email notifier here. For the sake of time we will skip this step.
 
-Next, create an example email notifier that will send an email every Monday to remind the frontend team about the vulnerabilities in the deployment.
-
-====
-This notifier will not work but will show you what is possible with RHACS.
-====
 
 [start=12]
-. Click *Add delivery destination -> Create email notifier* and enter the following
-
-Integration name: frontend-example
-Email server: smtp.example.com:465
-Click *Enable unauthenticated SMTP*
-From: security team
-Sender: rhacs@demo.com
-Default recipient: frontend@fix-this.com
-
-image::04-vr-8.png[link=self, window=blank, width=100%]
-
-NOTE: Don't worry if you don't want to enable the notification. The exercise is about going through the workflow. 
-
-[start=12]
-. Select a frequency. For example, weekly on Monday.
 . Hit *Next*
 . Review your masterpiece and click *Create*
 
@@ -367,13 +248,13 @@ In the next section, you'll focus on identifying and enforcing a runtime policy.
 
 == Runtime policy enforcement
 
-RHACS monitors container processes and collects data to help you create policies that block unwanted behaviors. This data can also be used to build baseline policy configurations for further refinement.
+RHACS monitors container processes and gathers data to help create policies that block unwanted behaviors. This data can also be used to establish baseline policies for further refinement.
 
-Package managers like apt (Ubuntu), apk (Alpine), or yum/dnf (Red Hat) are tools for managing software on Linux systems. While essential for managing virtual machines, using them in running containers violates the immutable nature of container operations.
+Package managers like apt (Ubuntu), apk (Alpine), or yum/dnf (Red Hat) manage software on Linux systems. While useful for virtual machines, using them in running containers breaks the immutable nature of containers.
 
-This policy shows how RHACS detects and prevents runtime violations by using Linux kernel instrumentation to identify running processes and OpenShift® to terminate pods as enforcement. OpenShift enforcement is preferable to rules applied directly to containers or container engines, as it ensures consistency with OpenShift's maintained state.
+This policy explains how RHACS detects and prevents runtime violations using Linux kernel tools to identify processes and OpenShift® to terminate pods for enforcement. OpenShift enforcement is better than applying rules directly to containers, as it maintains consistency with OpenShift's state.
 
-By terminating the container upon detecting runtime policy violations, you not only enforce the immutable principle but also stop an attack before it progresses further.
+By terminating containers on detecting violations, you enforce immutability and stop potential attacks before they spread.
 
 *Procedure*
 
@@ -383,7 +264,7 @@ image::04-acs-policy-00.png[link=self, window=blank, width=100%, Policy Manageme
 
 [start=2]
 
-. Filter through the policies to find *Alpine Linux Package Manager Execution* or use the search bar to select *Policy* then *Alpine Linux Package Manager Execution*.
+. Use the search bar to select *Policy* THEN *Alpine Linux Package Manager Execution*.
 
 image::04-acs-policy-01.png[link=self, window=blank, width=100%, Policy Management Search]
 
@@ -423,12 +304,12 @@ The Policy behavior section allows you to exclude specific deployments from this
 . In the *Policy behavior -> Actions* tab select *inform and enforce* 
 . Enable runtime enforcement by clicking the *inform and enforce* button.
 . Configure enforcement behavior by selecting *Enforce at Runtime*.
-. Click *Next*
 
 image::04-acs-policy-06.png[link=self, window=blank, width=100%, Enforce Runtime Policy]
 
-[start=13]
+[start=12]
 
+. Click *Next*
 . Review the policy changes
 . Click *Save*
 
@@ -486,6 +367,7 @@ NOTE: If you see */home/fritz $* you've confirmed you have a shell and access to
 apk update
 ----
 
+[start=6]
 . Examine the output and expect to see that the package manager attempts to perform an update operation:
 
 [source,texinfo,subs="attributes"]
@@ -497,7 +379,7 @@ ERROR: Failed to open apk database: Permission denied
 [demo-user@bastion ~]$ 
 ----
 
-[start=6]
+[start=7]
 . Examine the oc get events tmux pane (The pane on the bottom), and note that it shows that RHACS detected the package manager invocation and deleted the pod:
 
 [source,texinfo,subs="attributes"]
@@ -517,7 +399,7 @@ LAST SEEN   TYPE      REASON                 OBJECT                           ME
 
 NOTE: After a few seconds, you can see the pod is deleted and recreated. In your tmux shell pane, note that your shell session has terminated and that you are returned to the Bastion VM command line.
 
-[start=7]
+[start=8]
 
 . Type exit in the terminal, use ctrl+c to stop the 'watch' command, and type exit one more time to get back to the default terminal.
 
@@ -529,26 +411,21 @@ Congrats! You have successfully stopped yourself from downloading malicious pack
 
 === Deploy-Time policy enforcement
 
-Deploy-time policies enforce configuration controls within the cluster and during the CI/CD process to prevent misconfigurations before deployment. In this example, we'll ensure the Ubuntu Package Manager never makes it into the default namespace.
+Deploy-time policies enforce configuration controls within the cluster and during the CI/CD process to prevent misconfigurations before deployment. In this example, we'll make sure the Ubuntu Package Manager doesn't make it into the default namespace.
 
-RHACS provides two ways to enforce deploy-time policies:
+RHACS offers two ways to enforce deploy-time policies:
+* With Admission Controller Enabled: RHACS rejects deployments that violate the policy before they are created.
+* Without Admission Controller Enabled: RHACS scales the pod replicas to zero, preventing the deployment from running.
 
-1. With Admission Controller Enabled (Listen and Enforce Mode). RHACS rejects deployments that violate policy before they are created.
-Without Admission Controller Enabled:
-
-2. RHACS scales the pod replicas to zero, effectively preventing the deployment from running. 
-
-In the next example, we’ll configure a Deploy-Time policy to block the frontend application from deploying into the patient-portal namespace if the image contains the alpine package manager.
+Next, we’ll configure a deploy-time policy to block the frontend application from being deployed into the patient-portal namespace if the image contains the Alpine package manager.
 
 === Build-Time policy enforcement
 
-Build-time policies in RHACS help prevent misconfigurations or vulnerabilities from being introduced during the build process, before deployment even occurs. These policies are focused on ensuring that the code and images being built meet security and configuration standards.
+Build-time policies in RHACS help prevent misconfigurations or vulnerabilities during the build process, before deployment. These policies ensure that the code and images being built meet security and configuration standards.
 
-RHACS provides two ways to enforce build-time policies:
-
-With Build Scanning Enabled (Enforce Mode): RHACS scans the container image for vulnerabilities or policy violations during the build process. If any issues are detected, the build is rejected, preventing the image from being pushed to the registry.
-
-Without Build Scanning Enabled: RHACS allows the image to be built, but after scanning, it marks the image as non-compliant and provides a warning. The image can still be pushed to the registry, but it’s flagged for review before deployment.
+RHACS offers two ways to enforce build-time policies:
+* With Build Scanning Enabled (Enforce Mode): RHACS scans the container image for vulnerabilities or policy violations during the build. If issues are found, the build is rejected, and the image can't be pushed to the registry.
+* Without Build Scanning Enabled: RHACS allows the image to be built, but marks it as non-compliant after scanning. The image can still be pushed to the registry but is flagged for review before deployment.
 
 == Prevent the Alpine Package Manager in the frontend image from being deployed
 
@@ -582,7 +459,7 @@ Now, you want to target the frontend deployment by it's namespace
 
 . Click on the *Policy behavior -> Scope* tab.
 . Click on *Add inclusion scope*.
-. Select *Cluster=Production* & *Namespace=patient-portal* & *app=frontend*
+. Select the Cluster *Production*, fill in the Namespace section with *patient-portal* & fill in the Deployment label of *app = frontend*
 
 image::04-acs-deploy-2.png[link=self, window=blank, width=100%]
 
@@ -590,6 +467,7 @@ image::04-acs-deploy-2.png[link=self, window=blank, width=100%]
 
 . Next, head to *Policy behavior -> Actions*.
 . Update the policy to *inform and enforce*
+. Select *Enforce on Build* & *Enforce on Deploy*
 
 image::04-acs-deploy-3.png[link=self, window=blank, width=100%]
 
@@ -704,45 +582,69 @@ image::04-acs-violations.png[link=self, window=blank, width=100%, Violations Men
 
 If configured, each violation record is pushed to a Security Information and Event Management (SIEM) integration and is available to be retrieved via the API. The forensic data shown in the UI is recorded, including the timestamp, process user IDs, process arguments, process ancestors, and enforcement action.
 
-IMPORTANT: You must resolve the issue before it can be marked as resolved.
+IMPORTANT: You must resolve the issue before it can be marked as resolved. 
 
 [start=4]
-. Remove the deployment that violates the policy.
-
-[source,sh,subs="attributes",role=execute]
-----
-oc delete -f $TUTORIAL_HOME/skupper-demo/frontend.yml
-----
-
-[start=5]
-. After addressing the issue, mark the violation as resolved.
+. Mark the violation as resolved.
 
 image::04-acs-resolve.png[link=self, window=blank, width=100%]
 
 == Implement Policy-as-Code in ACM with OpenShift GitOps
 
-Your last task is to externally manage ACS policies through OpenShift GitOps. To make this easier, the policies from before have already been exported to a GitHub repository.
+Your last task of the module is to externally manage RHACS policies with OpenShift GitOps. To make this easier, the policies from before have already been exported to a GitHub repository.
 
 link:https://github.com/mfosterrox/skupper-security-demo/tree/main/PaC-custom-policies[PaC Custom Policies on GitHub]
 
+NOTE: This section will take place in the RHACM dashboard
+
 *Procedure*
 
-. Navigate to OpenShift GitOps: Go to the OpenShift Console and search for "OpenShift GitOps"
-. Create a new GitOps Application: In the GitOps dashboard, click on "New Application" to create a new application.
+. First, navigate to the RHACM dashboard and *select the Application tab*
+
+image::04-pac-01.png[link=self, window=blank, width=100%]
+
+[start=2]
+. Create a new application -> In the dashboard, click on "Create Application" to create a new application & select *"pull model".*
 . Configure the Application:
-Name: Give the application a name, e.g., pac-custom-policies.
-. Select the Argo server, "openshift-gitops"
-. Hit "Next"
-. Enter the URL of the GitHub repository containing the custom policies (https://github.com/mfosterrox/skupper-security-demo.git).
+* Name: Give the application a name, e.g., pac-custom-policies.
+* Select the Argo server, "openshift-gitops"
+
+image::04-pac-02.png[link=self, window=blank, width=100%]
+
+[start=4]
+. Click "*Next*"
+. In the Template tab, select *Git Repository* and enter the URL of the GitHub repository containing the custom policies (https://github.com/mfosterrox/skupper-security-demo.git).
 . Select "Main"
 . Select "PaC-custom-policies"
 . Enter the remote namespace of "stackrox"
-. Make sure the "Replace resources instead of applying changes from the source repository" is selected.
-. *Deploy application resources on clusters with all specified labels*
+
+image::04-pac-03.png[link=self, window=blank, width=100%]
+
+[start=9]
+. Click "*Next*"
+. in the "Sync policy" tab select 
+* *Replace resources instead of applying changes from the source repository*
+
+image::04-pac-04.png[link=self, window=blank, width=100%]
+
+[start=11]
+. Click "*Next*"
+. Set the following in the Placement tab
 * Cluster sets: *default*
-* Label: *local-cluster*
-* Operator: *equals any of*
-* Value: *true*
+. Under *Label expressions* click *add label* and select the following
+* *Label:* name
+* *Operator:* equals any of
+* *Values:* local-cluster
+
+image::04-pac-05.png[link=self, window=blank, width=100%]
+
+[start=14]
+. Click "*Next*"
+. Click "*Submit*"
+
+== Ensure that the policies are properly configured
+
+
 
 == Conclusion
 
