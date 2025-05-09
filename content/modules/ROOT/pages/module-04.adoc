@@ -644,7 +644,12 @@ image::04-pac-05.png[link=self, window=blank, width=100%]
 
 == Ensure that the policies are properly configured
 
+*Procedure*
 
+. Navigate to the RHACS dashboard and go to Platform Configuration - Policy Management.
+. Verify that you now have two "Externally Managed" policies
+
+image::04-pac-06.png[link=self, window=blank, width=100%]
 
 == Conclusion
 
