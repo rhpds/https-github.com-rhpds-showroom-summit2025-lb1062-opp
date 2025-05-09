@@ -250,7 +250,7 @@ This command will merge and patch the ArgoCD configuration to point to the lates
 * URL: https://github.com/jalvarez-rh/demo-policygenerator.git
 * Revision: main
 * Path: dir
-* Remote namespace: policy-generator
+* Remote namespace: openshift-gitops
 * Click *NEXT* Twice
 
 . Verify that it installs only to the local cluster by setting the following values:
@@ -291,5 +291,69 @@ image::119-policies-enforce-green.png[link=self, window=blank, width=100%, Polic
 . Click on the policy and select *Results* to verify that the gitops operator has been installed.
 
 CAUTION: CAREFUL implementing the *kubeadmin-removed* policy, if you enforce this you won’t be able to continue this lab and access that cluster through the console as the only account created on these clusters is Kubeadmin.
+
+== Working with Kyverno Policies in RHACM
+
+Kyverno is a Kubernetes-native policy engine that allows you to manage configurations and enforce governance across your Kubernetes clusters using YAML. It enables you to define policies for security, compliance, and best practices without needing to write custom code.
+
+When integrated with RHACM, Kyverno enhances centralized governance and policy management across multiple clusters. RHACM can distribute Kyverno policies to managed clusters, enabling:
+	•	*Consistent security and compliance:* Enforce security standards (e.g., disallow privileged containers) across clusters.
+	•	*Automated policy enforcement:* Automatically mutate, validate, or generate resources to meet operational standards.
+	•	Multi-cluster visibility: Use RHACM’s observability and policy dashboards to monitor policy compliance at scale.
+
+=== Prerequisites
+
+To deploy Kyverno policies with ArgoCD, you will need to deploy the Kyverno engine in the local hub cluster.
+
+*Procedure*
+
+. Execute the following install script.
+
+[source,sh,subs="attributes",role=execute]
+----
+kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.13.0/install.yaml
+----
+
+NOTE: Script might fail to create the *policyreports.wgpolicyk8s.io* this is expected behavior, you can move on.
+
+image::05-kyverno-error-install.png[link=self, window=blank, width=100%, Kyverno Install Error]
+
+== Deploying Kyverno Policies in RHACM
+
+*Procedure*
+
+[start=1]
+. Navigate to *Applications*.
+. Click *Create application, select ArgoCD ApplicationSet - Push Model*.
+* Name: kyverno-policy
+* Argo server: openshift-gitops
+* Click *NEXT*
+* Under repository types, select the GIT repository
+* URL: https://github.com/jalvarez-rh/rhacm-tmm-kyverno-example.git
+* Revision: main
+* Path: files
+* Remote namespace: openshift-gitops
+* Click *NEXT* Twice
+
+. Verify that it installs only to the local cluster by setting the following values:
+* Cluster sets: *default*
+* Label: *local-cluster*
+* Operator: *equals any of*
+* Value: *true*
+
+. Verify all the information is correct, click *Create*.
+
+It will take a few minutes to deploy the application, *Click on the Topology Tab* to view and verify that *all of the circles are green*.
+
+image::05-kyverno-policy.png[link=self, window=blank, width=100%, Kyverno Policy Install]
+
+[start=5]
+. Navigate to the *Governance* tab.
+. Click on the *Discovered Policies* tab.
+. Verify that you see a Kyverno policie called *require-labes* and that their *Cluster Violations* count is one.
+
+image::05-kyverno-policy-acm.png[link=self, window=blank, width=100%, Governance Policies List]
+
+Now that the policies have been created for us leveraging the Policy Generator Engine let’s go ahead and have a look at it.
 
 Now you have successfully created a Policy leveraging the Policy Generator to scan your clusters, if you would like to play with other policies please visit the Policy Repo for more Policies you can test out.
